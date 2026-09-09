@@ -1,69 +1,347 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import WordFinder from "@/components/WordFinder";
+
+export const metadata: Metadata = {
+  title: "Free Word Finder & Letter Unscrambler",
+  description:
+    "Find words from scrambled letters, discover hidden words, and solve anagrams with TootieWords' free online word finder.",
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+    <main className="min-h-screen overflow-hidden bg-[#fffaf4] text-[#3d2923]">
+      <Header />
+
+      {/* HERO */}
+      <section className="hero-storybook relative overflow-hidden">
+        <PawPrint className="left-[4%] top-[23%] -rotate-12" />
+        <PawPrint className="left-[40%] top-[10%] rotate-12" />
+        <PawPrint className="right-[5%] top-[27%] -rotate-6" />
+
+        <div className="mx-auto max-w-[1420px] px-5 pb-8 pt-7 sm:px-6 lg:px-8 lg:pb-12 lg:pt-8">
+          <div className="relative grid items-start gap-2 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="relative z-30 pt-3 lg:pt-9">
+              <div className="hero-copy-column">
+                <h1 className="hero-headline">
+                  <span className="hero-headline-line hero-headline-line-one">
+                    Turn Letters
+                  </span>
+
+                  <span className="hero-headline-line hero-headline-line-two">
+                    Into Possibilities
+                  </span>
+                </h1>
+
+                <div className="hero-swoosh" aria-hidden="true">
+                  <span />
+                </div>
+
+                <p className="hero-description">
+                  Find words, solve anagrams, and explore the magic hidden in
+                  letters with TootieWords — your friendly word game helper.
+                </p>
+
+                <div className="hero-note hidden sm:block">
+                  <span>
+                    Same Letters.
+                    <br />
+                    More Fun! ♡
+                  </span>
+
+                  <div className="hero-note-line" />
+                </div>
+              </div>
+            </div>
+
+            <div className="relative z-20 flex min-h-[315px] items-end justify-center lg:min-h-[430px] lg:justify-end">
+              <Tile
+                letter="A"
+                className="left-[10%] top-[10%] -rotate-12"
+              />
+
+              <Tile
+                letter="P"
+                className="right-[14%] top-[7%] rotate-12"
+              />
+
+              <Tile
+                letter="W"
+                pink
+                className="right-[4%] top-[39%] rotate-[10deg]"
+              />
+
+              <Tile
+                letter="R"
+                className="right-[8%] bottom-[13%] rotate-12"
+              />
+
+              <Image
+                src="/tootie-hero.png"
+                alt="Tootie peeking over the word finder"
+                width={1600}
+                height={900}
+                priority
+                className="pointer-events-none relative z-20 h-auto w-full max-w-[735px] translate-y-3 drop-shadow-[0_18px_22px_rgba(74,46,37,0.16)]"
+              />
+            </div>
+          </div>
+
+          <div className="home-hero-finder relative z-10 lg:-mt-[142px]">
+            <WordFinder
+              heroMode
+              title="Find Words From Letters"
+              description="Enter your letters and discover all the possible words!"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
         </div>
-      </main>
+
+        <div className="storybook-wave-bottom" />
+      </section>
+
+      {/* TOOL CARDS */}
+      <section className="tool-section relative overflow-hidden px-5 pb-20 pt-12 sm:px-6">
+        <PawPrint className="left-[3%] top-[20%] rotate-12 opacity-[0.08]" />
+        <PawPrint className="right-[4%] bottom-[12%] -rotate-12 opacity-[0.08]" />
+
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-7 md:grid-cols-3">
+            <ToolCard
+              letters={["W", "O", "R", "D"]}
+              title="Word Unscrambler"
+              description="Unscramble letters to find all possible words."
+              href="/word-unscrambler"
+              variant="pink"
+            />
+
+            <ToolCard
+              letters={["A", "B", "C"]}
+              title="Anagram Solver"
+              description="Find all anagrams from your letters."
+              href="/anagram-solver"
+              variant="orange"
+            />
+
+            <ToolCard
+              letters={["C", "A", "T"]}
+              title="Words From Letters"
+              description="See every word you can make from your letters."
+              href="/words-from-letters"
+              variant="pink"
+              lightbulb
+            />
+          </div>
+        </div>
+
+        <div className="tool-section-wave" />
+      </section>
+
+      {/* COZY BOOK / QUOTE */}
+      <section className="cozy-story-section relative overflow-hidden">
+        <PawPrint className="left-[3%] top-[18%] -rotate-12 opacity-[0.12]" />
+        <PawPrint className="left-[9%] bottom-[18%] rotate-12 opacity-[0.08]" />
+
+        <div className="cozy-story-blob cozy-story-blob-left" />
+        <div className="cozy-story-blob cozy-story-blob-right" />
+
+        <div className="mx-auto grid max-w-[1380px] items-center gap-2 px-5 py-8 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:px-8 lg:py-5">
+          <div className="cozy-quote relative z-20">
+            <div className="cozy-quote-mark" aria-hidden="true">
+              “
+            </div>
+
+            <blockquote>
+              A few letters can lead
+              <br />
+              to a lot of happy.
+            </blockquote>
+
+            <div className="cozy-signature">
+              <span>— Tootie</span>
+              <span className="cozy-signature-paw">🐾</span>
+            </div>
+
+            <div className="cozy-quote-scribble" aria-hidden="true" />
+          </div>
+
+          <div className="relative z-10 flex justify-center lg:justify-end">
+            <Image
+              src="/tootie-book-scene.png"
+              alt="Tootie with an open book, plants, and a warm drink"
+              width={1900}
+              height={700}
+              className="cozy-book-image h-auto w-full max-w-[900px]"
+            />
+          </div>
+        </div>
+
+        <div className="cozy-bottom-wave" />
+      </section>
+
+      {/* BENEFITS */}
+      <section className="benefits-section relative overflow-hidden px-5 pb-20 pt-16 sm:px-6">
+        <PawPrint className="left-[2%] bottom-[10%] -rotate-12 opacity-[0.07]" />
+        <PawPrint className="right-[3%] top-[17%] rotate-12 opacity-[0.07]" />
+
+        <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
+          <Benefit
+            icon="♥"
+            title="Simple & Easy"
+            text="Fast, clean tools that are easy to use."
+            variant="pink"
+          />
+
+          <Benefit
+            icon="🐾"
+            title="Helpful Results"
+            text="Find the words you need, quickly."
+            variant="orange"
+          />
+
+          <Benefit
+            icon="★"
+            title="Word Game Friendly"
+            text="Great for word games, puzzles, and more."
+            variant="gold"
+          />
+
+          <Benefit
+            icon="🍃"
+            title="100% Free"
+            text="All tools are free to use, always."
+            variant="green"
+          />
+        </div>
+
+        <div className="benefits-footer-wave" />
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
+
+function ToolCard({
+  letters,
+  title,
+  description,
+  href,
+  variant,
+  lightbulb = false,
+}: {
+  letters: string[];
+  title: string;
+  description: string;
+  href: string;
+  variant: "pink" | "orange";
+  lightbulb?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`tool-card group ${
+        variant === "pink" ? "tool-card-pink" : "tool-card-orange"
+      }`}
+    >
+      <div className="tool-card-art">
+        {lightbulb ? (
+          <div className="tool-lightbulb" aria-hidden="true">
+            <span className="tool-lightbulb-rays">✦</span>
+            <span className="tool-lightbulb-bulb">💡</span>
+            <span className="tool-lightbulb-paw">🐾</span>
+          </div>
+        ) : (
+          <div className="tool-tiles">
+            {letters.map((letter, index) => (
+              <span
+                key={`${letter}-${index}`}
+                className={`letter-tile tool-letter-${index + 1}`}
+              >
+                {letter}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <h2 className="tool-card-title">{title}</h2>
+
+      <p className="tool-card-description">{description}</p>
+
+      <div
+        className={`tool-card-button ${
+          variant === "pink"
+            ? "tool-card-button-pink"
+            : "tool-card-button-orange"
+        }`}
+      >
+        <span>Try It Now</span>
+        <span className="transition-transform duration-200 group-hover:translate-x-1">
+          →
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+function Benefit({
+  icon,
+  title,
+  text,
+  variant,
+}: {
+  icon: string;
+  title: string;
+  text: string;
+  variant: "pink" | "orange" | "gold" | "green";
+}) {
+  return (
+    <div className="benefit-card">
+      <div className={`benefit-icon benefit-icon-${variant}`}>{icon}</div>
+
+      <h3>{title}</h3>
+
+      <p>{text}</p>
+    </div>
+  );
+}
+
+function Tile({
+  letter,
+  pink = false,
+  className = "",
+}: {
+  letter: string;
+  pink?: boolean;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`pointer-events-none absolute z-30 flex h-14 w-14 items-center justify-center rounded-xl text-2xl font-black shadow-lg ${
+        pink ? "bg-[#ef82a0] text-white" : "bg-[#f5b05d] text-[#4e332a]"
+      } ${className}`}
+      aria-hidden="true"
+    >
+      {letter}
+    </div>
+  );
+}
+
+function PawPrint({
+  className = "",
+}: {
+  className?: string;
+}) {
+  return (
+    <div
+      className={`pointer-events-none absolute text-5xl opacity-[0.11] ${className}`}
+      aria-hidden="true"
+    >
+      🐾
     </div>
   );
 }
