@@ -83,10 +83,10 @@ export default function Home() {
               <Image
                 src="/tootie-hero-optimized.webp"
                 alt="Tootie peeking over the word finder"
-                width={1600}
-                height={900}
-                priority
-                sizes="(max-width: 1023px) 100vw, 735px"
+                width={900}
+                height={600}
+                preload
+                sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1023px) calc(100vw - 48px), 735px"
                 className="pointer-events-none relative z-20 h-auto w-full max-w-[735px] translate-y-3 drop-shadow-[0_18px_22px_rgba(74,46,37,0.16)]"
               />
             </div>
@@ -173,9 +173,9 @@ export default function Home() {
             <Image
               src="/tootie-book-scene-optimized.webp"
               alt="Tootie with an open book, plants, and a warm drink"
-              width={1900}
-              height={700}
-              sizes="(max-width: 1023px) 100vw, 900px"
+              width={1200}
+              height={400}
+              sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1023px) calc(100vw - 48px), 900px"
               className="cozy-book-image h-auto w-full max-w-[900px]"
             />
           </div>

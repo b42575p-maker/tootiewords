@@ -72,9 +72,9 @@ export default function Footer() {
           <Image
             src="/tootie-footer-optimized.webp"
             alt="Tootie peeking over the bottom of the page"
-            width={1600}
-            height={700}
-            sizes="(max-width: 1023px) 100vw, 780px"
+            width={1200}
+            height={400}
+            sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1023px) 100vw, 780px"
             className="footer-tootie pointer-events-none absolute bottom-[-74px] right-[-9%] h-auto w-[112%] max-w-[780px]"
           />
         </div>
