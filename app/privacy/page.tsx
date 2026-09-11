@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,124 +7,244 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Read the TootieWords Privacy Policy and learn how information may be collected and used when you visit TootieWords.",
+    "Learn how TootieWords handles information, cookies, analytics, and advertising.",
 };
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
+    <>
       <Header />
 
-      <section className="mx-auto max-w-3xl px-6 py-16">
-        <h1 className="text-4xl font-bold">Privacy Policy</h1>
+      <main className="min-h-screen bg-[#fff8ed] px-5 py-14 text-[#3d2b2b] sm:px-8">
+        <article className="mx-auto max-w-4xl">
+          <div className="rounded-[32px] border border-[#f1d7c5] bg-white/80 p-7 shadow-sm sm:p-10">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#e55b74]">
+              TootieWords
+            </p>
 
-        <p className="mt-3 text-sm text-slate-500">
-          Last updated: September 7, 2026
-        </p>
+            <h1 className="text-4xl font-black tracking-tight sm:text-5xl">
+              Privacy Policy
+            </h1>
 
-        <p className="mt-8 leading-8 text-slate-600">
-          TootieWords respects your privacy. This Privacy Policy
-          explains the types of information that may be collected when
-          you visit TootieWords and how that information may be used.
-        </p>
+            <p className="mt-4 text-sm text-[#765f59]">
+              Last updated: September 10, 2026
+            </p>
 
-        <h2 className="mt-10 text-2xl font-bold">
-          Information You Enter
-        </h2>
+            <div className="mt-10 space-y-9 leading-8 text-[#584641]">
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Overview
+                </h2>
 
-        <p className="mt-4 leading-8 text-slate-600">
-          TootieWords provides tools that allow you to enter letters,
-          words, and search filters. This information is used to
-          generate word results and is not intended to identify you
-          personally.
-        </p>
+                <p>
+                  TootieWords respects your privacy. This Privacy Policy
+                  explains what information may be collected when you use
+                  TootieWords, how that information may be used, and the
+                  third-party services that help us operate and improve the
+                  website.
+                </p>
+              </section>
 
-        <h2 className="mt-10 text-2xl font-bold">
-          Automatically Collected Information
-        </h2>
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Information You Provide
+                </h2>
 
-        <p className="mt-4 leading-8 text-slate-600">
-          Like many websites, TootieWords may collect basic technical
-          information when you visit the site. This may include
-          information such as your browser type, device type, referring
-          page, pages visited, and general usage information.
-        </p>
+                <p>
+                  You can use the word-finding tools on TootieWords without
+                  creating an account. Letters, words, and search options that
+                  you enter into the word tools are used to provide results.
+                  TootieWords does not require you to provide personal
+                  information in order to use these tools.
+                </p>
+              </section>
 
-        <h2 className="mt-10 text-2xl font-bold">
-          Cookies and Similar Technologies
-        </h2>
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Automatically Collected Information
+                </h2>
 
-        <p className="mt-4 leading-8 text-slate-600">
-          TootieWords may use cookies or similar technologies to
-          operate the website, understand how visitors use the site,
-          remember preferences, and improve the user experience.
-        </p>
+                <p>
+                  When you visit TootieWords, certain information may be
+                  collected automatically by our website, hosting provider,
+                  analytics services, or advertising partners. This may include
+                  information such as your browser and device type, operating
+                  system, pages visited, approximate geographic information,
+                  referring pages, interactions with the website, IP address,
+                  and other technical information.
+                </p>
+              </section>
 
-        <h2 className="mt-10 text-2xl font-bold">
-          Analytics
-        </h2>
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Google Analytics
+                </h2>
 
-        <p className="mt-4 leading-8 text-slate-600">
-          TootieWords may use analytics services to better understand
-          website traffic and how visitors interact with the site.
-          These services may collect information about your device,
-          browser, and use of the website.
-        </p>
+                <p>
+                  TootieWords uses Google Analytics to help us understand how
+                  visitors use the website. Google Analytics may use cookies
+                  and similar technologies to collect information about website
+                  activity, such as pages viewed, session information, browser
+                  and device information, and approximate location.
+                </p>
 
-        <h2 className="mt-10 text-2xl font-bold">
-          Advertising
-        </h2>
+                <p className="mt-4">
+                  We use this information to understand site traffic, improve
+                  our tools, identify technical problems, and make TootieWords
+                  more useful to visitors.
+                </p>
 
-        <p className="mt-4 leading-8 text-slate-600">
-          TootieWords may display advertisements in the future.
-          Advertising providers may use cookies or similar technologies
-          to measure advertising performance and, where permitted,
-          provide relevant advertisements.
-        </p>
+                <p className="mt-4">
+                  You can learn more about how Google handles information from
+                  sites that use Google services in{" "}
+                  <a
+                    href="https://policies.google.com/technologies/partner-sites"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-[#d94d68] underline"
+                  >
+                    Google&apos;s information for sites and apps that use its
+                    services
+                  </a>
+                  .
+                </p>
+              </section>
 
-        <h2 className="mt-10 text-2xl font-bold">
-          Third-Party Services
-        </h2>
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Google AdSense and Advertising
+                </h2>
 
-        <p className="mt-4 leading-8 text-slate-600">
-          TootieWords may use third-party services to help operate,
-          analyze, or support the website. Those services may process
-          information according to their own privacy policies.
-        </p>
+                <p>
+                  TootieWords uses or may use Google AdSense to display
+                  advertisements. Third-party vendors, including Google, may use
+                  cookies, web beacons, IP addresses, or other identifiers in
+                  connection with advertising on this website.
+                </p>
 
-        <h2 className="mt-10 text-2xl font-bold">
-          Children's Privacy
-        </h2>
+                <p className="mt-4">
+                  Google and its advertising partners may use advertising
+                  cookies to serve ads based on a visitor&apos;s previous visits
+                  to TootieWords or other websites, where permitted.
+                </p>
 
-        <p className="mt-4 leading-8 text-slate-600">
-          TootieWords is not intended to knowingly collect personal
-          information from children. If you believe personal
-          information from a child has been provided to TootieWords,
-          please contact us so the matter can be reviewed.
-        </p>
+                <p className="mt-4">
+                  Visitors can manage how Google uses information to personalize
+                  advertisements through{" "}
+                  <a
+                    href="https://myadcenter.google.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-[#d94d68] underline"
+                  >
+                    Google&apos;s My Ad Center
+                  </a>
+                  .
+                </p>
+              </section>
 
-        <h2 className="mt-10 text-2xl font-bold">
-          Changes to This Privacy Policy
-        </h2>
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Cookies and Similar Technologies
+                </h2>
 
-        <p className="mt-4 leading-8 text-slate-600">
-          This Privacy Policy may be updated as TootieWords changes or
-          adds new features and services. The latest version will be
-          posted on this page with an updated revision date.
-        </p>
+                <p>
+                  TootieWords and third-party services used by the website may
+                  use cookies and similar technologies. Cookies are small pieces
+                  of data stored by your browser that can help websites remember
+                  information, measure website usage, provide functionality,
+                  and support advertising.
+                </p>
 
-        <h2 className="mt-10 text-2xl font-bold">
-          Contact
-        </h2>
+                <p className="mt-4">
+                  You can control or delete cookies through your browser
+                  settings. Disabling certain cookies may affect some website
+                  features or the way advertisements are displayed.
+                </p>
+              </section>
 
-        <p className="mt-4 leading-8 text-slate-600">
-          If you have questions about this Privacy Policy, you can
-          contact TootieWords using the contact information provided
-          on the website.
-        </p>
-      </section>
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Third-Party Services
+                </h2>
+
+                <p>
+                  TootieWords may rely on third-party providers for services
+                  such as hosting, analytics, advertising, security, and other
+                  website operations. These providers may process information
+                  according to their own privacy policies and applicable laws.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Your Privacy Choices
+                </h2>
+
+                <p>
+                  Depending on where you live, you may have rights or choices
+                  regarding certain uses of your information. You may also use
+                  browser controls to manage cookies and Google&apos;s privacy
+                  and advertising controls to manage certain Google services.
+                </p>
+
+                <p className="mt-4">
+                  Where required, TootieWords may provide additional consent or
+                  privacy controls for cookies, analytics, or advertising.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Children&apos;s Privacy
+                </h2>
+
+                <p>
+                  TootieWords is a general-audience word tool and is not
+                  directed specifically to children under 13. We do not
+                  knowingly ask children under 13 to provide personal
+                  information through the word-finding tools.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Changes to This Privacy Policy
+                </h2>
+
+                <p>
+                  We may update this Privacy Policy as TootieWords changes or as
+                  our services and legal obligations evolve. When we make
+                  changes, we may update the date shown at the top of this page.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Contact
+                </h2>
+
+                <p>
+                  If you have questions about this Privacy Policy or privacy at
+                  TootieWords, please use the contact information provided on
+                  the website.
+                </p>
+              </section>
+
+              <div className="border-t border-[#ead8cb] pt-7">
+                <Link
+                  href="/"
+                  className="font-bold text-[#d94d68] hover:underline"
+                >
+                  ← Back to TootieWords
+                </Link>
+              </div>
+            </div>
+          </div>
+        </article>
+      </main>
 
       <Footer />
-    </main>
+    </>
   );
 }
