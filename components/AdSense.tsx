@@ -1,19 +1,15 @@
 import Script from "next/script";
 
+const PUBLISHER_ID = "ca-pub-6698106209794133";
+
 export default function AdSense() {
-  const publisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
-
-  if (!publisherId) {
-    return null;
-  }
-
   return (
     <Script
       id="adsense-script"
       async
       strategy="afterInteractive"
       crossOrigin="anonymous"
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`}
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${PUBLISHER_ID}`}
     />
   );
 }
