@@ -29,7 +29,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/4-letter-words`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/5-letter-words`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/6-letter-words`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/7-letter-words`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/8-letter-words`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
