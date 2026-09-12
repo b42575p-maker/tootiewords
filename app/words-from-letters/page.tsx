@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -49,9 +50,27 @@ export default function WordsFromLettersPage() {
 
           <p className="mt-4 leading-8 text-slate-600">
             If you already know part of the answer, use Starts With,
-            Ends With, or Must Contain to reduce the number of
-            possible matches.
+            Ends With, or Must Contain to reduce the number of possible
+            matches.
           </p>
+
+          <h2 className="mt-10 text-2xl font-bold">
+            Specialty Word Searches
+          </h2>
+
+          <p className="mt-4 leading-8 text-slate-600">
+            Looking for a more specific kind of word? Browse one of
+            TootieWords&apos; specialty word lists.
+          </p>
+
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link
+              href="/words-with-q"
+              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+            >
+              Words With Q
+            </Link>
+          </div>
         </div>
       </section>
 
