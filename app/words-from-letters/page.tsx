@@ -70,6 +70,13 @@ export default function WordsFromLettersPage() {
             >
               Words With Q
             </Link>
+
+            <Link
+              href="/words-with-q-without-u"
+              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+            >
+              Words With Q Without U
+            </Link>
           </div>
         </div>
       </section>
