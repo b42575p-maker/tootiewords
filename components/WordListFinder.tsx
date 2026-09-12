@@ -7,6 +7,8 @@ type WordListFinderProps = {
   wordLength: number;
 };
 
+type ResultMode = "common" | "all";
+
 const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
 export default function WordListFinder({
@@ -17,12 +19,35 @@ export default function WordListFinder({
   const [contains, setContains] = useState("");
   const [endsWith, setEndsWith] = useState("");
   const [exclude, setExclude] = useState("");
-  const [copiedWord, setCopiedWord] = useState<string | null>(null);
-  const [showAll, setShowAll] = useState(false);
+
+  const [resultMode, setResultMode] =
+    useState<ResultMode>("common");
+
+  const [allWords, setAllWords] =
+    useState<string[] | null>(null);
+
+  const [loadingAllWords, setLoadingAllWords] =
+    useState(false);
+
+  const [allWordsError, setAllWordsError] =
+    useState(false);
+
+  const [copiedWord, setCopiedWord] =
+    useState<string | null>(null);
+
+  const [showAll, setShowAll] =
+    useState(false);
 
   function cleanInput(value: string) {
-    return value.replace(/[^a-zA-Z]/g, "").toLowerCase();
+    return value
+      .replace(/[^a-zA-Z]/g, "")
+      .toLowerCase();
   }
+
+  const sourceWords =
+    resultMode === "all" && allWords
+      ? allWords
+      : words;
 
   const filteredWords = useMemo(() => {
     const cleanStarts = cleanInput(startsWith);
@@ -30,29 +55,46 @@ export default function WordListFinder({
     const cleanEnds = cleanInput(endsWith);
     const cleanExclude = cleanInput(exclude);
 
-    return words.filter((word) => {
-      if (cleanStarts && !word.startsWith(cleanStarts)) {
+    return sourceWords.filter((word) => {
+      if (
+        cleanStarts &&
+        !word.startsWith(cleanStarts)
+      ) {
         return false;
       }
 
-      if (cleanContains && !word.includes(cleanContains)) {
+      if (
+        cleanContains &&
+        !word.includes(cleanContains)
+      ) {
         return false;
       }
 
-      if (cleanEnds && !word.endsWith(cleanEnds)) {
+      if (
+        cleanEnds &&
+        !word.endsWith(cleanEnds)
+      ) {
         return false;
       }
 
       if (
         cleanExclude &&
-        [...cleanExclude].some((letter) => word.includes(letter))
+        [...cleanExclude].some((letter) =>
+          word.includes(letter)
+        )
       ) {
         return false;
       }
 
       return true;
     });
-  }, [words, startsWith, contains, endsWith, exclude]);
+  }, [
+    sourceWords,
+    startsWith,
+    contains,
+    endsWith,
+    exclude,
+  ]);
 
   const visibleWords = showAll
     ? filteredWords
@@ -86,13 +128,60 @@ export default function WordListFinder({
     }, 50);
   }
 
+  async function chooseResultMode(
+    mode: ResultMode
+  ) {
+    setResultMode(mode);
+    setShowAll(false);
+    setAllWordsError(false);
+
+    if (
+      mode === "all" &&
+      allWords === null &&
+      !loadingAllWords
+    ) {
+      setLoadingAllWords(true);
+
+      try {
+        const response = await fetch(
+          `/api/word-list?length=${wordLength}`
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            "Unable to load all words."
+          );
+        }
+
+        const data = (await response.json()) as {
+          words?: string[];
+        };
+
+        if (!Array.isArray(data.words)) {
+          throw new Error(
+            "Invalid word list response."
+          );
+        }
+
+        setAllWords(data.words);
+      } catch {
+        setAllWordsError(true);
+        setResultMode("common");
+      } finally {
+        setLoadingAllWords(false);
+      }
+    }
+  }
+
   async function copyWord(word: string) {
     await navigator.clipboard.writeText(word);
+
     setCopiedWord(word);
 
-    window.setTimeout(() => {
-      setCopiedWord(null);
-    }, 1200);
+    window.setTimeout(
+      () => setCopiedWord(null),
+      1200
+    );
   }
 
   return (
@@ -104,17 +193,60 @@ export default function WordListFinder({
           </div>
 
           <p className="mx-auto max-w-2xl text-base leading-7 text-[#755d52] sm:text-lg">
-            Use the filters below to narrow the list of{" "}
-            {wordLength}-letter words.
+            Use the filters below to narrow
+            the list of {wordLength}-letter
+            words.
           </p>
         </div>
+
+        {/* COMMON / ALL WORDS */}
+        <div className="mb-7 flex justify-center">
+          <div className="inline-flex rounded-full border-2 border-[#ead6c5] bg-[#fff8ef] p-1.5">
+            <button
+              type="button"
+              onClick={() =>
+                chooseResultMode("common")
+              }
+              className={`rounded-full px-5 py-2.5 text-sm font-black transition ${
+                resultMode === "common"
+                  ? "bg-[#f4a24a] text-white shadow-sm"
+                  : "text-[#795b4c] hover:bg-white"
+              }`}
+            >
+              Common Words
+            </button>
+
+            <button
+              type="button"
+              onClick={() =>
+                chooseResultMode("all")
+              }
+              className={`rounded-full px-5 py-2.5 text-sm font-black transition ${
+                resultMode === "all"
+                  ? "bg-[#f4a24a] text-white shadow-sm"
+                  : "text-[#795b4c] hover:bg-white"
+              }`}
+            >
+              All Words
+            </button>
+          </div>
+        </div>
+
+        {allWordsError && (
+          <div className="mb-6 rounded-2xl border border-[#efc9a8] bg-[#fff0df] px-5 py-4 text-center text-sm font-bold text-[#9a5830]">
+            Tootie couldn&apos;t load the full
+            word list. Please try again.
+          </div>
+        )}
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <FilterField label="Starts With">
             <input
               value={startsWith}
               onChange={(e) => {
-                setStartsWith(cleanInput(e.target.value));
+                setStartsWith(
+                  cleanInput(e.target.value)
+                );
                 setShowAll(false);
               }}
               placeholder="Example: s"
@@ -128,7 +260,9 @@ export default function WordListFinder({
             <input
               value={contains}
               onChange={(e) => {
-                setContains(cleanInput(e.target.value));
+                setContains(
+                  cleanInput(e.target.value)
+                );
                 setShowAll(false);
               }}
               placeholder="Example: ar"
@@ -142,7 +276,9 @@ export default function WordListFinder({
             <input
               value={endsWith}
               onChange={(e) => {
-                setEndsWith(cleanInput(e.target.value));
+                setEndsWith(
+                  cleanInput(e.target.value)
+                );
                 setShowAll(false);
               }}
               placeholder="Example: e"
@@ -156,7 +292,9 @@ export default function WordListFinder({
             <input
               value={exclude}
               onChange={(e) => {
-                setExclude(cleanInput(e.target.value));
+                setExclude(
+                  cleanInput(e.target.value)
+                );
                 setShowAll(false);
               }}
               placeholder="Example: xyz"
@@ -176,7 +314,9 @@ export default function WordListFinder({
               <button
                 key={letter}
                 type="button"
-                onClick={() => chooseStartingLetter(letter)}
+                onClick={() =>
+                  chooseStartingLetter(letter)
+                }
                 aria-label={`Show ${wordLength}-letter words starting with ${letter.toUpperCase()}`}
                 className={`flex h-10 w-10 items-center justify-center rounded-xl border-2 font-black uppercase transition ${
                   startsWith === letter
@@ -194,92 +334,131 @@ export default function WordListFinder({
           id="word-results"
           className="mt-7 scroll-mt-6 border-t-2 border-dashed border-[#ecd8c7] pt-6"
         >
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <div className="text-sm font-black uppercase tracking-[0.15em] text-[#d8741e]">
-                Tootie found
-              </div>
-
-              <div className="mt-1 text-2xl font-black text-[#4a2e25]">
-                {filteredWords.length.toLocaleString()}{" "}
-                {wordLength}-letter{" "}
-                {filteredWords.length === 1 ? "word" : "words"}
-              </div>
-            </div>
-
-            {filtersActive && (
-              <button
-                type="button"
-                onClick={clearFilters}
-                className="rounded-full border-2 border-[#e7cdb8] bg-white px-6 py-2.5 text-sm font-bold text-[#795b4c] hover:bg-[#fff4e8]"
-              >
-                Clear Filters
-              </button>
-            )}
-          </div>
-
-          {filteredWords.length === 0 ? (
+          {loadingAllWords &&
+          resultMode === "all" ? (
             <div className="py-14 text-center">
-              <div className="text-5xl">🐾</div>
+              <div className="text-5xl">
+                🐾
+              </div>
 
               <h2 className="mt-4 text-2xl font-black text-[#4a2e25]">
-                Tootie couldn&apos;t find a match
+                Tootie is fetching the big
+                word pile...
               </h2>
 
               <p className="mt-2 text-[#846c60]">
-                Try removing one of your filters or using different
-                letters.
+                Loading all {wordLength}-letter
+                words.
               </p>
             </div>
           ) : (
             <>
-              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-                {visibleWords.map((word) => (
-                  <button
-                    key={word}
-                    type="button"
-                    onClick={() => copyWord(word)}
-                    className="word-chip border-[#ead6c5] bg-[#fffaf4] hover:border-[#ef9b4a] hover:bg-[#fff0df]"
-                  >
-                    {copiedWord === word
-                      ? "✓ Copied!"
-                      : word}
-                  </button>
-                ))}
-              </div>
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <div className="text-sm font-black uppercase tracking-[0.15em] text-[#d8741e]">
+                    Tootie found
+                  </div>
 
-              {!showAll && filteredWords.length > 200 && (
-                <div className="mt-10 text-center">
-                  <button
-                    type="button"
-                    onClick={() => setShowAll(true)}
-                    className="tootie-button rounded-full px-7 py-3 font-black text-white"
-                  >
-                    Show All{" "}
-                    {filteredWords.length.toLocaleString()} Words
-                  </button>
+                  <div className="mt-1 text-2xl font-black text-[#4a2e25]">
+                    {filteredWords.length.toLocaleString()}{" "}
+                    {resultMode === "common"
+                      ? "common "
+                      : ""}
+                    {wordLength}-letter{" "}
+                    {filteredWords.length === 1
+                      ? "word"
+                      : "words"}
+                  </div>
                 </div>
-              )}
 
-              {showAll && filteredWords.length > 200 && (
-                <div className="mt-10 text-center">
+                {filtersActive && (
                   <button
                     type="button"
-                    onClick={() => {
-                      setShowAll(false);
-
-                      document
-                        .getElementById("word-results")
-                        ?.scrollIntoView({
-                          behavior: "smooth",
-                          block: "start",
-                        });
-                    }}
+                    onClick={clearFilters}
                     className="rounded-full border-2 border-[#e7cdb8] bg-white px-6 py-2.5 text-sm font-bold text-[#795b4c] hover:bg-[#fff4e8]"
                   >
-                    Show Fewer Words
+                    Clear Filters
                   </button>
+                )}
+              </div>
+
+              {filteredWords.length === 0 ? (
+                <div className="py-14 text-center">
+                  <div className="text-5xl">
+                    🐾
+                  </div>
+
+                  <h2 className="mt-4 text-2xl font-black text-[#4a2e25]">
+                    Tootie couldn&apos;t find a
+                    match
+                  </h2>
+
+                  <p className="mt-2 text-[#846c60]">
+                    Try removing one of your
+                    filters or using different
+                    letters.
+                  </p>
                 </div>
+              ) : (
+                <>
+                  <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                    {visibleWords.map((word) => (
+                      <button
+                        key={word}
+                        type="button"
+                        onClick={() =>
+                          copyWord(word)
+                        }
+                        className="word-chip border-[#ead6c5] bg-[#fffaf4] hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                      >
+                        {copiedWord === word
+                          ? "✓ Copied!"
+                          : word}
+                      </button>
+                    ))}
+                  </div>
+
+                  {!showAll &&
+                    filteredWords.length > 200 && (
+                      <div className="mt-10 text-center">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setShowAll(true)
+                          }
+                          className="tootie-button rounded-full px-7 py-3 font-black text-white"
+                        >
+                          Show All{" "}
+                          {filteredWords.length.toLocaleString()}{" "}
+                          Words
+                        </button>
+                      </div>
+                    )}
+
+                  {showAll &&
+                    filteredWords.length > 200 && (
+                      <div className="mt-10 text-center">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowAll(false);
+
+                            document
+                              .getElementById(
+                                "word-results"
+                              )
+                              ?.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                              });
+                          }}
+                          className="rounded-full border-2 border-[#e7cdb8] bg-white px-6 py-2.5 text-sm font-bold text-[#795b4c] hover:bg-[#fff4e8]"
+                        >
+                          Show Fewer Words
+                        </button>
+                      </div>
+                    )}
+                </>
               )}
             </>
           )}
