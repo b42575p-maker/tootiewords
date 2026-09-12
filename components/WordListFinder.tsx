@@ -5,6 +5,10 @@ import { useMemo, useState } from "react";
 type WordListFinderProps = {
   words: string[];
   wordLength: number;
+  initialStartsWith?: string;
+  initialContains?: string;
+  initialEndsWith?: string;
+  initialExclude?: string;
 };
 
 type ResultMode = "common" | "all";
@@ -14,11 +18,23 @@ const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 export default function WordListFinder({
   words,
   wordLength,
+  initialStartsWith = "",
+  initialContains = "",
+  initialEndsWith = "",
+  initialExclude = "",
 }: WordListFinderProps) {
-  const [startsWith, setStartsWith] = useState("");
-  const [contains, setContains] = useState("");
-  const [endsWith, setEndsWith] = useState("");
-  const [exclude, setExclude] = useState("");
+  const [startsWith, setStartsWith] = useState(
+    cleanInput(initialStartsWith)
+  );
+  const [contains, setContains] = useState(
+    cleanInput(initialContains)
+  );
+  const [endsWith, setEndsWith] = useState(
+    cleanInput(initialEndsWith)
+  );
+  const [exclude, setExclude] = useState(
+    cleanInput(initialExclude)
+  );
 
   const [resultMode, setResultMode] =
     useState<ResultMode>("common");
@@ -37,12 +53,6 @@ export default function WordListFinder({
 
   const [showAll, setShowAll] =
     useState(false);
-
-  function cleanInput(value: string) {
-    return value
-      .replace(/[^a-zA-Z]/g, "")
-      .toLowerCase();
-  }
 
   const sourceWords =
     resultMode === "all" && allWords
@@ -199,7 +209,6 @@ export default function WordListFinder({
           </p>
         </div>
 
-        {/* COMMON / ALL WORDS */}
         <div className="mb-7 flex justify-center">
           <div className="inline-flex rounded-full border-2 border-[#ead6c5] bg-[#fff8ef] p-1.5">
             <button
@@ -466,6 +475,12 @@ export default function WordListFinder({
       </div>
     </section>
   );
+}
+
+function cleanInput(value: string) {
+  return value
+    .replace(/[^a-zA-Z]/g, "")
+    .toLowerCase();
 }
 
 function FilterField({
