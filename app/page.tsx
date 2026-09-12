@@ -141,6 +141,55 @@ export default function Home() {
         <div className="tool-section-wave" />
       </section>
 
+      {/* WORDS BY LENGTH */}
+      <section className="relative overflow-hidden bg-[#fffaf4] px-5 py-16 sm:px-6 sm:py-20">
+        <PawPrint className="left-[3%] top-[15%] -rotate-12 opacity-[0.07]" />
+        <PawPrint className="right-[4%] bottom-[10%] rotate-12 opacity-[0.07]" />
+
+        <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#efc9a8] bg-[#fff0df] px-4 py-2 text-sm font-black text-[#a75b24]">
+              🐾 Tootie&apos;s Word Lists
+            </div>
+
+            <h2 className="whimsy-title text-3xl font-black text-[#4a2e25] sm:text-4xl">
+              Browse Words by Length
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[#755d52] sm:text-lg">
+              Tootie sorted the word pile for you. Choose a word length
+              and start exploring.
+            </p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            {[4, 5, 6, 7, 8].map((length) => (
+              <Link
+                key={length}
+                href={`/${length}-letter-words`}
+                className="group rounded-[1.75rem] border-2 border-[#efd3ba] bg-white px-4 py-7 text-center shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#ef9b4a] hover:bg-[#fff8ef] hover:shadow-[0_16px_35px_rgba(91,59,43,0.12)]"
+              >
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#fff0df] text-3xl font-black text-[#d8741e] transition group-hover:bg-[#f4a24a] group-hover:text-white">
+                  {length}
+                </div>
+
+                <div className="mt-4 text-lg font-black text-[#4a2e25]">
+                  {length} Letter Words
+                </div>
+
+                <div className="mt-2 text-sm font-bold text-[#a26b49]">
+                  Explore words →
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <p className="mt-8 text-center text-sm font-bold text-[#9b7b6b]">
+            🐱 Pick a length and let Tootie help narrow the possibilities.
+          </p>
+        </div>
+      </section>
+
       {/* COZY BOOK / QUOTE */}
       <section className="cozy-story-section relative overflow-hidden">
         <PawPrint className="left-[3%] top-[18%] -rotate-12 opacity-[0.12]" />
