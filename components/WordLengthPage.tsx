@@ -111,6 +111,57 @@ export default function WordLengthPage({
             you know cannot be used.
           </p>
 
+          {wordLength === 5 && (
+            <>
+              <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+                Popular 5-Letter Word Searches
+              </h2>
+
+              <p className="mt-4 leading-8 text-[#755d52]">
+                Jump directly to some of the most useful five-letter
+                word patterns, then use the filters to narrow the
+                results even further.
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Link
+                  href="/5-letter-words-starting-with-a"
+                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+                >
+                  5 Letter Words Starting With A
+                </Link>
+
+                <Link
+                  href="/5-letter-words-starting-with-s"
+                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+                >
+                  5 Letter Words Starting With S
+                </Link>
+
+                <Link
+                  href="/5-letter-words-ending-in-e"
+                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+                >
+                  5 Letter Words Ending In E
+                </Link>
+
+                <Link
+                  href="/5-letter-words-ending-in-y"
+                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+                >
+                  5 Letter Words Ending In Y
+                </Link>
+
+                <Link
+                  href="/5-letter-words-with-a"
+                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+                >
+                  5 Letter Words With A
+                </Link>
+              </div>
+            </>
+          )}
+
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
             Browse Words by Length
           </h2>
