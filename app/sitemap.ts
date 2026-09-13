@@ -40,6 +40,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+
+    // 5-letter pattern pages
     {
       url: `${baseUrl}/5-letter-words-starting-with-a`,
       lastModified: new Date(),
@@ -70,6 +72,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+
+    // Exact-position 5-letter pages
+    {
+      url: `${baseUrl}/5-letter-words-with-a-in-second-position`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/5-letter-words-with-e-in-fifth-position`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/5-letter-words-with-r-in-third-position`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/5-letter-words-with-o-in-second-position`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+
+    // Specialty word pages
     {
       url: `${baseUrl}/words-with-q`,
       lastModified: new Date(),
@@ -88,6 +118,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+
+    // Other word-length pages
     {
       url: `${baseUrl}/6-letter-words`,
       lastModified: new Date(),
@@ -106,6 +138,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+
+    // Site information
     {
       url: `${baseUrl}/about`,
       lastModified: new Date(),

@@ -9,7 +9,8 @@ import WordListFinder from "@/components/WordListFinder";
 
 type FrequencyEntry = [string, number];
 
-const frequencyEntries = wordFrequencyData as FrequencyEntry[];
+const frequencyEntries =
+  wordFrequencyData as FrequencyEntry[];
 
 const frequencies = new Map<string, number>(
   frequencyEntries.map(([word, score]) => [
@@ -51,7 +52,8 @@ function getWordsByLength(wordLength: number) {
 export default function WordLengthPage({
   wordLength,
 }: WordLengthPageProps) {
-  const matchingWords = getWordsByLength(wordLength);
+  const matchingWords =
+    getWordsByLength(wordLength);
 
   return (
     <main className="min-h-screen bg-[#fffaf4] text-slate-900">
@@ -67,8 +69,10 @@ export default function WordLengthPage({
         </h1>
 
         <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-[#755d52]">
-          Browse {wordLength}-letter words and quickly narrow the list
-          by starting letters, ending letters, included letters, or
+          Browse {wordLength}-letter words and
+          quickly narrow the list by starting
+          letters, ending letters, included
+          letters, exact letter positions, or
           letters you want to exclude.
         </p>
       </section>
@@ -81,24 +85,42 @@ export default function WordLengthPage({
       <section className="border-t border-[#ecd8c7] bg-white">
         <div className="mx-auto max-w-4xl px-6 py-14">
           <h2 className="whimsy-title text-3xl font-black text-[#4a2e25]">
-            Find the Right {wordLength}-Letter Word
+            Find the Right {wordLength}-Letter
+            Word
           </h2>
 
           <p className="mt-5 leading-8 text-[#755d52]">
-            {wordLength}-letter words appear in many word games and
-            puzzles. TootieWords helps you narrow the possibilities
-            when you already know some of the letters in the answer.
+            {wordLength}-letter words appear in
+            many word games and puzzles.
+            TootieWords helps you narrow the
+            possibilities when you already know
+            some of the letters in the answer.
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
-            Search by Starting or Ending Letters
+            Search by Starting or Ending
+            Letters
           </h2>
 
           <p className="mt-4 leading-8 text-[#755d52]">
-            If you know how the word begins or ends, enter those
-            letters in the Starts With or Ends With boxes. You can
-            combine both filters when you know more than one part of
-            the word.
+            If you know how the word begins or
+            ends, enter those letters in the
+            Starts With or Ends With boxes. You
+            can combine both filters when you
+            know more than one part of the word.
+          </p>
+
+          <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+            Search by Exact Letter Position
+          </h2>
+
+          <p className="mt-4 leading-8 text-[#755d52]">
+            If you know exactly where a letter
+            belongs, enter it in the matching
+            numbered position. You can combine
+            exact positions with the other
+            filters to narrow the results even
+            further.
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
@@ -106,9 +128,10 @@ export default function WordLengthPage({
           </h2>
 
           <p className="mt-4 leading-8 text-[#755d52]">
-            Use Contains for letters you know belong in the answer.
-            Use Exclude Letters to remove words containing letters
-            you know cannot be used.
+            Use Contains for letters you know
+            belong in the answer. Use Exclude
+            Letters to remove words containing
+            letters you know cannot be used.
           </p>
 
           {wordLength === 5 && (
@@ -118,8 +141,9 @@ export default function WordLengthPage({
               </h2>
 
               <p className="mt-4 leading-8 text-[#755d52]">
-                Jump directly to some of the most useful five-letter
-                word patterns, then use the filters to narrow the
+                Jump directly to some useful
+                five-letter word patterns, then
+                use the filters to narrow the
                 results even further.
               </p>
 
@@ -157,6 +181,47 @@ export default function WordLengthPage({
                   className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
                 >
                   5 Letter Words With A
+                </Link>
+              </div>
+
+              <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+                Exact Letter Position Searches
+              </h2>
+
+              <p className="mt-4 leading-8 text-[#755d52]">
+                Use these searches when you
+                already know the exact position
+                of one letter in a five-letter
+                word.
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Link
+                  href="/5-letter-words-with-a-in-second-position"
+                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+                >
+                  A in Second Position
+                </Link>
+
+                <Link
+                  href="/5-letter-words-with-e-in-fifth-position"
+                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+                >
+                  E in Fifth Position
+                </Link>
+
+                <Link
+                  href="/5-letter-words-with-r-in-third-position"
+                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+                >
+                  R in Third Position
+                </Link>
+
+                <Link
+                  href="/5-letter-words-with-o-in-second-position"
+                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+                >
+                  O in Second Position
                 </Link>
               </div>
             </>

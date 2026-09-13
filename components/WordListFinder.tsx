@@ -9,6 +9,7 @@ type WordListFinderProps = {
   initialContains?: string;
   initialEndsWith?: string;
   initialExclude?: string;
+  initialPositionLetters?: string[];
 };
 
 type ResultMode = "common" | "all";
@@ -23,6 +24,7 @@ export default function WordListFinder({
   initialContains = "",
   initialEndsWith = "",
   initialExclude = "",
+  initialPositionLetters = [],
 }: WordListFinderProps) {
   const [startsWith, setStartsWith] = useState(
     cleanInput(initialStartsWith)
@@ -41,9 +43,19 @@ export default function WordListFinder({
   );
 
   const [positionLetters, setPositionLetters] =
-    useState<string[]>(
-      Array(wordLength).fill("")
-    );
+    useState<string[]>(() => {
+      const positions =
+        Array(wordLength).fill("");
+
+      initialPositionLetters
+        .slice(0, wordLength)
+        .forEach((letter, index) => {
+          positions[index] =
+            cleanInput(letter).slice(0, 1);
+        });
+
+      return positions;
+    });
 
   const [resultMode, setResultMode] =
     useState<ResultMode>("common");

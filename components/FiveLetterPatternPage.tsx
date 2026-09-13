@@ -12,11 +12,13 @@ type FrequencyEntry = [string, number];
 type PatternType =
   | "starts-with"
   | "ends-with"
-  | "contains";
+  | "contains"
+  | "position";
 
 type FiveLetterPatternPageProps = {
   patternType: PatternType;
   letters: string;
+  position?: number;
 };
 
 const frequencyEntries =
@@ -55,9 +57,20 @@ function getCommonFiveLetterWords() {
     });
 }
 
+function getOrdinal(position: number) {
+  if (position === 1) return "First";
+  if (position === 2) return "Second";
+  if (position === 3) return "Third";
+  if (position === 4) return "Fourth";
+  if (position === 5) return "Fifth";
+
+  return `${position}th`;
+}
+
 function getHeading(
   patternType: PatternType,
-  letters: string
+  letters: string,
+  position?: number
 ) {
   const displayLetters = letters.toUpperCase();
 
@@ -69,29 +82,70 @@ function getHeading(
     return `5 Letter Words Ending In ${displayLetters}`;
   }
 
-  return `5 Letter Words With ${displayLetters}`;
+  if (patternType === "contains") {
+    return `5 Letter Words With ${displayLetters}`;
+  }
+
+  const ordinal =
+    position !== undefined
+      ? getOrdinal(position)
+      : "";
+
+  return `5 Letter Words With ${displayLetters} In The ${ordinal} Position`;
 }
 
 function getIntro(
   patternType: PatternType,
-  letters: string
+  letters: string,
+  position?: number
 ) {
   const displayLetters = letters.toUpperCase();
 
   if (patternType === "starts-with") {
-    return `Browse 5-letter words that start with ${displayLetters}. Use TootieWords to narrow the list further by ending letters, included letters, or letters you want to exclude.`;
+    return `Browse 5-letter words that start with ${displayLetters}. Use TootieWords to narrow the list further by ending letters, included letters, known positions, or letters you want to exclude.`;
   }
 
   if (patternType === "ends-with") {
-    return `Browse 5-letter words that end in ${displayLetters}. Use TootieWords to narrow the list further by starting letters, included letters, or letters you want to exclude.`;
+    return `Browse 5-letter words that end in ${displayLetters}. Use TootieWords to narrow the list further by starting letters, included letters, known positions, or letters you want to exclude.`;
   }
 
-  return `Browse 5-letter words containing ${displayLetters}. Use TootieWords to narrow the list further by starting letters, ending letters, or excluded letters.`;
+  if (patternType === "contains") {
+    return `Browse 5-letter words containing ${displayLetters}. Use TootieWords to narrow the list further by starting letters, ending letters, known positions, or excluded letters.`;
+  }
+
+  const ordinal =
+    position !== undefined
+      ? getOrdinal(position).toLowerCase()
+      : "";
+
+  return `Browse 5-letter words with ${displayLetters} in the ${ordinal} position. The matching position is already filled in, and you can add more filters to narrow the results further.`;
+}
+
+function buildInitialPositionLetters(
+  letters: string,
+  position?: number
+) {
+  const positions =
+    Array(5).fill("");
+
+  if (
+    position === undefined ||
+    position < 1 ||
+    position > 5
+  ) {
+    return positions;
+  }
+
+  positions[position - 1] =
+    letters.slice(0, 1);
+
+  return positions;
 }
 
 export default function FiveLetterPatternPage({
   patternType,
   letters,
+  position,
 }: FiveLetterPatternPageProps) {
   const cleanLetters = letters
     .replace(/[^a-zA-Z]/g, "")
@@ -99,16 +153,26 @@ export default function FiveLetterPatternPage({
 
   const heading = getHeading(
     patternType,
-    cleanLetters
+    cleanLetters,
+    position
   );
 
   const intro = getIntro(
     patternType,
-    cleanLetters
+    cleanLetters,
+    position
   );
 
   const commonFiveLetterWords =
     getCommonFiveLetterWords();
+
+  const initialPositionLetters =
+    patternType === "position"
+      ? buildInitialPositionLetters(
+          cleanLetters,
+          position
+        )
+      : [];
 
   return (
     <main className="min-h-screen bg-[#fffaf4] text-slate-900">
@@ -146,6 +210,9 @@ export default function FiveLetterPatternPage({
             ? cleanLetters
             : ""
         }
+        initialPositionLetters={
+          initialPositionLetters
+        }
       />
 
       <section className="border-t border-[#ecd8c7] bg-white">
@@ -155,12 +222,11 @@ export default function FiveLetterPatternPage({
           </h2>
 
           <p className="mt-5 leading-8 text-[#755d52]">
-            This word list starts with the
-            pattern already filled in for you.
-            You can add more filters to narrow
-            the results or switch from Common
-            Words to All Words for a larger
-            dictionary.
+            {patternType === "position"
+              ? `This word list starts with ${cleanLetters.toUpperCase()} already placed in the ${getOrdinal(
+                  position ?? 1
+                ).toLowerCase()} position. You can add more filters to narrow the results or switch from Common Words to All Words for a larger dictionary.`
+              : `This word list starts with the pattern already filled in for you. You can add more filters to narrow the results or switch from Common Words to All Words for a larger dictionary.`}
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
@@ -170,8 +236,9 @@ export default function FiveLetterPatternPage({
           <p className="mt-4 leading-8 text-[#755d52]">
             Add known starting or ending
             letters, require letters with the
-            Contains box, or exclude letters
-            that cannot appear in the answer.
+            Contains box, fill in exact known
+            positions, or exclude letters that
+            cannot appear in the answer.
             Combining filters can quickly
             reduce a long list to a handful of
             possibilities.
