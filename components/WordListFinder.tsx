@@ -13,7 +13,8 @@ type WordListFinderProps = {
 
 type ResultMode = "common" | "all";
 
-const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+const alphabet =
+  "abcdefghijklmnopqrstuvwxyz".split("");
 
 export default function WordListFinder({
   words,
@@ -26,15 +27,23 @@ export default function WordListFinder({
   const [startsWith, setStartsWith] = useState(
     cleanInput(initialStartsWith)
   );
+
   const [contains, setContains] = useState(
     cleanInput(initialContains)
   );
+
   const [endsWith, setEndsWith] = useState(
     cleanInput(initialEndsWith)
   );
+
   const [exclude, setExclude] = useState(
     cleanInput(initialExclude)
   );
+
+  const [positionLetters, setPositionLetters] =
+    useState<string[]>(
+      Array(wordLength).fill("")
+    );
 
   const [resultMode, setResultMode] =
     useState<ResultMode>("common");
@@ -60,10 +69,17 @@ export default function WordListFinder({
       : words;
 
   const filteredWords = useMemo(() => {
-    const cleanStarts = cleanInput(startsWith);
-    const cleanContains = cleanInput(contains);
-    const cleanEnds = cleanInput(endsWith);
-    const cleanExclude = cleanInput(exclude);
+    const cleanStarts =
+      cleanInput(startsWith);
+
+    const cleanContains =
+      cleanInput(contains);
+
+    const cleanEnds =
+      cleanInput(endsWith);
+
+    const cleanExclude =
+      cleanInput(exclude);
 
     return sourceWords.filter((word) => {
       if (
@@ -96,6 +112,17 @@ export default function WordListFinder({
         return false;
       }
 
+      const positionMismatch =
+        positionLetters.some(
+          (letter, index) =>
+            letter.length > 0 &&
+            word[index] !== letter
+        );
+
+      if (positionMismatch) {
+        return false;
+      }
+
       return true;
     });
   }, [
@@ -104,27 +131,63 @@ export default function WordListFinder({
     contains,
     endsWith,
     exclude,
+    positionLetters,
   ]);
 
   const visibleWords = showAll
     ? filteredWords
     : filteredWords.slice(0, 200);
 
+  const positionFiltersActive =
+    positionLetters.some(
+      (letter) => letter.length > 0
+    );
+
   const filtersActive =
     startsWith.length > 0 ||
     contains.length > 0 ||
     endsWith.length > 0 ||
-    exclude.length > 0;
+    exclude.length > 0 ||
+    positionFiltersActive;
 
   function clearFilters() {
     setStartsWith("");
     setContains("");
     setEndsWith("");
     setExclude("");
+
+    setPositionLetters(
+      Array(wordLength).fill("")
+    );
+
     setShowAll(false);
   }
 
-  function chooseStartingLetter(letter: string) {
+  function setPositionLetter(
+    index: number,
+    value: string
+  ) {
+    const cleanValue =
+      cleanInput(value).slice(0, 1);
+
+    setPositionLetters(
+      (currentLetters) => {
+        const nextLetters =
+          [...currentLetters];
+
+        nextLetters[index] =
+          cleanValue;
+
+        return nextLetters;
+      }
+    );
+
+    setShowAll(false);
+  }
+
+  function chooseStartingLetter(
+    letter: string
+  ) {
     setStartsWith(letter);
     setShowAll(false);
 
@@ -163,9 +226,10 @@ export default function WordListFinder({
           );
         }
 
-        const data = (await response.json()) as {
-          words?: string[];
-        };
+        const data =
+          (await response.json()) as {
+            words?: string[];
+          };
 
         if (!Array.isArray(data.words)) {
           throw new Error(
@@ -183,8 +247,12 @@ export default function WordListFinder({
     }
   }
 
-  async function copyWord(word: string) {
-    await navigator.clipboard.writeText(word);
+  async function copyWord(
+    word: string
+  ) {
+    await navigator.clipboard.writeText(
+      word
+    );
 
     setCopiedWord(word);
 
@@ -254,8 +322,11 @@ export default function WordListFinder({
               value={startsWith}
               onChange={(e) => {
                 setStartsWith(
-                  cleanInput(e.target.value)
+                  cleanInput(
+                    e.target.value
+                  )
                 );
+
                 setShowAll(false);
               }}
               placeholder="Example: s"
@@ -270,8 +341,11 @@ export default function WordListFinder({
               value={contains}
               onChange={(e) => {
                 setContains(
-                  cleanInput(e.target.value)
+                  cleanInput(
+                    e.target.value
+                  )
                 );
+
                 setShowAll(false);
               }}
               placeholder="Example: ar"
@@ -286,8 +360,11 @@ export default function WordListFinder({
               value={endsWith}
               onChange={(e) => {
                 setEndsWith(
-                  cleanInput(e.target.value)
+                  cleanInput(
+                    e.target.value
+                  )
                 );
+
                 setShowAll(false);
               }}
               placeholder="Example: e"
@@ -302,8 +379,11 @@ export default function WordListFinder({
               value={exclude}
               onChange={(e) => {
                 setExclude(
-                  cleanInput(e.target.value)
+                  cleanInput(
+                    e.target.value
+                  )
                 );
+
                 setShowAll(false);
               }}
               placeholder="Example: xyz"
@@ -311,6 +391,62 @@ export default function WordListFinder({
               aria-label="Exclude letters"
             />
           </FilterField>
+        </div>
+
+        <div className="mt-7 border-t-2 border-dashed border-[#ecd8c7] pt-6">
+          <div className="text-center">
+            <div className="text-sm font-black uppercase tracking-[0.12em] text-[#9a5830]">
+              Known Letter Positions
+            </div>
+
+            <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-[#846c60]">
+              Know exactly where a letter
+              belongs? Enter it in the matching
+              position. Leave unknown positions
+              blank.
+            </p>
+          </div>
+
+          <div className="mt-5 flex flex-wrap justify-center gap-2 sm:gap-3">
+            {positionLetters.map(
+              (letter, index) => (
+                <div
+                  key={index}
+                  className="text-center"
+                >
+                  <label
+                    htmlFor={`position-${index}`}
+                    className="mb-1 block text-xs font-black text-[#9a5830]"
+                  >
+                    {index + 1}
+                  </label>
+
+                  <input
+                    id={`position-${index}`}
+                    value={letter}
+                    onChange={(e) =>
+                      setPositionLetter(
+                        index,
+                        e.target.value
+                      )
+                    }
+                    maxLength={1}
+                    placeholder="?"
+                    aria-label={`Letter in position ${
+                      index + 1
+                    }`}
+                    className="h-12 w-12 rounded-xl border-2 border-[#ead6c5] bg-white text-center text-xl font-black uppercase text-[#4a2e25] outline-none transition placeholder:text-[#c7b4a5] focus:border-[#ef9b4a] focus:ring-2 focus:ring-[#f8d7b6] sm:h-14 sm:w-14"
+                  />
+                </div>
+              )
+            )}
+          </div>
+
+          <p className="mt-4 text-center text-xs font-bold text-[#9a8175]">
+            Example: enter A in position 2
+            and E in position {wordLength} to
+            find words matching that pattern.
+          </p>
         </div>
 
         <div className="mt-7 border-t-2 border-dashed border-[#ecd8c7] pt-6">
@@ -324,7 +460,9 @@ export default function WordListFinder({
                 key={letter}
                 type="button"
                 onClick={() =>
-                  chooseStartingLetter(letter)
+                  chooseStartingLetter(
+                    letter
+                  )
                 }
                 aria-label={`Show ${wordLength}-letter words starting with ${letter.toUpperCase()}`}
                 className={`flex h-10 w-10 items-center justify-center rounded-xl border-2 font-black uppercase transition ${
@@ -374,7 +512,8 @@ export default function WordListFinder({
                       ? "common "
                       : ""}
                     {wordLength}-letter{" "}
-                    {filteredWords.length === 1
+                    {filteredWords.length ===
+                    1
                       ? "word"
                       : "words"}
                   </div>
@@ -391,7 +530,8 @@ export default function WordListFinder({
                 )}
               </div>
 
-              {filteredWords.length === 0 ? (
+              {filteredWords.length ===
+              0 ? (
                 <div className="py-14 text-center">
                   <div className="text-5xl">
                     🐾
@@ -411,29 +551,34 @@ export default function WordListFinder({
               ) : (
                 <>
                   <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-                    {visibleWords.map((word) => (
-                      <button
-                        key={word}
-                        type="button"
-                        onClick={() =>
-                          copyWord(word)
-                        }
-                        className="word-chip border-[#ead6c5] bg-[#fffaf4] hover:border-[#ef9b4a] hover:bg-[#fff0df]"
-                      >
-                        {copiedWord === word
-                          ? "✓ Copied!"
-                          : word}
-                      </button>
-                    ))}
+                    {visibleWords.map(
+                      (word) => (
+                        <button
+                          key={word}
+                          type="button"
+                          onClick={() =>
+                            copyWord(word)
+                          }
+                          className="word-chip border-[#ead6c5] bg-[#fffaf4] hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                        >
+                          {copiedWord === word
+                            ? "✓ Copied!"
+                            : word}
+                        </button>
+                      )
+                    )}
                   </div>
 
                   {!showAll &&
-                    filteredWords.length > 200 && (
+                    filteredWords.length >
+                      200 && (
                       <div className="mt-10 text-center">
                         <button
                           type="button"
                           onClick={() =>
-                            setShowAll(true)
+                            setShowAll(
+                              true
+                            )
                           }
                           className="tootie-button rounded-full px-7 py-3 font-black text-white"
                         >
@@ -445,21 +590,28 @@ export default function WordListFinder({
                     )}
 
                   {showAll &&
-                    filteredWords.length > 200 && (
+                    filteredWords.length >
+                      200 && (
                       <div className="mt-10 text-center">
                         <button
                           type="button"
                           onClick={() => {
-                            setShowAll(false);
+                            setShowAll(
+                              false
+                            );
 
                             document
                               .getElementById(
                                 "word-results"
                               )
-                              ?.scrollIntoView({
-                                behavior: "smooth",
-                                block: "start",
-                              });
+                              ?.scrollIntoView(
+                                {
+                                  behavior:
+                                    "smooth",
+                                  block:
+                                    "start",
+                                }
+                              );
                           }}
                           className="rounded-full border-2 border-[#e7cdb8] bg-white px-6 py-2.5 text-sm font-bold text-[#795b4c] hover:bg-[#fff4e8]"
                         >
