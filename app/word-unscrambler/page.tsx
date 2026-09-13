@@ -5,9 +5,43 @@ import Footer from "@/components/Footer";
 import WordFinder from "@/components/WordFinder";
 
 export const metadata: Metadata = {
-  title: "Word Unscrambler",
+  title:
+    "Word Unscrambler - Unscramble Letters Into Words",
+
   description:
-    "Unscramble letters and find words you can make with TootieWords' free online word unscrambler.",
+    "Use TootieWords' free word unscrambler to turn scrambled letters into words. Filter results by word length, starting letters, ending letters, and more.",
+
+  alternates: {
+    canonical:
+      "https://tootiewords.com/word-unscrambler",
+  },
+
+  openGraph: {
+    type: "website",
+    url: "https://tootiewords.com/word-unscrambler",
+    siteName: "TootieWords",
+    title:
+      "Word Unscrambler - Unscramble Letters Into Words",
+    description:
+      "Unscramble letters and find words you can make with the free TootieWords word unscrambler.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TootieWords Word Unscrambler",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Word Unscrambler - Unscramble Letters Into Words",
+    description:
+      "Unscramble letters and find words you can make with the free TootieWords word unscrambler.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function WordUnscramblerPage() {

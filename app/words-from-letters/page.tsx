@@ -6,9 +6,43 @@ import Footer from "@/components/Footer";
 import WordFinder from "@/components/WordFinder";
 
 export const metadata: Metadata = {
-  title: "Words From Letters",
+  title:
+    "Words From Letters - Find Words Using Your Letters",
+
   description:
-    "Enter letters and find words you can make with TootieWords' free Words From Letters tool.",
+    "Use TootieWords to find words from letters. Enter your available letters, discover matching words, and filter results by length, starting letters, ending letters, and more.",
+
+  alternates: {
+    canonical:
+      "https://tootiewords.com/words-from-letters",
+  },
+
+  openGraph: {
+    type: "website",
+    url: "https://tootiewords.com/words-from-letters",
+    siteName: "TootieWords",
+    title:
+      "Words From Letters - Find Words Using Your Letters",
+    description:
+      "Find words you can make from your letters with the free TootieWords Words From Letters tool.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TootieWords Words From Letters",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Words From Letters - Find Words Using Your Letters",
+    description:
+      "Find words you can make from your letters with the free TootieWords Words From Letters tool.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function WordsFromLettersPage() {

@@ -8,55 +8,71 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://tootiewords.com"),
 
   title: {
-    default: "TootieWords - Free Word Finder & Unscrambler",
+    default:
+      "Free Word Finder, Unscrambler & Anagram Solver | TootieWords",
     template: "%s | TootieWords",
   },
 
   description:
-    "Find words from letters, unscramble words, and solve anagrams with free TootieWords word tools.",
-
-  keywords: [
-    "word finder",
-    "word unscrambler",
-    "anagram solver",
-    "words from letters",
-    "letter unscrambler",
-    "word game helper",
-  ],
+    "Find words from letters, unscramble letters, solve anagrams, and narrow word-game answers with free TootieWords word tools.",
 
   applicationName: "TootieWords",
 
-  authors: [{ name: "TootieWords" }],
+  authors: [
+    {
+      name: "TootieWords",
+      url: "https://tootiewords.com",
+    },
+  ],
+
   creator: "TootieWords",
   publisher: "TootieWords",
+
+  category: "games",
 
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 
   openGraph: {
     type: "website",
+    locale: "en_US",
     url: "https://tootiewords.com",
     siteName: "TootieWords",
-    title: "TootieWords - Free Word Finder & Unscrambler",
+
+    title:
+      "Free Word Finder, Unscrambler & Anagram Solver | TootieWords",
+
     description:
-      "Find words from letters, unscramble words, and solve anagrams with free TootieWords word tools.",
+      "Find words from letters, unscramble letters, solve anagrams, and narrow word-game answers with free TootieWords word tools.",
+
     images: [
       {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "TootieWords - Find More Words. More Fun.",
+        alt: "TootieWords - Free Word Finder and Letter Unscrambler",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "TootieWords - Free Word Finder & Unscrambler",
+
+    title:
+      "Free Word Finder, Unscrambler & Anagram Solver | TootieWords",
+
     description:
-      "Find words from letters, unscramble words, and solve anagrams with free TootieWords word tools.",
+      "Find words from letters, unscramble letters, solve anagrams, and narrow word-game answers with free TootieWords word tools.",
+
     images: ["/opengraph-image.png"],
   },
 };

@@ -5,9 +5,43 @@ import Footer from "@/components/Footer";
 import WordFinder from "@/components/WordFinder";
 
 export const metadata: Metadata = {
-  title: "Anagram Solver",
+  title:
+    "Anagram Solver - Find Anagrams From Letters",
+
   description:
-    "Find anagrams from letters with TootieWords' free online anagram solver and word finder.",
+    "Use TootieWords' free anagram solver to find exact anagrams and other words from your letters. Enter a word or letter set and discover possible matches.",
+
+  alternates: {
+    canonical:
+      "https://tootiewords.com/anagram-solver",
+  },
+
+  openGraph: {
+    type: "website",
+    url: "https://tootiewords.com/anagram-solver",
+    siteName: "TootieWords",
+    title:
+      "Anagram Solver - Find Anagrams From Letters",
+    description:
+      "Find exact anagrams and other words from your letters with the free TootieWords anagram solver.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TootieWords Anagram Solver",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Anagram Solver - Find Anagrams From Letters",
+    description:
+      "Find exact anagrams and other words from your letters with the free TootieWords anagram solver.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function AnagramSolverPage() {
