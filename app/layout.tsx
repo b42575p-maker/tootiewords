@@ -77,6 +77,44 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://tootiewords.com/#organization",
+
+      name: "TootieWords",
+
+      url: "https://tootiewords.com",
+
+      logo: {
+        "@type": "ImageObject",
+        url: "https://tootiewords.com/icon.png",
+      },
+    },
+
+    {
+      "@type": "WebSite",
+      "@id": "https://tootiewords.com/#website",
+
+      url: "https://tootiewords.com",
+
+      name: "TootieWords",
+
+      description:
+        "Free word finder, word unscrambler, anagram solver, and word-game tools.",
+
+      publisher: {
+        "@id": "https://tootiewords.com/#organization",
+      },
+
+      inLanguage: "en-US",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -85,6 +123,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+
         {children}
 
         <GoogleAnalytics />
