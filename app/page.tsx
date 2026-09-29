@@ -190,6 +190,96 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SPECIALTY WORD LISTS */}
+      <section className="relative overflow-hidden bg-[#fff4e8] px-5 py-16 sm:px-6 sm:py-20">
+        <PawPrint className="left-[4%] top-[18%] rotate-12 opacity-[0.07]" />
+        <PawPrint className="right-[5%] bottom-[12%] -rotate-12 opacity-[0.07]" />
+
+        <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#efc9a8] bg-white px-4 py-2 text-sm font-black text-[#a75b24]">
+              Specialty Word Lists
+            </div>
+
+            <h2 className="whimsy-title text-3xl font-black text-[#4a2e25] sm:text-4xl">
+              Explore More Word Lists
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[#755d52] sm:text-lg">
+              Looking for an unusual letter pattern? Explore specialty word
+              lists for tricky letters and uncommon combinations.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            <Link
+              href="/words-with-q"
+              className="group rounded-[1.75rem] border-2 border-[#efd3ba] bg-white p-6 shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#ef9b4a] hover:shadow-[0_16px_35px_rgba(91,59,43,0.12)]"
+            >
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff0df] text-2xl font-black text-[#d8741e]">
+                Q
+              </div>
+
+              <h3 className="mt-5 text-xl font-black text-[#4a2e25]">
+                Words With Q
+              </h3>
+
+              <p className="mt-2 leading-7 text-[#755d52]">
+                Browse words containing Q and narrow the list by length,
+                starting letters, endings, and more.
+              </p>
+
+              <div className="mt-5 font-black text-[#d8741e] transition group-hover:translate-x-1">
+                Explore Q words &rarr;
+              </div>
+            </Link>
+
+            <Link
+              href="/words-with-q-without-u"
+              className="group rounded-[1.75rem] border-2 border-[#efb9c8] bg-white p-6 shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#e96f91] hover:shadow-[0_16px_35px_rgba(91,59,43,0.12)]"
+            >
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff0f4] text-2xl font-black text-[#d85b7c]">
+                QU
+              </div>
+
+              <h3 className="mt-5 text-xl font-black text-[#4a2e25]">
+                Q Without U
+              </h3>
+
+              <p className="mt-2 leading-7 text-[#755d52]">
+                Find the unusual words where Q appears without the U that
+                normally follows it.
+              </p>
+
+              <div className="mt-5 font-black text-[#d85b7c] transition group-hover:translate-x-1">
+                Find Q without U &rarr;
+              </div>
+            </Link>
+
+            <Link
+              href="/words-with-no-vowels"
+              className="group rounded-[1.75rem] border-2 border-[#efd3ba] bg-white p-6 shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#ef9b4a] hover:shadow-[0_16px_35px_rgba(91,59,43,0.12)]"
+            >
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff0df] text-xl font-black text-[#d8741e]">
+                Y?
+              </div>
+
+              <h3 className="mt-5 text-xl font-black text-[#4a2e25]">
+                Words With No Vowels
+              </h3>
+
+              <p className="mt-2 leading-7 text-[#755d52]">
+                Explore words spelled without A, E, I, O, or U, including
+                words where Y does the heavy lifting.
+              </p>
+
+              <div className="mt-5 font-black text-[#d8741e] transition group-hover:translate-x-1">
+                Explore vowel-free words &rarr;
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
       {/* COZY BOOK / QUOTE */}
       <section className="cozy-story-section relative overflow-hidden">
         <PawPrint className="left-[3%] top-[18%] -rotate-12 opacity-[0.12]" />
