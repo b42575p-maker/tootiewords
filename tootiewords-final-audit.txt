@@ -1,0 +1,2907 @@
+﻿
+
+============================================================
+FILE: app\page.tsx
+============================================================
+
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import WordFinder from "@/components/WordFinder";
+
+export const metadata: Metadata = {
+  title: "Free Word Finder & Letter Unscrambler",
+  description:
+    "Find words from scrambled letters, discover hidden words, and solve anagrams with TootieWords' free online word finder.",
+};
+
+export default function Home() {
+  return (
+    <main className="min-h-screen overflow-hidden bg-[#fffaf4] text-[#3d2923]">
+      <Header />
+
+      {/* HERO */}
+      <section className="hero-storybook relative overflow-hidden">
+        <PawPrint className="left-[4%] top-[23%] -rotate-12" />
+        <PawPrint className="left-[40%] top-[10%] rotate-12" />
+        <PawPrint className="right-[5%] top-[27%] -rotate-6" />
+
+        <div className="mx-auto max-w-[1420px] px-5 pb-8 pt-7 sm:px-6 lg:px-8 lg:pb-12 lg:pt-8">
+          <div className="relative grid items-start gap-2 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="relative z-30 pt-3 lg:pt-9">
+              <div className="hero-copy-column">
+                <h1 className="hero-headline">
+                  <span className="hero-headline-line hero-headline-line-one">
+                    Turn Letters
+                  </span>
+
+                  <span className="hero-headline-line hero-headline-line-two">
+                    Into Possibilities
+                  </span>
+                </h1>
+
+                <div className="hero-swoosh" aria-hidden="true">
+                  <span />
+                </div>
+
+                <p className="hero-description">
+                  Find words, solve anagrams, and explore the magic hidden in
+                  letters with TootieWords â€” your friendly word game helper.
+                </p>
+
+                <div className="hero-note hidden sm:block">
+                  <span>
+                    Same Letters.
+                    <br />
+                    More Fun! â™¡
+                  </span>
+
+                  <div className="hero-note-line" />
+                </div>
+              </div>
+            </div>
+
+            <div className="relative z-20 flex min-h-[315px] items-end justify-center lg:min-h-[430px] lg:justify-end">
+              <Tile
+                letter="A"
+                className="left-[10%] top-[10%] -rotate-12"
+              />
+
+              <Tile
+                letter="P"
+                className="right-[14%] top-[7%] rotate-12"
+              />
+
+              <Tile
+                letter="W"
+                pink
+                className="right-[4%] top-[39%] rotate-[10deg]"
+              />
+
+              <Tile
+                letter="R"
+                className="right-[8%] bottom-[13%] rotate-12"
+              />
+
+              <Image
+                src="/tootie-hero-optimized.webp"
+                alt="Tootie peeking over the word finder"
+                width={900}
+                height={600}
+                preload
+                sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1023px) calc(100vw - 48px), 735px"
+                className="pointer-events-none relative z-20 h-auto w-full max-w-[735px] translate-y-3 drop-shadow-[0_18px_22px_rgba(74,46,37,0.16)]"
+              />
+            </div>
+          </div>
+
+          <div className="home-hero-finder relative z-10 lg:-mt-[142px]">
+            <WordFinder
+              heroMode
+              title="Find Words From Letters"
+              description="Enter your letters and discover all the possible words!"
+            />
+          </div>
+        </div>
+
+        <div className="storybook-wave-bottom" />
+      </section>
+
+      {/* TOOL CARDS */}
+      <section className="tool-section relative overflow-hidden px-5 pb-20 pt-12 sm:px-6">
+        <PawPrint className="left-[3%] top-[20%] rotate-12 opacity-[0.08]" />
+        <PawPrint className="right-[4%] bottom-[12%] -rotate-12 opacity-[0.08]" />
+
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-7 md:grid-cols-3">
+            <ToolCard
+              letters={["W", "O", "R", "D"]}
+              title="Word Unscrambler"
+              description="Unscramble letters to find all possible words."
+              href="/word-unscrambler"
+              variant="pink"
+            />
+
+            <ToolCard
+              letters={["A", "B", "C"]}
+              title="Anagram Solver"
+              description="Find all anagrams from your letters."
+              href="/anagram-solver"
+              variant="orange"
+            />
+
+            <ToolCard
+              letters={["C", "A", "T"]}
+              title="Words From Letters"
+              description="See every word you can make from your letters."
+              href="/words-from-letters"
+              variant="pink"
+              lightbulb
+            />
+          </div>
+        </div>
+
+        <div className="tool-section-wave" />
+      </section>
+
+      {/* WORDS BY LENGTH */}
+      <section className="relative overflow-hidden bg-[#fffaf4] px-5 py-16 sm:px-6 sm:py-20">
+        <PawPrint className="left-[3%] top-[15%] -rotate-12 opacity-[0.07]" />
+        <PawPrint className="right-[4%] bottom-[10%] rotate-12 opacity-[0.07]" />
+
+        <div className="relative z-10 mx-auto max-w-6xl">
+          <div className="text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#efc9a8] bg-[#fff0df] px-4 py-2 text-sm font-black text-[#a75b24]">
+              ðŸ¾ Tootie&apos;s Word Lists
+            </div>
+
+            <h2 className="whimsy-title text-3xl font-black text-[#4a2e25] sm:text-4xl">
+              Browse Words by Length
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-[#755d52] sm:text-lg">
+              Tootie sorted the word pile for you. Choose a word length
+              and start exploring.
+            </p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            {[4, 5, 6, 7, 8].map((length) => (
+              <Link
+                key={length}
+                href={`/${length}-letter-words`}
+                className="group rounded-[1.75rem] border-2 border-[#efd3ba] bg-white px-4 py-7 text-center shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#ef9b4a] hover:bg-[#fff8ef] hover:shadow-[0_16px_35px_rgba(91,59,43,0.12)]"
+              >
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#fff0df] text-3xl font-black text-[#d8741e] transition group-hover:bg-[#f4a24a] group-hover:text-white">
+                  {length}
+                </div>
+
+                <div className="mt-4 text-lg font-black text-[#4a2e25]">
+                  {length} Letter Words
+                </div>
+
+                <div className="mt-2 text-sm font-bold text-[#a26b49]">
+                  Explore words â†’
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <p className="mt-8 text-center text-sm font-bold text-[#9b7b6b]">
+            ðŸ± Pick a length and let Tootie help narrow the possibilities.
+          </p>
+        </div>
+      </section>
+
+      {/* COZY BOOK / QUOTE */}
+      <section className="cozy-story-section relative overflow-hidden">
+        <PawPrint className="left-[3%] top-[18%] -rotate-12 opacity-[0.12]" />
+        <PawPrint className="left-[9%] bottom-[18%] rotate-12 opacity-[0.08]" />
+
+        <div className="cozy-story-blob cozy-story-blob-left" />
+        <div className="cozy-story-blob cozy-story-blob-right" />
+
+        <div className="mx-auto grid max-w-[1380px] items-center gap-2 px-5 py-8 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:px-8 lg:py-5">
+          <div className="cozy-quote relative z-20">
+            <div className="cozy-quote-mark" aria-hidden="true">
+              â€œ
+            </div>
+
+            <blockquote>
+              A few letters can lead
+              <br />
+              to a lot of happy.
+            </blockquote>
+
+            <div className="cozy-signature">
+              <span>â€” Tootie</span>
+              <span className="cozy-signature-paw">ðŸ¾</span>
+            </div>
+
+            <div className="cozy-quote-scribble" aria-hidden="true" />
+          </div>
+
+          <div className="relative z-10 flex justify-center lg:justify-end">
+            <Image
+              src="/tootie-book-scene-optimized.webp"
+              alt="Tootie with an open book, plants, and a warm drink"
+              width={1200}
+              height={400}
+              sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1023px) calc(100vw - 48px), 900px"
+              className="cozy-book-image h-auto w-full max-w-[900px]"
+            />
+          </div>
+        </div>
+
+        <div className="cozy-bottom-wave" />
+      </section>
+
+      {/* BENEFITS */}
+      <section className="benefits-section relative overflow-hidden px-5 pb-20 pt-16 sm:px-6">
+        <PawPrint className="left-[2%] bottom-[10%] -rotate-12 opacity-[0.07]" />
+        <PawPrint className="right-[3%] top-[17%] rotate-12 opacity-[0.07]" />
+
+        <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
+          <Benefit
+            icon="â™¥"
+            title="Simple & Easy"
+            text="Fast, clean tools that are easy to use."
+            variant="pink"
+          />
+
+          <Benefit
+            icon="ðŸ¾"
+            title="Helpful Results"
+            text="Find the words you need, quickly."
+            variant="orange"
+          />
+
+          <Benefit
+            icon="â˜…"
+            title="Word Game Friendly"
+            text="Great for word games, puzzles, and more."
+            variant="gold"
+          />
+
+          <Benefit
+            icon="ðŸƒ"
+            title="100% Free"
+            text="All tools are free to use, always."
+            variant="green"
+          />
+        </div>
+
+        <div className="benefits-footer-wave" />
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
+
+function ToolCard({
+  letters,
+  title,
+  description,
+  href,
+  variant,
+  lightbulb = false,
+}: {
+  letters: string[];
+  title: string;
+  description: string;
+  href: string;
+  variant: "pink" | "orange";
+  lightbulb?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`tool-card group ${
+        variant === "pink" ? "tool-card-pink" : "tool-card-orange"
+      }`}
+    >
+      <div className="tool-card-art">
+        {lightbulb ? (
+          <div className="tool-lightbulb" aria-hidden="true">
+            <span className="tool-lightbulb-rays">âœ¦</span>
+            <span className="tool-lightbulb-bulb">ðŸ’¡</span>
+            <span className="tool-lightbulb-paw">ðŸ¾</span>
+          </div>
+        ) : (
+          <div className="tool-tiles">
+            {letters.map((letter, index) => (
+              <span
+                key={`${letter}-${index}`}
+                className={`letter-tile tool-letter-${index + 1}`}
+              >
+                {letter}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <h2 className="tool-card-title">{title}</h2>
+
+      <p className="tool-card-description">{description}</p>
+
+      <div
+        className={`tool-card-button ${
+          variant === "pink"
+            ? "tool-card-button-pink"
+            : "tool-card-button-orange"
+        }`}
+      >
+        <span>Try It Now</span>
+        <span className="transition-transform duration-200 group-hover:translate-x-1">
+          â†’
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+function Benefit({
+  icon,
+  title,
+  text,
+  variant,
+}: {
+  icon: string;
+  title: string;
+  text: string;
+  variant: "pink" | "orange" | "gold" | "green";
+}) {
+  return (
+    <div className="benefit-card">
+      <div className={`benefit-icon benefit-icon-${variant}`}>{icon}</div>
+
+      <h3>{title}</h3>
+
+      <p>{text}</p>
+    </div>
+  );
+}
+
+function Tile({
+  letter,
+  pink = false,
+  className = "",
+}: {
+  letter: string;
+  pink?: boolean;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`pointer-events-none absolute z-30 flex h-14 w-14 items-center justify-center rounded-xl text-2xl font-black shadow-lg ${
+        pink ? "bg-[#ef82a0] text-white" : "bg-[#f5b05d] text-[#4e332a]"
+      } ${className}`}
+      aria-hidden="true"
+    >
+      {letter}
+    </div>
+  );
+}
+
+function PawPrint({
+  className = "",
+}: {
+  className?: string;
+}) {
+  return (
+    <div
+      className={`pointer-events-none absolute text-5xl opacity-[0.11] ${className}`}
+      aria-hidden="true"
+    >
+      ðŸ¾
+    </div>
+  );
+}
+
+============================================================
+FILE: app\about\page.tsx
+============================================================
+
+import type { Metadata } from "next";
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn about TootieWords, a free collection of word tools for finding words, solving anagrams, and having more fun with letters.",
+};
+
+export default function AboutPage() {
+  return (
+    <main className="min-h-screen bg-[#fffaf4] text-[#3d2923]">
+      <Header />
+
+      <section className="px-5 py-14 sm:px-6">
+        <div className="mx-auto max-w-3xl">
+          <div className="rounded-[2rem] border border-[#efd5be] bg-white p-7 shadow-[0_18px_40px_rgba(86,51,36,0.08)] sm:p-10">
+            <p className="font-hand text-lg font-bold text-[#d85b7c]">
+              About TootieWords ðŸ¾
+            </p>
+
+            <h1 className="whimsy-title mt-2 text-4xl font-black text-[#4a2118] sm:text-5xl">
+              Words are more fun with Tootie.
+            </h1>
+
+            <p className="mt-6 text-lg leading-8 text-[#6f5549]">
+              TootieWords is a free collection of simple word tools designed
+              to help you find words from letters, solve anagrams, and explore
+              new word possibilities.
+            </p>
+
+            <p className="mt-5 leading-8 text-[#6f5549]">
+              Whether you are working on a word game, solving a puzzle, or
+              simply curious about what words can be made from a set of
+              letters, TootieWords is designed to make the process quick,
+              friendly, and easy to use.
+            </p>
+
+            <p className="mt-5 leading-8 text-[#6f5549]">
+              The site is named after Tootie, the tortoiseshell cat who serves
+              as the mascot and inspiration behind the playful look of the
+              site.
+            </p>
+
+            <div className="mt-10 border-t border-[#f0ded0] pt-8">
+              <h2 className="text-xl font-black text-[#4a2e25]">
+                Word Data & Attribution
+              </h2>
+
+              <p className="mt-4 leading-7 text-[#766056]">
+                TootieWords uses word-frequency data from the
+                {" "}
+                <a
+                  href="https://github.com/aparrish/wordfreq-en-25000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-[#d8617f] underline decoration-[#ef9ab2] underline-offset-4"
+                >
+                  wordfreq-en-25000
+                </a>
+                {" "}
+                dataset, which was created from the
+                {" "}
+                <a
+                  href="https://github.com/rspeer/wordfreq"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-[#d8617f] underline decoration-[#ef9ab2] underline-offset-4"
+                >
+                  wordfreq
+                </a>
+                {" "}
+                project by Robyn Speer.
+              </p>
+
+              <p className="mt-4 leading-7 text-[#766056]">
+                The word-frequency data is made available under the
+                {" "}
+                <a
+                  href="https://creativecommons.org/licenses/by-sa/4.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-[#d8617f] underline decoration-[#ef9ab2] underline-offset-4"
+                >
+                  Creative Commons Attribution-ShareAlike 4.0 International
+                  License
+                </a>
+                .
+              </p>
+
+              <p className="mt-4 text-sm leading-6 text-[#92796d]">
+                TootieWords is not affiliated with or endorsed by the
+                creators of those projects.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
+
+============================================================
+FILE: app\privacy\page.tsx
+============================================================
+
+import type { Metadata } from "next";
+import Link from "next/link";
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Learn how TootieWords handles information, cookies, analytics, and advertising.",
+};
+
+export default function PrivacyPage() {
+  return (
+    <>
+      <Header />
+
+      <main className="min-h-screen bg-[#fff8ed] px-5 py-14 text-[#3d2b2b] sm:px-8">
+        <article className="mx-auto max-w-4xl">
+          <div className="rounded-[32px] border border-[#f1d7c5] bg-white/80 p-7 shadow-sm sm:p-10">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#e55b74]">
+              TootieWords
+            </p>
+
+            <h1 className="text-4xl font-black tracking-tight sm:text-5xl">
+              Privacy Policy
+            </h1>
+
+            <p className="mt-4 text-sm text-[#765f59]">
+              Last updated: September 10, 2026
+            </p>
+
+            <div className="mt-10 space-y-9 leading-8 text-[#584641]">
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Overview
+                </h2>
+
+                <p>
+                  TootieWords respects your privacy. This Privacy Policy
+                  explains what information may be collected when you use
+                  TootieWords, how that information may be used, and the
+                  third-party services that help us operate and improve the
+                  website.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Information You Provide
+                </h2>
+
+                <p>
+                  You can use the word-finding tools on TootieWords without
+                  creating an account. Letters, words, and search options that
+                  you enter into the word tools are used to provide results.
+                  TootieWords does not require you to provide personal
+                  information in order to use these tools.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Automatically Collected Information
+                </h2>
+
+                <p>
+                  When you visit TootieWords, certain information may be
+                  collected automatically by our website, hosting provider,
+                  analytics services, or advertising partners. This may include
+                  information such as your browser and device type, operating
+                  system, pages visited, approximate geographic information,
+                  referring pages, interactions with the website, IP address,
+                  and other technical information.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Google Analytics
+                </h2>
+
+                <p>
+                  TootieWords uses Google Analytics to help us understand how
+                  visitors use the website. Google Analytics may use cookies
+                  and similar technologies to collect information about website
+                  activity, such as pages viewed, session information, browser
+                  and device information, and approximate location.
+                </p>
+
+                <p className="mt-4">
+                  We use this information to understand site traffic, improve
+                  our tools, identify technical problems, and make TootieWords
+                  more useful to visitors.
+                </p>
+
+                <p className="mt-4">
+                  You can learn more about how Google handles information from
+                  sites that use Google services in{" "}
+                  <a
+                    href="https://policies.google.com/technologies/partner-sites"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-[#d94d68] underline"
+                  >
+                    Google&apos;s information for sites and apps that use its
+                    services
+                  </a>
+                  .
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Google AdSense and Advertising
+                </h2>
+
+                <p>
+                  TootieWords uses or may use Google AdSense to display
+                  advertisements. Third-party vendors, including Google, may use
+                  cookies, web beacons, IP addresses, or other identifiers in
+                  connection with advertising on this website.
+                </p>
+
+                <p className="mt-4">
+                  Google and its advertising partners may use advertising
+                  cookies to serve ads based on a visitor&apos;s previous visits
+                  to TootieWords or other websites, where permitted.
+                </p>
+
+                <p className="mt-4">
+                  Visitors can manage how Google uses information to personalize
+                  advertisements through{" "}
+                  <a
+                    href="https://myadcenter.google.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-[#d94d68] underline"
+                  >
+                    Google&apos;s My Ad Center
+                  </a>
+                  .
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Cookies and Similar Technologies
+                </h2>
+
+                <p>
+                  TootieWords and third-party services used by the website may
+                  use cookies and similar technologies. Cookies are small pieces
+                  of data stored by your browser that can help websites remember
+                  information, measure website usage, provide functionality,
+                  and support advertising.
+                </p>
+
+                <p className="mt-4">
+                  You can control or delete cookies through your browser
+                  settings. Disabling certain cookies may affect some website
+                  features or the way advertisements are displayed.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Third-Party Services
+                </h2>
+
+                <p>
+                  TootieWords may rely on third-party providers for services
+                  such as hosting, analytics, advertising, security, and other
+                  website operations. These providers may process information
+                  according to their own privacy policies and applicable laws.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Your Privacy Choices
+                </h2>
+
+                <p>
+                  Depending on where you live, you may have rights or choices
+                  regarding certain uses of your information. You may also use
+                  browser controls to manage cookies and Google&apos;s privacy
+                  and advertising controls to manage certain Google services.
+                </p>
+
+                <p className="mt-4">
+                  Where required, TootieWords may provide additional consent or
+                  privacy controls for cookies, analytics, or advertising.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Children&apos;s Privacy
+                </h2>
+
+                <p>
+                  TootieWords is a general-audience word tool and is not
+                  directed specifically to children under 13. We do not
+                  knowingly ask children under 13 to provide personal
+                  information through the word-finding tools.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Changes to This Privacy Policy
+                </h2>
+
+                <p>
+                  We may update this Privacy Policy as TootieWords changes or as
+                  our services and legal obligations evolve. When we make
+                  changes, we may update the date shown at the top of this page.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="mb-3 text-2xl font-bold text-[#3d2b2b]">
+                  Contact
+                </h2>
+
+                <p>
+                  If you have questions about this Privacy Policy or privacy at
+                  TootieWords, please use the contact information provided on
+                  the website.
+                </p>
+              </section>
+
+              <div className="border-t border-[#ead8cb] pt-7">
+                <Link
+                  href="/"
+                  className="font-bold text-[#d94d68] hover:underline"
+                >
+                  â† Back to TootieWords
+                </Link>
+              </div>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <Footer />
+    </>
+  );
+}
+
+============================================================
+FILE: app\terms\page.tsx
+============================================================
+
+import type { Metadata } from "next";
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Terms of Use",
+  description:
+    "Read the TootieWords Terms of Use for using our free word finder, anagram solver, and word unscrambler tools.",
+};
+
+export default function TermsPage() {
+  return (
+    <main className="min-h-screen bg-slate-50 text-slate-900">
+      <Header />
+
+      <section className="mx-auto max-w-3xl px-6 py-16">
+        <h1 className="text-4xl font-bold">Terms of Use</h1>
+
+        <p className="mt-3 text-sm text-slate-500">
+          Last updated: September 7, 2026
+        </p>
+
+        <p className="mt-8 leading-8 text-slate-600">
+          These Terms of Use govern your use of TootieWords. By using
+          this website, you agree to these terms. If you do not agree
+          with these terms, please do not use the website.
+        </p>
+
+        <h2 className="mt-10 text-2xl font-bold">
+          About TootieWords
+        </h2>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          TootieWords provides free online tools for finding words,
+          unscrambling letters, solving anagrams, and performing
+          related word searches.
+        </p>
+
+        <h2 className="mt-10 text-2xl font-bold">
+          Permitted Use
+        </h2>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          You may use TootieWords for personal, educational, and other
+          lawful purposes. You agree not to use the website in a way
+          that interferes with its operation, attempts to gain
+          unauthorized access to its systems, or violates applicable
+          laws or regulations.
+        </p>
+
+        <h2 className="mt-10 text-2xl font-bold">
+          Word Results and Accuracy
+        </h2>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          TootieWords uses word lists and software to generate search
+          results. Although we work to provide useful and accurate
+          results, we do not guarantee that every result will be
+          complete, correct, commonly used, or accepted by every word
+          game, dictionary, competition, or organization.
+        </p>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          Different games and dictionaries may use different rules and
+          word lists. You are responsible for confirming whether a word
+          is valid under the rules that apply to your particular game
+          or activity.
+        </p>
+
+        <h2 className="mt-10 text-2xl font-bold">
+          Website Availability
+        </h2>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          We may modify, update, suspend, or discontinue any part of
+          TootieWords at any time. We do not guarantee that the website
+          or any particular feature will always be available or operate
+          without interruption or errors.
+        </p>
+
+        <h2 className="mt-10 text-2xl font-bold">
+          Intellectual Property
+        </h2>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          The TootieWords name, website design, original content,
+          graphics, and other original materials on the website are
+          protected by applicable intellectual property laws. Third-party
+          word lists, data, software, or other materials remain subject
+          to their respective licenses and ownership rights.
+        </p>
+
+        <h2 className="mt-10 text-2xl font-bold">
+          Third-Party Services
+        </h2>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          TootieWords may use or link to third-party websites,
+          services, advertisements, or resources. We are not responsible
+          for the content, availability, privacy practices, or policies
+          of third-party services.
+        </p>
+
+        <h2 className="mt-10 text-2xl font-bold">
+          Disclaimer
+        </h2>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          TootieWords is provided on an "as is" and "as available"
+          basis. To the extent permitted by law, we make no warranties,
+          express or implied, regarding the operation, availability,
+          accuracy, or reliability of the website or its results.
+        </p>
+
+        <h2 className="mt-10 text-2xl font-bold">
+          Limitation of Liability
+        </h2>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          To the extent permitted by applicable law, TootieWords and
+          its owners will not be liable for indirect, incidental,
+          special, consequential, or similar damages resulting from
+          your use of, or inability to use, the website.
+        </p>
+
+        <h2 className="mt-10 text-2xl font-bold">
+          Changes to These Terms
+        </h2>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          These Terms of Use may be updated from time to time as
+          TootieWords changes or adds new features. The latest version
+          will be posted on this page with an updated revision date.
+        </p>
+
+        <h2 className="mt-10 text-2xl font-bold">
+          Contact
+        </h2>
+
+        <p className="mt-4 leading-8 text-slate-600">
+          If you have questions about these Terms of Use, you can
+          contact TootieWords using the contact information provided
+          on the website.
+        </p>
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
+
+============================================================
+FILE: components\WordFinder.tsx
+============================================================
+
+"use client";
+
+import { useMemo, useState } from "react";
+import words from "an-array-of-english-words";
+import wordFrequencyData from "../data/wordfreq-en-25000-log.json";
+
+type FrequencyEntry = [string, number];
+
+type WordFinderProps = {
+  title: string;
+  description: string;
+  defaultMode?: "common" | "all";
+  heroMode?: boolean;
+};
+
+const frequencyEntries = wordFrequencyData as FrequencyEntry[];
+
+const frequencies = new Map<string, number>(
+  frequencyEntries.map(([word, score]) => [
+    word.toLowerCase(),
+    score,
+  ])
+);
+
+export default function WordFinder({
+  title,
+  description,
+  defaultMode = "common",
+  heroMode = false,
+}: WordFinderProps) {
+  const [letters, setLetters] = useState("");
+  const [wordLength, setWordLength] = useState("any");
+  const [startsWith, setStartsWith] = useState("");
+  const [endsWith, setEndsWith] = useState("");
+  const [mustContain, setMustContain] = useState("");
+  const [resultMode, setResultMode] =
+    useState<"common" | "all">(defaultMode);
+
+  const [results, setResults] = useState<string[]>([]);
+  const [searched, setSearched] = useState(false);
+  const [searchedLetters, setSearchedLetters] = useState("");
+  const [copiedWord, setCopiedWord] = useState<string | null>(null);
+  const [copiedAll, setCopiedAll] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+
+  function cleanInput(value: string) {
+    return value.replace(/[^a-zA-Z]/g, "").toLowerCase();
+  }
+
+  function canMakeWord(
+    word: string,
+    availableLetters: string
+  ) {
+    const counts: Record<string, number> = {};
+
+    for (const letter of availableLetters) {
+      counts[letter] = (counts[letter] || 0) + 1;
+    }
+
+    for (const letter of word) {
+      if (!counts[letter]) {
+        return false;
+      }
+
+      counts[letter]--;
+    }
+
+    return true;
+  }
+
+  function getFrequency(word: string) {
+    return frequencies.get(word) ?? -Infinity;
+  }
+
+  function isCommonWord(word: string) {
+    return frequencies.has(word);
+  }
+
+  function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ) {
+    e.preventDefault();
+
+    const cleanLetters = cleanInput(letters);
+    const cleanStartsWith = cleanInput(startsWith);
+    const cleanEndsWith = cleanInput(endsWith);
+    const cleanMustContain = cleanInput(mustContain);
+
+    if (!cleanLetters) {
+      setResults([]);
+      setSearched(false);
+      return;
+    }
+
+    const matches = words
+      .map((word) => word.toLowerCase())
+      .filter((word) => {
+        if (!/^[a-z]+$/.test(word)) return false;
+        if (word.length < 3) return false;
+        if (word.length > cleanLetters.length) {
+          return false;
+        }
+
+        if (!canMakeWord(word, cleanLetters)) {
+          return false;
+        }
+
+        if (
+          wordLength !== "any" &&
+          word.length !== Number(wordLength)
+        ) {
+          return false;
+        }
+
+        if (
+          cleanStartsWith &&
+          !word.startsWith(cleanStartsWith)
+        ) {
+          return false;
+        }
+
+        if (
+          cleanEndsWith &&
+          !word.endsWith(cleanEndsWith)
+        ) {
+          return false;
+        }
+
+        if (
+          cleanMustContain &&
+          !word.includes(cleanMustContain)
+        ) {
+          return false;
+        }
+
+        if (
+          resultMode === "common" &&
+          !isCommonWord(word)
+        ) {
+          return false;
+        }
+
+        return true;
+      })
+      .filter(
+        (word, index, array) =>
+          array.indexOf(word) === index
+      )
+      .sort((a, b) => {
+        if (b.length !== a.length) {
+          return b.length - a.length;
+        }
+
+        const frequencyDifference =
+          getFrequency(b) - getFrequency(a);
+
+        if (frequencyDifference !== 0) {
+          return frequencyDifference;
+        }
+
+        return a.localeCompare(b);
+      });
+
+    setResults(matches);
+    setSearchedLetters(cleanLetters);
+    setSearched(true);
+    setCopiedWord(null);
+    setCopiedAll(false);
+  }
+
+  function handleClear() {
+    setLetters("");
+    setWordLength("any");
+    setStartsWith("");
+    setEndsWith("");
+    setMustContain("");
+    setResultMode(defaultMode);
+    setResults([]);
+    setSearched(false);
+    setSearchedLetters("");
+  }
+
+  async function copyWord(word: string) {
+    await navigator.clipboard.writeText(word);
+    setCopiedWord(word);
+
+    window.setTimeout(() => {
+      setCopiedWord(null);
+    }, 1200);
+  }
+
+  async function copyAllWords() {
+    if (!results.length) return;
+
+    await navigator.clipboard.writeText(
+      results.join("\n")
+    );
+
+    setCopiedAll(true);
+
+    window.setTimeout(() => {
+      setCopiedAll(false);
+    }, 1500);
+  }
+
+  const exactAnagrams = useMemo(() => {
+    if (!searchedLetters) return [];
+
+    return results.filter(
+      (word) =>
+        word.length === searchedLetters.length &&
+        word !== searchedLetters
+    );
+  }, [results, searchedLetters]);
+
+  const groupedResults = useMemo(() => {
+    return results.reduce<Record<number, string[]>>(
+      (groups, word) => {
+        const length = word.length;
+
+        if (!groups[length]) {
+          groups[length] = [];
+        }
+
+        groups[length].push(word);
+        return groups;
+      },
+      {}
+    );
+  }, [results]);
+
+  const lengths = Object.keys(groupedResults)
+    .map(Number)
+    .sort((a, b) => b - a);
+
+  return (
+    <>
+      <section
+        className={
+          heroMode
+            ? ""
+            : "mx-auto max-w-4xl px-6 pb-12 pt-16 text-center"
+        }
+      >
+        {!heroMode && (
+          <>
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#efc9a8] bg-[#fff0df] px-4 py-2 text-sm font-black text-[#a75b24]">
+              ðŸ¾ Tootie&apos;s Word Finder
+            </div>
+
+            <h1 className="whimsy-title text-4xl font-black text-[#4a2e25] sm:text-5xl">
+              {title}
+            </h1>
+
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#755d52]">
+              {description}
+            </p>
+          </>
+        )}
+
+        <form
+          onSubmit={handleSubmit}
+          className={`word-finder-card text-left ${
+            heroMode
+              ? "rounded-[2rem] p-5 sm:p-7"
+              : "mx-auto mt-10 max-w-3xl rounded-[2rem] p-6 sm:p-8"
+          }`}
+        >
+          {heroMode && (
+            <div className="mb-5 text-center">
+              <h2 className="whimsy-title text-3xl font-black text-[#4a2e25] sm:text-4xl">
+                {title}
+              </h2>
+
+              <p className="mt-2 text-[#755d52]">
+                {description}
+              </p>
+            </div>
+          )}
+
+          <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
+            <input
+              id={heroMode ? "hero-letters" : "letters"}
+              type="text"
+              value={letters}
+              onChange={(e) =>
+                setLetters(cleanInput(e.target.value))
+              }
+              placeholder="Enter letters, e.g. cat, listen, dream"
+              autoComplete="off"
+              aria-label="Enter your letters"
+              className="w-full rounded-2xl border-2 border-[#e8d1bd] bg-white px-5 py-4 text-lg font-semibold text-[#4a2e25] shadow-inner outline-none transition focus:border-[#ef9a43] focus:ring-4 focus:ring-[#f5c996]/40"
+            />
+
+            <button
+              type="submit"
+              className="tootie-button rounded-2xl px-7 py-4 text-lg font-black text-white"
+            >
+              ðŸ¾ Find Words
+            </button>
+          </div>
+
+          <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex rounded-xl bg-[#f7ece2] p-1">
+              <button
+                type="button"
+                onClick={() =>
+                  setResultMode("common")
+                }
+                className={`rounded-lg px-4 py-2 text-sm font-bold transition ${
+                  resultMode === "common"
+                    ? "bg-white text-[#d66e18] shadow-sm"
+                    : "text-[#80685c]"
+                }`}
+              >
+                âœ“ Common Words
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setResultMode("all")}
+                className={`rounded-lg px-4 py-2 text-sm font-bold transition ${
+                  resultMode === "all"
+                    ? "bg-white text-[#d66e18] shadow-sm"
+                    : "text-[#80685c]"
+                }`}
+              >
+                All Words
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={() =>
+                setShowFilters((current) => !current)
+              }
+              className="text-sm font-black text-[#9a5830] hover:text-[#d66e18]"
+            >
+              {showFilters
+                ? "Hide filters â†‘"
+                : "More filters â†“"}
+            </button>
+          </div>
+
+          {showFilters && (
+            <div className="mt-5 border-t-2 border-dashed border-[#ecd6c4] pt-5">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <FilterField label="Word Length">
+                  <select
+                    value={wordLength}
+                    onChange={(e) =>
+                      setWordLength(e.target.value)
+                    }
+                    className="tootie-input"
+                  >
+                    <option value="any">
+                      Any length
+                    </option>
+
+                    {Array.from(
+                      { length: 18 },
+                      (_, i) => i + 3
+                    ).map((length) => (
+                      <option
+                        key={length}
+                        value={length}
+                      >
+                        {length} letters
+                      </option>
+                    ))}
+                  </select>
+                </FilterField>
+
+                <FilterField label="Must Contain">
+                  <input
+                    value={mustContain}
+                    onChange={(e) =>
+                      setMustContain(
+                        cleanInput(e.target.value)
+                      )
+                    }
+                    placeholder="Example: st"
+                    className="tootie-input"
+                  />
+                </FilterField>
+
+                <FilterField label="Starts With">
+                  <input
+                    value={startsWith}
+                    onChange={(e) =>
+                      setStartsWith(
+                        cleanInput(e.target.value)
+                      )
+                    }
+                    placeholder="Example: s"
+                    className="tootie-input"
+                  />
+                </FilterField>
+
+                <FilterField label="Ends With">
+                  <input
+                    value={endsWith}
+                    onChange={(e) =>
+                      setEndsWith(
+                        cleanInput(e.target.value)
+                      )
+                    }
+                    placeholder="Example: t"
+                    className="tootie-input"
+                  />
+                </FilterField>
+              </div>
+
+              <div className="mt-5 text-center">
+                <button
+                  type="button"
+                  onClick={handleClear}
+                  className="rounded-full border-2 border-[#e7cdb8] bg-white px-6 py-2.5 text-sm font-bold text-[#795b4c] hover:bg-[#fff4e8]"
+                >
+                  Clear everything
+                </button>
+              </div>
+            </div>
+          )}
+        </form>
+      </section>
+
+      {searched && (
+        <section className="mx-auto max-w-6xl px-5 py-12 sm:px-6">
+          <div className="rounded-[2rem] border-2 border-[#efd3ba] bg-[#fffdf9] p-5 shadow-[0_18px_50px_rgba(91,59,43,0.1)] sm:p-8">
+            <div className="mb-8 flex flex-col gap-5 border-b-2 border-dashed border-[#ecd8c7] pb-6 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="text-sm font-black uppercase tracking-[0.15em] text-[#d8741e]">
+                  Tootie found
+                </div>
+
+                <h2 className="whimsy-title mt-2 text-3xl font-black text-[#4a2e25]">
+                  Words From &quot;
+                  {searchedLetters}&quot;
+                </h2>
+
+                <p className="mt-2 font-semibold text-[#846c60]">
+                  {results.length}{" "}
+                  {results.length === 1
+                    ? "word"
+                    : "words"}{" "}
+                  found ðŸ¾
+                </p>
+              </div>
+
+              {results.length > 0 && (
+                <button
+                  type="button"
+                  onClick={copyAllWords}
+                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 text-sm font-black text-[#a85d25]"
+                >
+                  {copiedAll
+                    ? "âœ“ Copied!"
+                    : "Copy All Words"}
+                </button>
+              )}
+            </div>
+
+            {results.length === 0 ? (
+              <div className="py-14 text-center">
+                <div className="text-5xl">ðŸ¾</div>
+
+                <h3 className="mt-4 text-2xl font-black text-[#4a2e25]">
+                  Tootie couldn&apos;t find a match
+                </h3>
+
+                <p className="mt-2 text-[#846c60]">
+                  Try different letters or loosen one
+                  of the filters.
+                </p>
+              </div>
+            ) : (
+              <>
+                {exactAnagrams.length > 0 && (
+                  <div className="mb-10 rounded-[1.5rem] border-2 border-[#efb6c6] bg-[#fff1f5] p-5 sm:p-6">
+                    <h3 className="text-xl font-black text-[#56352b]">
+                      â˜… Exact Anagrams
+                    </h3>
+
+                    <p className="mt-1 text-sm text-[#896c61]">
+                      Same letters, brand-new word.
+                    </p>
+
+                    <div className="mt-5 flex flex-wrap gap-3">
+                      {exactAnagrams.map((word) => (
+                        <button
+                          key={word}
+                          type="button"
+                          onClick={() =>
+                            copyWord(word)
+                          }
+                          className="word-chip border-[#efb6c6] bg-white hover:bg-[#ffe5ed]"
+                        >
+                          {copiedWord === word
+                            ? "âœ“ Copied!"
+                            : word}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="space-y-10">
+                  {lengths.map((length) => (
+                    <div key={length}>
+                      <div className="mb-4 flex items-center gap-3">
+                        <span className="flex h-10 min-w-10 items-center justify-center rounded-xl bg-[#f4a24a] px-3 font-black text-white shadow-sm">
+                          {length}
+                        </span>
+
+                        <h3 className="text-xl font-black text-[#4a2e25]">
+                          {length}-Letter Words
+                        </h3>
+
+                        <span className="rounded-full bg-[#f6ece3] px-3 py-1 text-sm font-bold text-[#8a7165]">
+                          {
+                            groupedResults[length]
+                              .length
+                          }
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                        {groupedResults[length].map(
+                          (word) => (
+                            <button
+                              key={word}
+                              type="button"
+                              onClick={() =>
+                                copyWord(word)
+                              }
+                              className="word-chip border-[#ead6c5] bg-[#fffaf4] hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                            >
+                              {copiedWord === word
+                                ? "âœ“ Copied!"
+                                : word}
+                            </button>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </section>
+      )}
+    </>
+  );
+}
+
+function FilterField({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <label className="mb-2 block text-sm font-bold text-[#684b3f]">
+        {label}
+      </label>
+
+      {children}
+    </div>
+  );
+}
+
+============================================================
+FILE: components\WordListFinder.tsx
+============================================================
+
+"use client";
+
+import { useMemo, useState } from "react";
+
+type WordListFinderProps = {
+  words: string[];
+  wordLength: number;
+  initialStartsWith?: string;
+  initialContains?: string;
+  initialEndsWith?: string;
+  initialExclude?: string;
+  initialPositionLetters?: string[];
+};
+
+type ResultMode = "common" | "all";
+
+const alphabet =
+  "abcdefghijklmnopqrstuvwxyz".split("");
+
+export default function WordListFinder({
+  words,
+  wordLength,
+  initialStartsWith = "",
+  initialContains = "",
+  initialEndsWith = "",
+  initialExclude = "",
+  initialPositionLetters = [],
+}: WordListFinderProps) {
+  const [startsWith, setStartsWith] = useState(
+    cleanInput(initialStartsWith)
+  );
+
+  const [contains, setContains] = useState(
+    cleanInput(initialContains)
+  );
+
+  const [endsWith, setEndsWith] = useState(
+    cleanInput(initialEndsWith)
+  );
+
+  const [exclude, setExclude] = useState(
+    cleanInput(initialExclude)
+  );
+
+  const [positionLetters, setPositionLetters] =
+    useState<string[]>(() => {
+      const positions =
+        Array(wordLength).fill("");
+
+      initialPositionLetters
+        .slice(0, wordLength)
+        .forEach((letter, index) => {
+          positions[index] =
+            cleanInput(letter).slice(0, 1);
+        });
+
+      return positions;
+    });
+
+  const [resultMode, setResultMode] =
+    useState<ResultMode>("common");
+
+  const [allWords, setAllWords] =
+    useState<string[] | null>(null);
+
+  const [loadingAllWords, setLoadingAllWords] =
+    useState(false);
+
+  const [allWordsError, setAllWordsError] =
+    useState(false);
+
+  const [copiedWord, setCopiedWord] =
+    useState<string | null>(null);
+
+  const [showAll, setShowAll] =
+    useState(false);
+
+  const sourceWords =
+    resultMode === "all" && allWords
+      ? allWords
+      : words;
+
+  const filteredWords = useMemo(() => {
+    const cleanStarts =
+      cleanInput(startsWith);
+
+    const cleanContains =
+      cleanInput(contains);
+
+    const cleanEnds =
+      cleanInput(endsWith);
+
+    const cleanExclude =
+      cleanInput(exclude);
+
+    return sourceWords.filter((word) => {
+      if (
+        cleanStarts &&
+        !word.startsWith(cleanStarts)
+      ) {
+        return false;
+      }
+
+      if (
+        cleanContains &&
+        !word.includes(cleanContains)
+      ) {
+        return false;
+      }
+
+      if (
+        cleanEnds &&
+        !word.endsWith(cleanEnds)
+      ) {
+        return false;
+      }
+
+      if (
+        cleanExclude &&
+        [...cleanExclude].some((letter) =>
+          word.includes(letter)
+        )
+      ) {
+        return false;
+      }
+
+      const positionMismatch =
+        positionLetters.some(
+          (letter, index) =>
+            letter.length > 0 &&
+            word[index] !== letter
+        );
+
+      if (positionMismatch) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [
+    sourceWords,
+    startsWith,
+    contains,
+    endsWith,
+    exclude,
+    positionLetters,
+  ]);
+
+  const visibleWords = showAll
+    ? filteredWords
+    : filteredWords.slice(0, 200);
+
+  const positionFiltersActive =
+    positionLetters.some(
+      (letter) => letter.length > 0
+    );
+
+  const filtersActive =
+    startsWith.length > 0 ||
+    contains.length > 0 ||
+    endsWith.length > 0 ||
+    exclude.length > 0 ||
+    positionFiltersActive;
+
+  function clearFilters() {
+    setStartsWith("");
+    setContains("");
+    setEndsWith("");
+    setExclude("");
+
+    setPositionLetters(
+      Array(wordLength).fill("")
+    );
+
+    setShowAll(false);
+  }
+
+  function setPositionLetter(
+    index: number,
+    value: string
+  ) {
+    const cleanValue =
+      cleanInput(value).slice(0, 1);
+
+    setPositionLetters(
+      (currentLetters) => {
+        const nextLetters =
+          [...currentLetters];
+
+        nextLetters[index] =
+          cleanValue;
+
+        return nextLetters;
+      }
+    );
+
+    setShowAll(false);
+  }
+
+  function chooseStartingLetter(
+    letter: string
+  ) {
+    setStartsWith(letter);
+    setShowAll(false);
+
+    window.setTimeout(() => {
+      document
+        .getElementById("word-results")
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+    }, 50);
+  }
+
+  async function chooseResultMode(
+    mode: ResultMode
+  ) {
+    setResultMode(mode);
+    setShowAll(false);
+    setAllWordsError(false);
+
+    if (
+      mode === "all" &&
+      allWords === null &&
+      !loadingAllWords
+    ) {
+      setLoadingAllWords(true);
+
+      try {
+        const response = await fetch(
+          `/api/word-list?length=${wordLength}`
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            "Unable to load all words."
+          );
+        }
+
+        const data =
+          (await response.json()) as {
+            words?: string[];
+          };
+
+        if (!Array.isArray(data.words)) {
+          throw new Error(
+            "Invalid word list response."
+          );
+        }
+
+        setAllWords(data.words);
+      } catch {
+        setAllWordsError(true);
+        setResultMode("common");
+      } finally {
+        setLoadingAllWords(false);
+      }
+    }
+  }
+
+  async function copyWord(
+    word: string
+  ) {
+    await navigator.clipboard.writeText(
+      word
+    );
+
+    setCopiedWord(word);
+
+    window.setTimeout(
+      () => setCopiedWord(null),
+      1200
+    );
+  }
+
+  return (
+    <section className="mx-auto max-w-6xl px-5 pb-14 sm:px-6">
+      <div className="rounded-[2rem] border-2 border-[#efd3ba] bg-[#fffdf9] p-5 shadow-[0_18px_50px_rgba(91,59,43,0.1)] sm:p-8">
+        <div className="mb-6 text-center">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#efc9a8] bg-[#fff0df] px-4 py-2 text-sm font-black text-[#a75b24]">
+            ðŸ¾ Tootie&apos;s Word List
+          </div>
+
+          <p className="mx-auto max-w-2xl text-base leading-7 text-[#755d52] sm:text-lg">
+            Use the filters below to narrow
+            the list of {wordLength}-letter
+            words.
+          </p>
+        </div>
+
+        <div className="mb-7 flex justify-center">
+          <div className="inline-flex rounded-full border-2 border-[#ead6c5] bg-[#fff8ef] p-1.5">
+            <button
+              type="button"
+              onClick={() =>
+                chooseResultMode("common")
+              }
+              className={`rounded-full px-5 py-2.5 text-sm font-black transition ${
+                resultMode === "common"
+                  ? "bg-[#f4a24a] text-white shadow-sm"
+                  : "text-[#795b4c] hover:bg-white"
+              }`}
+            >
+              Common Words
+            </button>
+
+            <button
+              type="button"
+              onClick={() =>
+                chooseResultMode("all")
+              }
+              className={`rounded-full px-5 py-2.5 text-sm font-black transition ${
+                resultMode === "all"
+                  ? "bg-[#f4a24a] text-white shadow-sm"
+                  : "text-[#795b4c] hover:bg-white"
+              }`}
+            >
+              All Words
+            </button>
+          </div>
+        </div>
+
+        {allWordsError && (
+          <div className="mb-6 rounded-2xl border border-[#efc9a8] bg-[#fff0df] px-5 py-4 text-center text-sm font-bold text-[#9a5830]">
+            Tootie couldn&apos;t load the full
+            word list. Please try again.
+          </div>
+        )}
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <FilterField label="Starts With">
+            <input
+              value={startsWith}
+              onChange={(e) => {
+                setStartsWith(
+                  cleanInput(
+                    e.target.value
+                  )
+                );
+
+                setShowAll(false);
+              }}
+              placeholder="Example: s"
+              className="tootie-input"
+              maxLength={wordLength}
+              aria-label="Starts with"
+            />
+          </FilterField>
+
+          <FilterField label="Contains">
+            <input
+              value={contains}
+              onChange={(e) => {
+                setContains(
+                  cleanInput(
+                    e.target.value
+                  )
+                );
+
+                setShowAll(false);
+              }}
+              placeholder="Example: ar"
+              className="tootie-input"
+              maxLength={wordLength}
+              aria-label="Contains"
+            />
+          </FilterField>
+
+          <FilterField label="Ends With">
+            <input
+              value={endsWith}
+              onChange={(e) => {
+                setEndsWith(
+                  cleanInput(
+                    e.target.value
+                  )
+                );
+
+                setShowAll(false);
+              }}
+              placeholder="Example: e"
+              className="tootie-input"
+              maxLength={wordLength}
+              aria-label="Ends with"
+            />
+          </FilterField>
+
+          <FilterField label="Exclude Letters">
+            <input
+              value={exclude}
+              onChange={(e) => {
+                setExclude(
+                  cleanInput(
+                    e.target.value
+                  )
+                );
+
+                setShowAll(false);
+              }}
+              placeholder="Example: xyz"
+              className="tootie-input"
+              aria-label="Exclude letters"
+            />
+          </FilterField>
+        </div>
+
+        <div className="mt-7 border-t-2 border-dashed border-[#ecd8c7] pt-6">
+          <div className="text-center">
+            <div className="text-sm font-black uppercase tracking-[0.12em] text-[#9a5830]">
+              Known Letter Positions
+            </div>
+
+            <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-[#846c60]">
+              Know exactly where a letter
+              belongs? Enter it in the matching
+              position. Leave unknown positions
+              blank.
+            </p>
+          </div>
+
+          <div className="mt-5 flex flex-wrap justify-center gap-2 sm:gap-3">
+            {positionLetters.map(
+              (letter, index) => (
+                <div
+                  key={index}
+                  className="text-center"
+                >
+                  <label
+                    htmlFor={`position-${index}`}
+                    className="mb-1 block text-xs font-black text-[#9a5830]"
+                  >
+                    {index + 1}
+                  </label>
+
+                  <input
+                    id={`position-${index}`}
+                    value={letter}
+                    onChange={(e) =>
+                      setPositionLetter(
+                        index,
+                        e.target.value
+                      )
+                    }
+                    maxLength={1}
+                    placeholder="?"
+                    aria-label={`Letter in position ${
+                      index + 1
+                    }`}
+                    className="h-12 w-12 rounded-xl border-2 border-[#ead6c5] bg-white text-center text-xl font-black uppercase text-[#4a2e25] outline-none transition placeholder:text-[#c7b4a5] focus:border-[#ef9b4a] focus:ring-2 focus:ring-[#f8d7b6] sm:h-14 sm:w-14"
+                  />
+                </div>
+              )
+            )}
+          </div>
+
+          <p className="mt-4 text-center text-xs font-bold text-[#9a8175]">
+            Example: enter A in position 2
+            and E in position {wordLength} to
+            find words matching that pattern.
+          </p>
+        </div>
+
+        <div className="mt-7 border-t-2 border-dashed border-[#ecd8c7] pt-6">
+          <div className="mb-3 text-sm font-black uppercase tracking-[0.12em] text-[#9a5830]">
+            Starts With
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {alphabet.map((letter) => (
+              <button
+                key={letter}
+                type="button"
+                onClick={() =>
+                  chooseStartingLetter(
+                    letter
+                  )
+                }
+                aria-label={`Show ${wordLength}-letter words starting with ${letter.toUpperCase()}`}
+                className={`flex h-10 w-10 items-center justify-center rounded-xl border-2 font-black uppercase transition ${
+                  startsWith === letter
+                    ? "border-[#ef9b4a] bg-[#f4a24a] text-white"
+                    : "border-[#ead6c5] bg-[#fffaf4] text-[#684b3f] hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                }`}
+              >
+                {letter}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div
+          id="word-results"
+          className="mt-7 scroll-mt-6 border-t-2 border-dashed border-[#ecd8c7] pt-6"
+        >
+          {loadingAllWords &&
+          resultMode === "all" ? (
+            <div className="py-14 text-center">
+              <div className="text-5xl">
+                ðŸ¾
+              </div>
+
+              <h2 className="mt-4 text-2xl font-black text-[#4a2e25]">
+                Tootie is fetching the big
+                word pile...
+              </h2>
+
+              <p className="mt-2 text-[#846c60]">
+                Loading all {wordLength}-letter
+                words.
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <div className="text-sm font-black uppercase tracking-[0.15em] text-[#d8741e]">
+                    Tootie found
+                  </div>
+
+                  <div className="mt-1 text-2xl font-black text-[#4a2e25]">
+                    {filteredWords.length.toLocaleString()}{" "}
+                    {resultMode === "common"
+                      ? "common "
+                      : ""}
+                    {wordLength}-letter{" "}
+                    {filteredWords.length ===
+                    1
+                      ? "word"
+                      : "words"}
+                  </div>
+                </div>
+
+                {filtersActive && (
+                  <button
+                    type="button"
+                    onClick={clearFilters}
+                    className="rounded-full border-2 border-[#e7cdb8] bg-white px-6 py-2.5 text-sm font-bold text-[#795b4c] hover:bg-[#fff4e8]"
+                  >
+                    Clear Filters
+                  </button>
+                )}
+              </div>
+
+              {filteredWords.length ===
+              0 ? (
+                <div className="py-14 text-center">
+                  <div className="text-5xl">
+                    ðŸ¾
+                  </div>
+
+                  <h2 className="mt-4 text-2xl font-black text-[#4a2e25]">
+                    Tootie couldn&apos;t find a
+                    match
+                  </h2>
+
+                  <p className="mt-2 text-[#846c60]">
+                    Try removing one of your
+                    filters or using different
+                    letters.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                    {visibleWords.map(
+                      (word) => (
+                        <button
+                          key={word}
+                          type="button"
+                          onClick={() =>
+                            copyWord(word)
+                          }
+                          className="word-chip border-[#ead6c5] bg-[#fffaf4] hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                        >
+                          {copiedWord === word
+                            ? "âœ“ Copied!"
+                            : word}
+                        </button>
+                      )
+                    )}
+                  </div>
+
+                  {!showAll &&
+                    filteredWords.length >
+                      200 && (
+                      <div className="mt-10 text-center">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setShowAll(
+                              true
+                            )
+                          }
+                          className="tootie-button rounded-full px-7 py-3 font-black text-white"
+                        >
+                          Show All{" "}
+                          {filteredWords.length.toLocaleString()}{" "}
+                          Words
+                        </button>
+                      </div>
+                    )}
+
+                  {showAll &&
+                    filteredWords.length >
+                      200 && (
+                      <div className="mt-10 text-center">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowAll(
+                              false
+                            );
+
+                            document
+                              .getElementById(
+                                "word-results"
+                              )
+                              ?.scrollIntoView(
+                                {
+                                  behavior:
+                                    "smooth",
+                                  block:
+                                    "start",
+                                }
+                              );
+                          }}
+                          className="rounded-full border-2 border-[#e7cdb8] bg-white px-6 py-2.5 text-sm font-bold text-[#795b4c] hover:bg-[#fff4e8]"
+                        >
+                          Show Fewer Words
+                        </button>
+                      </div>
+                    )}
+                </>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function cleanInput(value: string) {
+  return value
+    .replace(/[^a-zA-Z]/g, "")
+    .toLowerCase();
+}
+
+function FilterField({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <label className="mb-2 block text-sm font-bold text-[#684b3f]">
+        {label}
+      </label>
+
+      {children}
+    </div>
+  );
+}
+
+============================================================
+FILE: components\SpecialtyWordFinder.tsx
+============================================================
+
+"use client";
+
+import {
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
+
+type ResultMode = "common" | "all";
+
+type SpecialtyWordFinderProps = {
+  commonWords: string[];
+  allWords: string[];
+  listLabel: string;
+};
+
+const alphabet =
+  "abcdefghijklmnopqrstuvwxyz".split("");
+
+export default function SpecialtyWordFinder({
+  commonWords,
+  allWords,
+  listLabel,
+}: SpecialtyWordFinderProps) {
+  const [startsWith, setStartsWith] =
+    useState("");
+
+  const [contains, setContains] =
+    useState("");
+
+  const [endsWith, setEndsWith] =
+    useState("");
+
+  const [exclude, setExclude] =
+    useState("");
+
+  const [wordLength, setWordLength] =
+    useState("");
+
+  const [resultMode, setResultMode] =
+    useState<ResultMode>("common");
+
+  const [copiedWord, setCopiedWord] =
+    useState<string | null>(null);
+
+  const [showAll, setShowAll] =
+    useState(false);
+
+  const sourceWords =
+    resultMode === "common"
+      ? commonWords
+      : allWords;
+
+  const availableLengths = useMemo(() => {
+    return Array.from(
+      new Set(
+        allWords.map((word) => word.length)
+      )
+    ).sort((a, b) => a - b);
+  }, [allWords]);
+
+  const filteredWords = useMemo(() => {
+    const cleanStarts =
+      cleanInput(startsWith);
+
+    const cleanContains =
+      cleanInput(contains);
+
+    const cleanEnds =
+      cleanInput(endsWith);
+
+    const cleanExclude =
+      cleanInput(exclude);
+
+    const selectedLength =
+      wordLength === ""
+        ? null
+        : Number(wordLength);
+
+    return sourceWords.filter((word) => {
+      if (
+        selectedLength !== null &&
+        word.length !== selectedLength
+      ) {
+        return false;
+      }
+
+      if (
+        cleanStarts &&
+        !word.startsWith(cleanStarts)
+      ) {
+        return false;
+      }
+
+      if (
+        cleanContains &&
+        !word.includes(cleanContains)
+      ) {
+        return false;
+      }
+
+      if (
+        cleanEnds &&
+        !word.endsWith(cleanEnds)
+      ) {
+        return false;
+      }
+
+      if (
+        cleanExclude &&
+        [...cleanExclude].some((letter) =>
+          word.includes(letter)
+        )
+      ) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [
+    sourceWords,
+    startsWith,
+    contains,
+    endsWith,
+    exclude,
+    wordLength,
+  ]);
+
+  const visibleWords = showAll
+    ? filteredWords
+    : filteredWords.slice(0, 200);
+
+  const filtersActive =
+    startsWith.length > 0 ||
+    contains.length > 0 ||
+    endsWith.length > 0 ||
+    exclude.length > 0 ||
+    wordLength.length > 0;
+
+  function clearFilters() {
+    setStartsWith("");
+    setContains("");
+    setEndsWith("");
+    setExclude("");
+    setWordLength("");
+    setShowAll(false);
+  }
+
+  function chooseStartingLetter(
+    letter: string
+  ) {
+    setStartsWith(letter);
+    setShowAll(false);
+
+    window.setTimeout(() => {
+      document
+        .getElementById(
+          "specialty-word-results"
+        )
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+    }, 50);
+  }
+
+  function chooseResultMode(
+    mode: ResultMode
+  ) {
+    setResultMode(mode);
+    setShowAll(false);
+  }
+
+  async function copyWord(word: string) {
+    try {
+      await navigator.clipboard.writeText(
+        word
+      );
+
+      setCopiedWord(word);
+
+      window.setTimeout(
+        () => setCopiedWord(null),
+        1200
+      );
+    } catch {
+      setCopiedWord(null);
+    }
+  }
+
+  return (
+    <section className="mx-auto max-w-6xl px-5 pb-14 sm:px-6">
+      <div className="rounded-[2rem] border-2 border-[#efd3ba] bg-[#fffdf9] p-5 shadow-[0_18px_50px_rgba(91,59,43,0.1)] sm:p-8">
+        <div className="mb-6 text-center">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#efc9a8] bg-[#fff0df] px-4 py-2 text-sm font-black text-[#a75b24]">
+            ðŸ¾ Tootie&apos;s Specialty
+            Word List
+          </div>
+
+          <p className="mx-auto max-w-2xl text-base leading-7 text-[#755d52] sm:text-lg">
+            Browse {listLabel} and use the
+            filters below to narrow the list.
+          </p>
+        </div>
+
+        <div className="mb-7 flex justify-center">
+          <div className="inline-flex rounded-full border-2 border-[#ead6c5] bg-[#fff8ef] p-1.5">
+            <button
+              type="button"
+              onClick={() =>
+                chooseResultMode("common")
+              }
+              className={`rounded-full px-5 py-2.5 text-sm font-black transition ${
+                resultMode === "common"
+                  ? "bg-[#f4a24a] text-white shadow-sm"
+                  : "text-[#795b4c] hover:bg-white"
+              }`}
+            >
+              Common Words
+            </button>
+
+            <button
+              type="button"
+              onClick={() =>
+                chooseResultMode("all")
+              }
+              className={`rounded-full px-5 py-2.5 text-sm font-black transition ${
+                resultMode === "all"
+                  ? "bg-[#f4a24a] text-white shadow-sm"
+                  : "text-[#795b4c] hover:bg-white"
+              }`}
+            >
+              All Words
+            </button>
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <FilterField label="Word Length">
+            <select
+              value={wordLength}
+              onChange={(e) => {
+                setWordLength(
+                  e.target.value
+                );
+                setShowAll(false);
+              }}
+              className="tootie-input"
+              aria-label="Word length"
+            >
+              <option value="">
+                Any Length
+              </option>
+
+              {availableLengths.map(
+                (length) => (
+                  <option
+                    key={length}
+                    value={length}
+                  >
+                    {length} Letters
+                  </option>
+                )
+              )}
+            </select>
+          </FilterField>
+
+          <FilterField label="Starts With">
+            <input
+              value={startsWith}
+              onChange={(e) => {
+                setStartsWith(
+                  cleanInput(
+                    e.target.value
+                  )
+                );
+                setShowAll(false);
+              }}
+              placeholder="Example: s"
+              className="tootie-input"
+              aria-label="Starts with"
+            />
+          </FilterField>
+
+          <FilterField label="Contains">
+            <input
+              value={contains}
+              onChange={(e) => {
+                setContains(
+                  cleanInput(
+                    e.target.value
+                  )
+                );
+                setShowAll(false);
+              }}
+              placeholder="Example: ar"
+              className="tootie-input"
+              aria-label="Contains"
+            />
+          </FilterField>
+
+          <FilterField label="Ends With">
+            <input
+              value={endsWith}
+              onChange={(e) => {
+                setEndsWith(
+                  cleanInput(
+                    e.target.value
+                  )
+                );
+                setShowAll(false);
+              }}
+              placeholder="Example: e"
+              className="tootie-input"
+              aria-label="Ends with"
+            />
+          </FilterField>
+
+          <FilterField label="Exclude Letters">
+            <input
+              value={exclude}
+              onChange={(e) => {
+                setExclude(
+                  cleanInput(
+                    e.target.value
+                  )
+                );
+                setShowAll(false);
+              }}
+              placeholder="Example: xyz"
+              className="tootie-input"
+              aria-label="Exclude letters"
+            />
+          </FilterField>
+        </div>
+
+        <div className="mt-7 border-t-2 border-dashed border-[#ecd8c7] pt-6">
+          <div className="mb-3 text-sm font-black uppercase tracking-[0.12em] text-[#9a5830]">
+            Starts With
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {alphabet.map((letter) => (
+              <button
+                key={letter}
+                type="button"
+                onClick={() =>
+                  chooseStartingLetter(
+                    letter
+                  )
+                }
+                aria-label={`Show ${listLabel} starting with ${letter.toUpperCase()}`}
+                className={`flex h-10 w-10 items-center justify-center rounded-xl border-2 font-black uppercase transition ${
+                  startsWith === letter
+                    ? "border-[#ef9b4a] bg-[#f4a24a] text-white"
+                    : "border-[#ead6c5] bg-[#fffaf4] text-[#684b3f] hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                }`}
+              >
+                {letter}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div
+          id="specialty-word-results"
+          className="mt-7 scroll-mt-6 border-t-2 border-dashed border-[#ecd8c7] pt-6"
+        >
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <div className="text-sm font-black uppercase tracking-[0.15em] text-[#d8741e]">
+                Tootie found
+              </div>
+
+              <div className="mt-1 text-2xl font-black text-[#4a2e25]">
+                {filteredWords.length.toLocaleString()}{" "}
+                {resultMode === "common"
+                  ? "common "
+                  : ""}
+                {filteredWords.length === 1
+                  ? "word"
+                  : "words"}
+              </div>
+            </div>
+
+            {filtersActive && (
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="rounded-full border-2 border-[#e7cdb8] bg-white px-6 py-2.5 text-sm font-bold text-[#795b4c] hover:bg-[#fff4e8]"
+              >
+                Clear Filters
+              </button>
+            )}
+          </div>
+
+          {filteredWords.length === 0 ? (
+            <div className="py-14 text-center">
+              <div className="text-5xl">
+                ðŸ¾
+              </div>
+
+              <h2 className="mt-4 text-2xl font-black text-[#4a2e25]">
+                Tootie couldn&apos;t find
+                a match
+              </h2>
+
+              <p className="mt-2 text-[#846c60]">
+                Try removing one of your
+                filters or using different
+                letters.
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                {visibleWords.map(
+                  (word) => (
+                    <button
+                      key={word}
+                      type="button"
+                      onClick={() =>
+                        copyWord(word)
+                      }
+                      className="word-chip border-[#ead6c5] bg-[#fffaf4] hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                    >
+                      {copiedWord ===
+                      word
+                        ? "âœ“ Copied!"
+                        : word}
+                    </button>
+                  )
+                )}
+              </div>
+
+              {!showAll &&
+                filteredWords.length >
+                  200 && (
+                  <div className="mt-10 text-center">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowAll(true)
+                      }
+                      className="tootie-button rounded-full px-7 py-3 font-black text-white"
+                    >
+                      Show All{" "}
+                      {filteredWords.length.toLocaleString()}{" "}
+                      Words
+                    </button>
+                  </div>
+                )}
+
+              {showAll &&
+                filteredWords.length >
+                  200 && (
+                  <div className="mt-10 text-center">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowAll(false);
+
+                        document
+                          .getElementById(
+                            "specialty-word-results"
+                          )
+                          ?.scrollIntoView({
+                            behavior:
+                              "smooth",
+                            block:
+                              "start",
+                          });
+                      }}
+                      className="rounded-full border-2 border-[#e7cdb8] bg-white px-6 py-2.5 text-sm font-bold text-[#795b4c] hover:bg-[#fff4e8]"
+                    >
+                      Show Fewer Words
+                    </button>
+                  </div>
+                )}
+            </>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function cleanInput(value: string) {
+  return value
+    .replace(/[^a-zA-Z]/g, "")
+    .toLowerCase();
+}
+
+function FilterField({
+  label,
+  children,
+}: {
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <div>
+      <label className="mb-2 block text-sm font-bold text-[#684b3f]">
+        {label}
+      </label>
+
+      {children}
+    </div>
+  );
+}
+
+============================================================
+FILE: components\Header.tsx
+============================================================
+
+import Image from "next/image";
+import Link from "next/link";
+
+export default function Header() {
+  return (
+    <header className="relative z-50 border-b border-[#efd9c7] bg-[#fffaf4]/95 shadow-[0_4px_18px_rgba(74,46,37,0.06)] backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3 sm:px-6">
+        <Link
+          href="/"
+          aria-label="TootieWords home"
+          className="shrink-0 transition hover:scale-[1.02]"
+        >
+          <Image
+            src="/tootiewords-logo.png"
+            alt="TootieWords"
+            width={310}
+            height={150}
+            priority
+            className="h-auto w-[185px] sm:w-[220px]"
+          />
+        </Link>
+
+        <nav className="hidden items-center gap-2 lg:flex">
+          <NavLink href="/" active>
+            Home
+          </NavLink>
+
+          <NavLink href="/word-unscrambler">
+            Word Unscrambler
+          </NavLink>
+
+          <NavLink href="/anagram-solver">
+            Anagram Solver
+          </NavLink>
+
+          <NavLink href="/words-from-letters">
+            Words From Letters
+          </NavLink>
+
+          <NavLink href="/about">
+            About
+          </NavLink>
+        </nav>
+
+        <div className="hidden rotate-[-4deg] text-right font-hand text-lg leading-5 text-[#7a4432] xl:block">
+          Good words
+          <br />
+          happen here! â™¡
+        </div>
+      </div>
+
+      <nav className="flex gap-2 overflow-x-auto border-t border-[#f4e6db] bg-white/70 px-4 py-2 text-sm font-bold text-[#69483d] lg:hidden">
+        <MobileLink href="/">Home</MobileLink>
+        <MobileLink href="/word-unscrambler">
+          Unscrambler
+        </MobileLink>
+        <MobileLink href="/anagram-solver">
+          Anagrams
+        </MobileLink>
+        <MobileLink href="/words-from-letters">
+          Words From Letters
+        </MobileLink>
+      </nav>
+    </header>
+  );
+}
+
+function NavLink({
+  href,
+  active = false,
+  children,
+}: {
+  href: string;
+  active?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`rounded-2xl px-5 py-3 text-sm font-bold transition duration-200 ${
+        active
+          ? "bg-gradient-to-r from-[#ef799a] to-[#f0527e] text-white shadow-[0_6px_16px_rgba(240,82,126,0.25)]"
+          : "bg-[#f9ecdf] text-[#573a31] hover:-translate-y-0.5 hover:bg-[#ffe2c8]"
+      }`}
+    >
+      {children}
+    </Link>
+  );
+}
+
+function MobileLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className="shrink-0 rounded-full bg-[#fff1e5] px-4 py-2 hover:bg-[#ffe1c8]"
+    >
+      {children}
+    </Link>
+  );
+}
+
+============================================================
+FILE: components\Footer.tsx
+============================================================
+
+import Image from "next/image";
+import Link from "next/link";
+
+export default function Footer() {
+  return (
+    <footer className="footer-storybook relative overflow-hidden text-[#fff8ef]">
+      <div className="footer-glow footer-glow-left" />
+      <div className="footer-glow footer-glow-right" />
+
+      <div className="mx-auto grid min-h-[390px] max-w-[1380px] items-center gap-8 px-6 pb-8 pt-24 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+        {/* LEFT FOOTER CONTENT */}
+        <div className="relative z-20">
+          <Link
+            href="/"
+            aria-label="TootieWords home"
+            className="inline-block"
+          >
+            <Image
+              src="/tootiewords-logo.png"
+              alt="TootieWords"
+              width={340}
+              height={170}
+              sizes="235px"
+              className="footer-logo h-auto w-[210px] sm:w-[235px]"
+            />
+          </Link>
+
+          <p className="footer-tagline">
+            Find More Words. More Fun. ðŸ¾
+          </p>
+
+          <nav className="footer-links">
+            <Link href="/about">About</Link>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
+            <Link href="/contact">Contact</Link>
+          </nav>
+
+          <nav className="footer-tool-links">
+            <Link href="/word-unscrambler">
+              Word Unscrambler
+            </Link>
+
+            <Link href="/anagram-solver">
+              Anagram Solver
+            </Link>
+
+            <Link href="/words-from-letters">
+              Words From Letters
+            </Link>
+          </nav>
+
+          <p className="footer-copyright">
+            Â© {new Date().getFullYear()} TootieWords. All rights reserved.
+          </p>
+        </div>
+
+        {/* TOOTIE */}
+        <div className="relative z-10 min-h-[250px]">
+          <div className="footer-note">
+            Thanks for
+            <br />
+            Exploring!
+            <span>â™¡</span>
+
+            <div className="footer-note-line" />
+          </div>
+
+          <Paw className="left-[8%] top-[50%] rotate-[-12deg]" />
+          <Paw className="left-[21%] bottom-[15%] rotate-[9deg]" />
+
+          <Image
+            src="/tootie-footer-optimized.webp"
+            alt="Tootie peeking over the bottom of the page"
+            width={1200}
+            height={400}
+            sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1023px) 100vw, 780px"
+            className="footer-tootie pointer-events-none absolute bottom-[-74px] right-[-9%] h-auto w-[112%] max-w-[780px]"
+          />
+        </div>
+      </div>
+
+      <div className="footer-cream-wave" />
+    </footer>
+  );
+}
+
+function Paw({
+  className = "",
+}: {
+  className?: string;
+}) {
+  return (
+    <span
+      className={`pointer-events-none absolute text-5xl opacity-[0.2] ${className}`}
+      aria-hidden="true"
+    >
+      ðŸ¾
+    </span>
+  );
+}

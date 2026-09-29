@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 
 import words from "an-array-of-english-words";
@@ -61,9 +61,39 @@ function getCommonQWordsWithoutU() {
 }
 
 export const metadata: Metadata = {
-  title: "Words With Q Without U - Word Finder",
+  title: "Words With Q Without U - Q Word Finder",
   description:
-    "Find words with Q without U using TootieWords. Browse common and all words containing Q with no U anywhere in the word.",
+    "Find words containing Q without U. Browse common and uncommon Q-without-U words and narrow the list by length, starting letters, endings, and other letter clues.",
+  alternates: {
+    canonical:
+      "https://tootiewords.com/words-with-q-without-u",
+  },
+  openGraph: {
+    type: "website",
+    url:
+      "https://tootiewords.com/words-with-q-without-u",
+    siteName: "TootieWords",
+    title:
+      "Words With Q Without U - Q Word Finder",
+    description:
+      "Explore words that contain Q but do not contain U anywhere in the word.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TootieWords Words With Q Without U",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "Words With Q Without U - Q Word Finder",
+    description:
+      "Explore words containing Q without the letter U.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function WordsWithQWithoutUPage() {
@@ -79,7 +109,7 @@ export default function WordsWithQWithoutUPage() {
 
       <section className="mx-auto max-w-5xl px-6 pb-7 pt-10 text-center sm:pt-12">
         <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#efc9a8] bg-[#fff0df] px-4 py-2 text-sm font-black text-[#a75b24]">
-          🐱 Tootie&apos;s Specialty Word List
+          🐾 Tootie&apos;s Specialty Word List
         </div>
 
         <h1 className="whimsy-title text-4xl font-black text-[#4a2e25] sm:text-5xl">
@@ -87,12 +117,10 @@ export default function WordsWithQWithoutUPage() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-[#755d52]">
-          Browse words that contain the letter Q
-          but do not contain the letter U anywhere
-          in the word. Use the filters to narrow
-          the list by word length, starting letters,
-          ending letters, included letters, or
-          excluded letters.
+          Explore words that contain Q but do not
+          contain U anywhere in the word. Then use
+          the filters to narrow the list with the
+          other clues you know.
         </p>
       </section>
 
@@ -105,41 +133,70 @@ export default function WordsWithQWithoutUPage() {
       <section className="border-t border-[#ecd8c7] bg-white">
         <div className="mx-auto max-w-4xl px-6 py-14">
           <h2 className="whimsy-title text-3xl font-black text-[#4a2e25]">
-            Find Q Words Without U
+            Can Q Appear Without U?
           </h2>
 
           <p className="mt-5 leading-8 text-[#755d52]">
-            Q is often paired with U in English,
-            but some words contain Q without any U.
-            Every result on this page includes Q
-            and excludes U completely.
+            Yes. The familiar QU combination appears
+            in many English words, but Q can occur
+            without U as well. Some examples entered
+            English from languages whose spelling
+            patterns use Q differently, while other
+            entries are names for foods, places,
+            cultural terms, or specialized concepts
+            that became part of English vocabulary.
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
-            Filter by Word Length
+            Examples of Q Without U
           </h2>
 
           <p className="mt-4 leading-8 text-[#755d52]">
-            Use the Word Length menu when you know
-            how many letters the word should have.
-            You can also combine the length filter
-            with Starts With, Contains, Ends With,
-            and Exclude Letters.
+            Familiar examples include{" "}
+            <strong>qi</strong>, a term associated
+            with vital energy in Chinese philosophy,
+            and <strong>qadi</strong>, a judge in
+            Islamic law. Depending on the dictionary
+            being used, you may encounter additional
+            borrowed or specialized Q words without
+            U. That is one reason the Common Words
+            and All Words views can produce noticeably
+            different lists.
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
-            Common Words or All Words
+            Search the List More Efficiently
           </h2>
 
           <p className="mt-4 leading-8 text-[#755d52]">
-            Common Words shows a smaller list of
-            more familiar vocabulary. Switch to
-            All Words to explore a broader set of
-            entries, including less common words.
+            If you know the word length, choose it
+            first. Add a known beginning or ending
+            next, then use Contains for any other
+            required letters. Exclude Letters can
+            remove possibilities that conflict with
+            clues you have already tested. Every
+            result will continue to require Q and
+            exclude U.
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
-            More Specialty Searches
+            Why the Dictionary Matters
+          </h2>
+
+          <p className="mt-4 leading-8 text-[#755d52]">
+            Unusual letter combinations are especially
+            sensitive to dictionary choice. A word
+            can be valid in one reference and absent
+            from another. TootieWords therefore
+            separates a frequency-based Common Words
+            view from the broader All Words dictionary.
+            For a particular word game or puzzle,
+            its official word list remains the final
+            authority on whether an entry is accepted.
+          </p>
+
+          <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+            Related Word Searches
           </h2>
 
           <div className="mt-5 flex flex-wrap gap-3">
@@ -147,7 +204,14 @@ export default function WordsWithQWithoutUPage() {
               href="/words-with-q"
               className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
             >
-              Words With Q
+              All Words With Q
+            </Link>
+
+            <Link
+              href="/words-with-no-vowels"
+              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+            >
+              Words With No Vowels
             </Link>
 
             <Link

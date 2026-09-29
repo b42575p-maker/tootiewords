@@ -1,162 +1,140 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://tootiewords.com";
 
-  return [
+  const routes = [
     {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      path: "",
+      changeFrequency: "weekly" as const,
       priority: 1,
     },
     {
-      url: `${baseUrl}/word-unscrambler`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      path: "/word-unscrambler",
+      changeFrequency: "weekly" as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/anagram-solver`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      path: "/anagram-solver",
+      changeFrequency: "weekly" as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/words-from-letters`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      path: "/words-from-letters",
+      changeFrequency: "weekly" as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/4-letter-words`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      path: "/4-letter-words",
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+    {
+      path: "/5-letter-words",
+      changeFrequency: "weekly" as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/5-letter-words`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
+      path: "/5-letter-words-starting-with-a",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
     },
-
-    // 5-letter pattern pages
     {
-      url: `${baseUrl}/5-letter-words-starting-with-a`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      path: "/5-letter-words-starting-with-s",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-ending-in-e",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-ending-in-y",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-with-a",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-with-a-in-second-position",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-with-e-in-fifth-position",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-with-o-in-second-position",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-with-r-in-third-position",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/6-letter-words",
+      changeFrequency: "weekly" as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/5-letter-words-starting-with-s`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      path: "/7-letter-words",
+      changeFrequency: "weekly" as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/5-letter-words-ending-in-e`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      path: "/8-letter-words",
+      changeFrequency: "weekly" as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/5-letter-words-ending-in-y`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      path: "/words-with-q",
+      changeFrequency: "weekly" as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/5-letter-words-with-a`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-
-    // Exact-position 5-letter pages
-    {
-      url: `${baseUrl}/5-letter-words-with-a-in-second-position`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      path: "/words-with-q-without-u",
+      changeFrequency: "weekly" as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/5-letter-words-with-e-in-fifth-position`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      path: "/words-with-no-vowels",
+      changeFrequency: "weekly" as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/5-letter-words-with-r-in-third-position`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/5-letter-words-with-o-in-second-position`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-
-    // Specialty word pages
-    {
-      url: `${baseUrl}/words-with-q`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/words-with-q-without-u`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/words-with-no-vowels`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-
-    // Other word-length pages
-    {
-      url: `${baseUrl}/6-letter-words`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/7-letter-words`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/8-letter-words`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-
-    // Site information
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+      path: "/about",
+      changeFrequency: "monthly" as const,
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/privacy`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
+      path: "/contact",
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    },
+    {
+      path: "/privacy",
+      changeFrequency: "yearly" as const,
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/terms`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
+      path: "/terms",
+      changeFrequency: "yearly" as const,
       priority: 0.3,
     },
   ];
+
+  return routes.map((route) => ({
+    url: `${baseUrl}${route.path}`,
+    lastModified: new Date(),
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
+  }));
 }

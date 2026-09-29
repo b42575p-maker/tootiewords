@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 
 import words from "an-array-of-english-words";
@@ -60,9 +60,35 @@ function getCommonWordsWithQ() {
 }
 
 export const metadata: Metadata = {
-  title: "Words With Q - Word Finder",
+  title: "Words With Q - Q Word Finder",
   description:
-    "Find words with Q using TootieWords. Browse common and all words containing Q and filter by word length, starting letters, ending letters, and more.",
+    "Find words with Q using TootieWords. Browse Q words, explore common Q patterns, and filter by length, starting letters, endings, included letters, and excluded letters.",
+  alternates: {
+    canonical: "https://tootiewords.com/words-with-q",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://tootiewords.com/words-with-q",
+    siteName: "TootieWords",
+    title: "Words With Q - Q Word Finder",
+    description:
+      "Browse words containing Q and narrow the list with useful word filters.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TootieWords Words With Q Finder",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Words With Q - Q Word Finder",
+    description:
+      "Browse words containing Q and narrow the list with TootieWords.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function WordsWithQPage() {
@@ -78,7 +104,7 @@ export default function WordsWithQPage() {
 
       <section className="mx-auto max-w-5xl px-6 pb-7 pt-10 text-center sm:pt-12">
         <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#efc9a8] bg-[#fff0df] px-4 py-2 text-sm font-black text-[#a75b24]">
-          🐱 Tootie&apos;s Word Helper
+          🐾 Tootie&apos;s Specialty Word List
         </div>
 
         <h1 className="whimsy-title text-4xl font-black text-[#4a2e25] sm:text-5xl">
@@ -86,12 +112,10 @@ export default function WordsWithQPage() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-[#755d52]">
-          Browse words containing the letter Q.
-          Choose a word length or use the
-          filters to narrow the list by
-          starting letters, ending letters,
-          included letters, or letters you
-          want to exclude.
+          Browse words containing the letter Q and
+          narrow the list by word length, starting
+          letters, endings, additional required
+          letters, or letters you want to exclude.
         </p>
       </section>
 
@@ -104,48 +128,93 @@ export default function WordsWithQPage() {
       <section className="border-t border-[#ecd8c7] bg-white">
         <div className="mx-auto max-w-4xl px-6 py-14">
           <h2 className="whimsy-title text-3xl font-black text-[#4a2e25]">
-            Find Words Containing Q
+            Finding Words That Contain Q
           </h2>
 
           <p className="mt-5 leading-8 text-[#755d52]">
-            Every word on this page contains
-            the letter Q. Use the Word Length
-            menu to focus on shorter or longer
-            words, or combine the other
-            filters when you already know part
-            of the word you are looking for.
+            Q is an unusual letter because it often
+            appears as part of a recognizable letter
+            pattern rather than by itself. Words such
+            as <strong>queen</strong>,{" "}
+            <strong>quick</strong>,{" "}
+            <strong>quiet</strong>, and{" "}
+            <strong>square</strong> pair Q with U.
+            Starting with that pattern can be useful
+            when you are trying to remember or solve
+            a word containing Q.
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
-            Common Words or All Words
+            Q Is Not Always Followed by U
           </h2>
 
           <p className="mt-4 leading-8 text-[#755d52]">
-            Common Words gives you a smaller
-            list of more familiar vocabulary.
-            Switch to All Words when you want
-            to explore the larger dictionary,
-            including less common entries.
+            Although QU is familiar in English,
+            it is not a rule that every Q must be
+            followed by U. English also contains
+            words in which Q appears without U.
+            TootieWords has a separate list for
+            those cases so you can explore that
+            smaller and more unusual group directly.
           </p>
 
+          <div className="mt-5">
+            <Link
+              href="/words-with-q-without-u"
+              className="inline-flex rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+            >
+              Explore Words With Q Without U
+            </Link>
+          </div>
+
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
-            Narrow Your Q Word Search
+            How to Narrow a Q Word Search
           </h2>
 
           <p className="mt-4 leading-8 text-[#755d52]">
-            You can search for Q words that
-            start or end with particular
-            letters, require additional
-            letters with the Contains box, or
-            remove unwanted letters with
-            Exclude Letters.
+            Start with word length if you know it.
+            Then add any beginning or ending letters
+            you already have. The Contains filter is
+            useful for another confirmed letter,
+            while Exclude Letters removes words that
+            use letters you know cannot be part of
+            the answer. Combining clues is usually
+            more effective than scanning the entire
+            Q-word list.
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
-            More TootieWords Tools
+            Common Words and the Larger Dictionary
+          </h2>
+
+          <p className="mt-4 leading-8 text-[#755d52]">
+            Common Words focuses on entries found in
+            the frequency list used by TootieWords,
+            which tends to surface more familiar
+            vocabulary. All Words opens the broader
+            dictionary and may include uncommon,
+            specialized, or unfamiliar entries.
+          </p>
+
+          <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+            More TootieWords Searches
           </h2>
 
           <div className="mt-5 flex flex-wrap gap-3">
+            <Link
+              href="/words-with-q-without-u"
+              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+            >
+              Q Without U
+            </Link>
+
+            <Link
+              href="/words-with-no-vowels"
+              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+            >
+              Words With No Vowels
+            </Link>
+
             <Link
               href="/word-unscrambler"
               className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
@@ -158,13 +227,6 @@ export default function WordsWithQPage() {
               className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
             >
               Words From Letters
-            </Link>
-
-            <Link
-              href="/5-letter-words"
-              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
-            >
-              5 Letter Words
             </Link>
           </div>
         </div>
