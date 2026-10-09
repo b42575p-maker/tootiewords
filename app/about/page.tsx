@@ -4,6 +4,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://tootiewords.com/about",
+  },
   title: "About",
   description:
     "Learn about TootieWords, a free collection of word tools for finding words, solving anagrams, and having more fun with letters.",

@@ -4,6 +4,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://tootiewords.com/terms",
+  },
   title: "Terms of Use",
   description:
     "Read the TootieWords Terms of Use for using our free word finder, anagram solver, and word unscrambler tools.",
