@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 
 import words from "an-array-of-english-words";
 import wordFrequencyData from "../data/wordfreq-en-25000-log.json";
@@ -306,6 +306,35 @@ export default function FiveLetterPatternPage({
         <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-[#755d52]">
           {intro}
         </p>
+
+        {patternType === "position" &&
+          cleanLetters === "o" &&
+          position === 2 && (
+            <div className="mx-auto mt-6 max-w-md rounded-2xl border-2 border-[#f1d5bb] bg-white px-4 py-5">
+              <p className="text-xs font-black uppercase tracking-widest text-[#9a5830]">
+                Five-Letter Word Pattern
+              </p>
+
+              <div className="mt-4 flex justify-center gap-2">
+                {["?", "O", "?", "?", "?"].map((letter, index) => (
+                  <div
+                    key={index}
+                    className={`flex h-12 w-12 items-center justify-center rounded-xl border-2 text-xl font-black sm:h-14 sm:w-14 ${
+                      index === 1
+                        ? "border-[#d78935] bg-[#f4b56b] text-[#663a18]"
+                        : "border-[#ead6c5] bg-[#fffaf4] text-[#846c60]"
+                    }`}
+                  >
+                    {letter}
+                  </div>
+                ))}
+              </div>
+
+              <p className="mt-4 text-sm leading-6 text-[#755d52]">
+                O is always the second letter. The other four letters can vary.
+              </p>
+            </div>
+          )}
       </section>
 
       <WordListFinder

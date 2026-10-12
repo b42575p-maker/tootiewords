@@ -455,9 +455,7 @@ export default function WordListFinder({
           </div>
 
           <p className="mt-4 text-center text-xs font-bold text-[#9a8175]">
-            Example: enter A in position 2
-            and E in position {wordLength} to
-            find words matching that pattern.
+            Enter any additional letters you know in their matching positions. Leave unknown positions blank.
           </p>
         </div>
 
