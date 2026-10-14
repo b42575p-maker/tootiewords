@@ -1,7 +1,7 @@
 ﻿import Link from "next/link";
 
 import words from "an-array-of-english-words";
-import wordFrequencyData from "../data/wordfreq-en-25000-log.json";
+import { commonWordFrequencies as wordFrequencyData } from "@/lib/word-frequencies";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";

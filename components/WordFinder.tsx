@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import words from "an-array-of-english-words";
-import wordFrequencyData from "../data/wordfreq-en-25000-log.json";
+import { commonWordFrequencies as wordFrequencyData } from "@/lib/word-frequencies";
 
 type FrequencyEntry = [string, number];
 

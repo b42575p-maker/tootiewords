@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import Link from "next/link";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -74,6 +76,37 @@ export default function AboutPage() {
 
             <div className="mt-10 border-t border-[#f0ded0] pt-8">
               <h2 className="text-xl font-black text-[#4a2e25]">
+                Who Runs TootieWords
+              </h2>
+              <p className="mt-4 leading-7 text-[#766056]">
+                TootieWords is a small, independent site built and run by
+                Tootie&apos;s family. We are word-game fans ourselves, and we
+                built the tools we wanted to use: fast, free, easy to read on
+                a phone, and without sign-ups.
+              </p>
+              <p className="mt-4 leading-7 text-[#766056]">
+                We are not affiliated with any word game or game publisher.
+                TootieWords is meant to help you learn new words, check your
+                ideas, and get unstuck, and we hope it makes your next game
+                a little more fun.
+              </p>
+              <p className="mt-4 leading-7 text-[#766056]">
+                Spotted a missing word, a word that shouldn&apos;t be there,
+                or a bug? We would love to hear from you. Reach us through
+                our
+                {" "}
+                <Link
+                  href="/contact"
+                  className="font-bold text-[#d8617f] underline decoration-[#ef9ab2] underline-offset-4"
+                >
+                  contact page
+                </Link>
+                .
+              </p>
+            </div>
+
+            <div className="mt-10 border-t border-[#f0ded0] pt-8">
+              <h2 className="text-xl font-black text-[#4a2e25]">
                 Where Our Words Come From
               </h2>
               <p className="mt-4 leading-7 text-[#766056]">
@@ -85,9 +118,10 @@ export default function AboutPage() {
               <p className="mt-4 leading-7 text-[#766056]">
                 Results are sorted using how often each word appears in
                 everyday English. The Common Words view shows familiar
-                words first, while All Words shows everything in the list.
-                Every word game uses its own dictionary, so a word that
-                appears here may not be accepted in every game. When in
+                everyday words and leaves out names, places, and brands
+                that are usually capitalized. All Words shows everything in
+                the list. Every word game uses its own dictionary, so a word
+                that appears here may not be accepted in every game. When in
                 doubt, check your game&apos;s official rules.
               </p>
             </div>
