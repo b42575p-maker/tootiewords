@@ -37,6 +37,10 @@ export default function Header() {
             Words From Letters
           </NavLink>
 
+          <NavLink href="/guides">
+            Guides
+          </NavLink>
+
           <NavLink href="/about">
             About
           </NavLink>
@@ -60,6 +64,7 @@ export default function Header() {
         <MobileLink href="/words-from-letters">
           Words From Letters
         </MobileLink>
+        <MobileLink href="/guides">Guides</MobileLink>
       </nav>
     </header>
   );

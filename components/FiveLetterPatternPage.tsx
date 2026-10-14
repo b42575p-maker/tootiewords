@@ -238,6 +238,115 @@ function getPatternContent(
   };
 }
 
+type LetterShare = {
+  letter: string;
+  percent: number;
+};
+
+type PatternStats = {
+  sharePercent: number;
+  openPositions: {
+    position: number;
+    topLetters: LetterShare[];
+  }[];
+  topOtherLetters: LetterShare[];
+  repeatedLetterPercent: number;
+};
+
+function toPercent(count: number, total: number) {
+  return total === 0 ? 0 : Math.round((count / total) * 1000) / 10;
+}
+
+function getFixedPositions(
+  patternType: PatternType,
+  letters: string,
+  position?: number
+) {
+  if (patternType === "starts-with") {
+    return letters.split("").map((_, index) => index + 1);
+  }
+
+  if (patternType === "ends-with") {
+    return letters
+      .split("")
+      .map((_, index) => 5 - letters.length + index + 1);
+  }
+
+  if (patternType === "position" && position !== undefined) {
+    return [position];
+  }
+
+  return [];
+}
+
+function getPatternStats(
+  matchingWords: string[],
+  totalWords: number,
+  patternType: PatternType,
+  letters: string,
+  position?: number
+): PatternStats {
+  const total = matchingWords.length;
+  const fixedPositions = getFixedPositions(patternType, letters, position);
+
+  const openPositions = [1, 2, 3, 4, 5]
+    .filter((slot) => !fixedPositions.includes(slot))
+    .map((slot) => {
+      const counts = new Map<string, number>();
+
+      for (const word of matchingWords) {
+        const letter = word[slot - 1];
+        counts.set(letter, (counts.get(letter) ?? 0) + 1);
+      }
+
+      const topLetters = [...counts.entries()]
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .slice(0, 3)
+        .map(([letter, count]) => ({
+          letter,
+          percent: toPercent(count, total),
+        }));
+
+      return { position: slot, topLetters };
+    });
+
+  const patternLetters = new Set(letters.split(""));
+  const containsCounts = new Map<string, number>();
+
+  for (const word of matchingWords) {
+    for (const letter of new Set(word.split(""))) {
+      if (!patternLetters.has(letter)) {
+        containsCounts.set(letter, (containsCounts.get(letter) ?? 0) + 1);
+      }
+    }
+  }
+
+  const topOtherLetters = [...containsCounts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, 5)
+    .map(([letter, count]) => ({
+      letter,
+      percent: toPercent(count, total),
+    }));
+
+  const repeatedLetterWords = matchingWords.filter(
+    (word) => new Set(word.split("")).size < word.length
+  ).length;
+
+  return {
+    sharePercent: toPercent(total, totalWords),
+    openPositions,
+    topOtherLetters,
+    repeatedLetterPercent: toPercent(repeatedLetterWords, total),
+  };
+}
+
+function formatLetterShares(shares: LetterShare[]) {
+  return shares
+    .map(({ letter, percent }) => `${letter.toUpperCase()} (${percent}%)`)
+    .join(", ");
+}
+
 export default function FiveLetterPatternPage({
   patternType,
   letters,
@@ -274,6 +383,14 @@ export default function FiveLetterPatternPage({
 
   const exampleWords =
     matchingCommonWords.slice(0, 8);
+
+  const stats = getPatternStats(
+    matchingCommonWords,
+    commonFiveLetterWords.length,
+    patternType,
+    cleanLetters,
+    position
+  );
 
   const content =
     getPatternContent(
@@ -404,6 +521,49 @@ export default function FiveLetterPatternPage({
             )}
           </div>
 
+          {matchingCommonWords.length > 0 && (
+            <>
+              <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+                This Pattern by the Numbers
+              </h2>
+
+              <p className="mt-4 leading-8 text-[#755d52]">
+                These {matchingCommonWords.length.toLocaleString()} words make
+                up {stats.sharePercent}% of the{" "}
+                {commonFiveLetterWords.length.toLocaleString()} common
+                five-letter words in our list. Here is how the open spots
+                tend to fill in:
+              </p>
+
+              <ul className="mt-4 space-y-2 leading-8 text-[#755d52]">
+                {stats.openPositions.map(({ position: slot, topLetters }) => (
+                  <li key={slot}>
+                    <strong className="text-[#4a2e25]">
+                      {getOrdinal(slot)} letter:
+                    </strong>{" "}
+                    {formatLetterShares(topLetters)}
+                  </li>
+                ))}
+              </ul>
+
+              {stats.topOtherLetters.length > 0 && (
+                <p className="mt-4 leading-8 text-[#755d52]">
+                  Besides {cleanLetters.toUpperCase()}, the letters that show up
+                  most often in these words are{" "}
+                  {formatLetterShares(stats.topOtherLetters)}. If you have not
+                  tested those letters yet, they are good candidates for your
+                  next guess.
+                </p>
+              )}
+
+              <p className="mt-4 leading-8 text-[#755d52]">
+                {stats.repeatedLetterPercent}% of the words matching this
+                pattern use at least one letter twice, so do not rule out
+                doubles too early.
+              </p>
+            </>
+          )}
+
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
             {content.strategyTitle}
           </h2>
@@ -465,6 +625,13 @@ export default function FiveLetterPatternPage({
               className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
             >
               R in Third Position
+            </Link>
+
+            <Link
+              href="/guides/best-wordle-starting-words"
+              className="rounded-full border-2 border-[#efb6c6] bg-[#fff1f5] px-5 py-3 font-black text-[#c24d6e] hover:bg-[#ffe4ec]"
+            >
+              Guide: Best Wordle Starting Words
             </Link>
           </div>
 

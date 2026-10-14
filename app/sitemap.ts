@@ -110,6 +110,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      path: "/guides",
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+    {
+      path: "/guides/best-wordle-starting-words",
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    {
+      path: "/guides/how-to-unscramble-letters",
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/guides/q-without-u-words",
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/guides/words-without-vowels",
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
       path: "/about",
       changeFrequency: "monthly" as const,
       priority: 0.5,

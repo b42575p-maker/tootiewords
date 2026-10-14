@@ -48,6 +48,10 @@ export default function Footer() {
             <Link href="/words-from-letters">
               Words From Letters
             </Link>
+
+            <Link href="/guides">
+              Guides
+            </Link>
           </nav>
 
           <p className="footer-copyright">

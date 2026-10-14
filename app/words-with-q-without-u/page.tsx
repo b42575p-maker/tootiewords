@@ -26,8 +26,7 @@ function getAllQWordsWithoutU() {
     .filter(
       (word) =>
         /^[a-z]+$/.test(word) &&
-        word.includes("q") &&
-        !word.includes("u")
+        /q(?!u)/.test(word)
     )
     .filter(
       (word, index, array) =>
@@ -76,7 +75,7 @@ export const metadata: Metadata = {
     title:
       "Words With Q Without U - Q Word Finder",
     description:
-      "Explore words that contain Q but do not contain U anywhere in the word.",
+      "Explore words where Q appears without the U that usually follows it.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -117,8 +116,8 @@ export default function WordsWithQWithoutUPage() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-[#755d52]">
-          Explore words that contain Q but do not
-          contain U anywhere in the word. Then use
+          Explore words where Q appears without
+          the U that usually follows it. Then use
           the filters to narrow the list with the
           other clues you know.
         </p>
@@ -175,8 +174,8 @@ export default function WordsWithQWithoutUPage() {
             required letters. Exclude Letters can
             remove possibilities that conflict with
             clues you have already tested. Every
-            result will continue to require Q and
-            exclude U.
+            result will continue to include at
+            least one Q that is not followed by U.
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
