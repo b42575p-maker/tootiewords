@@ -217,9 +217,12 @@ export default function Home() {
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             <Link
               href="/words-with-q"
-              className="group rounded-[1.75rem] border-2 border-[#efd3ba] bg-white p-6 shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#ef9b4a] hover:shadow-[0_16px_35px_rgba(91,59,43,0.12)]"
+              className="group flex flex-col rounded-[1.75rem] border-2 border-[#efd3ba] bg-white p-6 shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#ef9b4a] hover:shadow-[0_16px_35px_rgba(91,59,43,0.12)]"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff0df] text-2xl font-black text-[#d8741e]">
+              <div
+                className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff0df] text-2xl font-black text-[#d8741e]"
+                aria-hidden="true"
+              >
                 Q
               </div>
 
@@ -232,17 +235,23 @@ export default function Home() {
                 starting letters, endings, and more.
               </p>
 
-              <div className="mt-5 font-black text-[#d8741e] transition group-hover:translate-x-1">
+              <div className="mt-auto pt-5 font-black text-[#d8741e] transition group-hover:translate-x-1">
                 Explore Q words &rarr;
               </div>
             </Link>
 
             <Link
               href="/words-with-q-without-u"
-              className="group rounded-[1.75rem] border-2 border-[#efb9c8] bg-white p-6 shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#e96f91] hover:shadow-[0_16px_35px_rgba(91,59,43,0.12)]"
+              className="group flex flex-col rounded-[1.75rem] border-2 border-[#efb9c8] bg-white p-6 shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#e96f91] hover:shadow-[0_16px_35px_rgba(91,59,43,0.12)]"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff0f4] text-2xl font-black text-[#d85b7c]">
-                QU
+              <div
+                className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff0f4] text-2xl font-black text-[#d85b7c]"
+                aria-hidden="true"
+              >
+                Q
+                <span className="line-through decoration-[3px] opacity-60">
+                  U
+                </span>
               </div>
 
               <h3 className="mt-5 text-xl font-black text-[#4a2e25]">
@@ -254,16 +263,19 @@ export default function Home() {
                 normally follows it.
               </p>
 
-              <div className="mt-5 font-black text-[#d85b7c] transition group-hover:translate-x-1">
+              <div className="mt-auto pt-5 font-black text-[#d85b7c] transition group-hover:translate-x-1">
                 Find Q without U &rarr;
               </div>
             </Link>
 
             <Link
               href="/words-with-no-vowels"
-              className="group rounded-[1.75rem] border-2 border-[#efd3ba] bg-white p-6 shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#ef9b4a] hover:shadow-[0_16px_35px_rgba(91,59,43,0.12)]"
+              className="group flex flex-col rounded-[1.75rem] border-2 border-[#efd3ba] bg-white p-6 shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition duration-200 hover:-translate-y-1 hover:border-[#ef9b4a] hover:shadow-[0_16px_35px_rgba(91,59,43,0.12)]"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff0df] text-xl font-black text-[#d8741e]">
+              <div
+                className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff0df] text-xl font-black text-[#d8741e]"
+                aria-hidden="true"
+              >
                 Y?
               </div>
 
@@ -276,7 +288,7 @@ export default function Home() {
                 words where Y does the heavy lifting.
               </p>
 
-              <div className="mt-5 font-black text-[#d8741e] transition group-hover:translate-x-1">
+              <div className="mt-auto pt-5 font-black text-[#d8741e] transition group-hover:translate-x-1">
                 Explore vowel-free words &rarr;
               </div>
             </Link>
