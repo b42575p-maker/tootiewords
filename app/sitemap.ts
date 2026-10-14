@@ -65,11 +65,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      path: "/5-letter-words-with-e-in-fifth-position",
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    },
-    {
       path: "/5-letter-words-with-o-in-second-position",
       changeFrequency: "weekly" as const,
       priority: 0.7,

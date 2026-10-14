@@ -323,13 +323,6 @@ export default function WordLengthPage({
                 </Link>
 
                 <Link
-                  href="/5-letter-words-with-e-in-fifth-position"
-                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
-                >
-                  E in Fifth Position
-                </Link>
-
-                <Link
                   href="/5-letter-words-with-r-in-third-position"
                   className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
                 >
