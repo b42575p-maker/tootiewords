@@ -8,6 +8,35 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "Learn how TootieWords handles information, cookies, analytics, and advertising.",
+
+  alternates: {
+    canonical: "https://tootiewords.com/privacy",
+  },
+
+  openGraph: {
+    type: "website",
+    url: "https://tootiewords.com/privacy",
+    siteName: "TootieWords",
+    title: "Privacy Policy | TootieWords",
+    description:
+      "Learn how TootieWords handles information, cookies, analytics, and advertising.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TootieWords",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | TootieWords",
+    description:
+      "Learn how TootieWords handles information, cookies, analytics, and advertising.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function PrivacyPage() {

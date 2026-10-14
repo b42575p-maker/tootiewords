@@ -11,6 +11,31 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://tootiewords.com/contact",
   },
+
+  openGraph: {
+    type: "website",
+    url: "https://tootiewords.com/contact",
+    siteName: "TootieWords",
+    title: "Contact TootieWords",
+    description:
+      "Contact TootieWords with questions, feedback, corrections, or suggestions about our free word tools.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TootieWords",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact TootieWords",
+    description:
+      "Contact TootieWords with questions, feedback, corrections, or suggestions about our free word tools.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function ContactPage() {

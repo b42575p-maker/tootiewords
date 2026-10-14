@@ -10,6 +10,31 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Learn about TootieWords, a free collection of word tools for finding words, solving anagrams, and having more fun with letters.",
+
+  openGraph: {
+    type: "website",
+    url: "https://tootiewords.com/about",
+    siteName: "TootieWords",
+    title: "About TootieWords",
+    description:
+      "Learn about TootieWords, a free collection of word tools for finding words, solving anagrams, and having more fun with letters.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TootieWords",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "About TootieWords",
+    description:
+      "Learn about TootieWords, a free collection of word tools for finding words, solving anagrams, and having more fun with letters.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function AboutPage() {
@@ -46,6 +71,26 @@ export default function AboutPage() {
               as the mascot and inspiration behind the playful look of the
               site.
             </p>
+
+            <div className="mt-10 border-t border-[#f0ded0] pt-8">
+              <h2 className="text-xl font-black text-[#4a2e25]">
+                Where Our Words Come From
+              </h2>
+              <p className="mt-4 leading-7 text-[#766056]">
+                TootieWords searches a word list of roughly 275,000 English
+                words derived from the word list used by the word game
+                Letterpress. It includes everyday words as well as the
+                unusual ones word-game players love, like QOPH and FAQIR.
+              </p>
+              <p className="mt-4 leading-7 text-[#766056]">
+                Results are sorted using how often each word appears in
+                everyday English. The Common Words view shows familiar
+                words first, while All Words shows everything in the list.
+                Every word game uses its own dictionary, so a word that
+                appears here may not be accepted in every game. When in
+                doubt, check your game&apos;s official rules.
+              </p>
+            </div>
 
             <div className="mt-10 border-t border-[#f0ded0] pt-8">
               <h2 className="text-xl font-black text-[#4a2e25]">

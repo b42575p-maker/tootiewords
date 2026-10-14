@@ -98,8 +98,9 @@ export default function WordUnscramblerPage() {
             shorter words that can be made from the
             same available letters. If you need an
             exact six-letter rearrangement, the
-            Exact Anagrams section is the quickest
-            place to look.
+            Exact Anagrams section at the top of
+            your results is the quickest place to
+            look.
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">

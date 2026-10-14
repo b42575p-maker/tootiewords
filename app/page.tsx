@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Free Word Finder & Letter Unscrambler",
   description:
     "Find words from scrambled letters, discover hidden words, and solve anagrams with TootieWords' free online word finder.",
+  alternates: {
+    canonical: "https://tootiewords.com",
+  },
 };
 
 export default function Home() {
@@ -30,7 +33,7 @@ export default function Home() {
                 <h1 className="hero-headline">
                   <span className="hero-headline-line hero-headline-line-one">
                     Turn Letters
-                  </span>
+                  </span>{" "}
 
                   <span className="hero-headline-line hero-headline-line-two">
                     Into Possibilities

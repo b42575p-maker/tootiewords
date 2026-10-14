@@ -10,6 +10,31 @@ export const metadata: Metadata = {
   title: "Terms of Use",
   description:
     "Read the TootieWords Terms of Use for using our free word finder, anagram solver, and word unscrambler tools.",
+
+  openGraph: {
+    type: "website",
+    url: "https://tootiewords.com/terms",
+    siteName: "TootieWords",
+    title: "Terms of Use | TootieWords",
+    description:
+      "Read the TootieWords Terms of Use for using our free word finder, anagram solver, and word unscrambler tools.",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TootieWords",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms of Use | TootieWords",
+    description:
+      "Read the TootieWords Terms of Use for using our free word finder, anagram solver, and word unscrambler tools.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function TermsPage() {

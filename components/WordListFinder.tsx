@@ -454,14 +454,11 @@ export default function WordListFinder({
             )}
           </div>
 
-          <p className="mt-4 text-center text-xs font-bold text-[#9a8175]">
-            Enter any additional letters you know in their matching positions. Leave unknown positions blank.
-          </p>
         </div>
 
         <div className="mt-7 border-t-2 border-dashed border-[#ecd8c7] pt-6">
           <div className="mb-3 text-sm font-black uppercase tracking-[0.12em] text-[#9a5830]">
-            Starts With
+            Quick Pick: First Letter
           </div>
 
           <div className="flex flex-wrap gap-2">
