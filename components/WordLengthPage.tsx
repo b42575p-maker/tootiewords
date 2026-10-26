@@ -171,6 +171,107 @@ function getLengthContent(
   }
 }
 
+type Share = {
+  label: string;
+  percent: number;
+};
+
+type LengthStats = {
+  dictionaryCount: number;
+  commonCount: number;
+  firstLetters: Share[];
+  lastLetters: Share[];
+  twoLetterEndings: Share[];
+  threeLetterEndings: Share[];
+  topLetters: Share[];
+  suffixTips: Share[];
+  repeatedLetterPercent: number;
+  averageVowels: number;
+  mostCommonWords: string[];
+};
+
+const COMMON_SUFFIXES = ["ing", "ed", "er", "es", "ly", "ion", "est"];
+
+function percentOf(count: number, total: number) {
+  return total === 0 ? 0 : Math.round((count / total) * 1000) / 10;
+}
+
+function topShares(
+  wordList: string[],
+  getKeys: (word: string) => Iterable<string>,
+  limit: number
+): Share[] {
+  const counts = new Map<string, number>();
+
+  for (const word of wordList) {
+    for (const key of getKeys(word)) {
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+  }
+
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, limit)
+    .map(([label, count]) => ({
+      label,
+      percent: percentOf(count, wordList.length),
+    }));
+}
+
+function getLengthStats(
+  wordLength: number,
+  commonWords: string[]
+): LengthStats {
+  const dictionaryCount = new Set(
+    words
+      .map((word) => word.toLowerCase())
+      .filter(
+        (word) => /^[a-z]+$/.test(word) && word.length === wordLength
+      )
+  ).size;
+
+  const vowelTotal = commonWords.reduce(
+    (sum, word) =>
+      sum + word.split("").filter((letter) => "aeiou".includes(letter)).length,
+    0
+  );
+
+  return {
+    dictionaryCount,
+    commonCount: commonWords.length,
+    firstLetters: topShares(commonWords, (word) => [word[0]], 5),
+    lastLetters: topShares(commonWords, (word) => [word[word.length - 1]], 5),
+    twoLetterEndings: topShares(commonWords, (word) => [word.slice(-2)], 4),
+    threeLetterEndings: topShares(commonWords, (word) => [word.slice(-3)], 3),
+    topLetters: topShares(commonWords, (word) => new Set(word.split("")), 6),
+    suffixTips: topShares(
+      commonWords,
+      (word) =>
+        COMMON_SUFFIXES.filter(
+          (suffix) =>
+            word.endsWith(suffix) && word.length >= suffix.length + 2
+        ),
+      2
+    ),
+    repeatedLetterPercent: percentOf(
+      commonWords.filter((word) => new Set(word.split("")).size < word.length)
+        .length,
+      commonWords.length
+    ),
+    averageVowels:
+      commonWords.length === 0
+        ? 0
+        : Math.round((vowelTotal / commonWords.length) * 10) / 10,
+    mostCommonWords: commonWords.slice(0, 12),
+  };
+}
+
+function formatShares(shares: Share[], prefix = "") {
+  return shares
+    .map(({ label, percent }) => `${prefix}${label.toUpperCase()} (${percent}%)`)
+    .join(", ");
+}
+
 export default function WordLengthPage({
   wordLength,
 }: WordLengthPageProps) {
@@ -179,6 +280,11 @@ export default function WordLengthPage({
 
   const content =
     getLengthContent(wordLength);
+
+  const stats = getLengthStats(
+    wordLength,
+    matchingWords
+  );
 
   return (
     <main className="min-h-screen bg-[#fffaf4] text-slate-900">
@@ -206,6 +312,118 @@ export default function WordLengthPage({
       <section className="border-t border-[#ecd8c7] bg-white">
         <div className="mx-auto max-w-4xl px-6 py-14">
           <h2 className="whimsy-title text-3xl font-black text-[#4a2e25]">
+            {wordLength}-Letter Words by the Numbers
+          </h2>
+
+          <p className="mt-5 leading-8 text-[#755d52]">
+            Our word list includes{" "}
+            <strong>{stats.dictionaryCount.toLocaleString()}</strong>{" "}
+            {wordLength}-letter words.{" "}
+            <strong>{stats.commonCount.toLocaleString()}</strong> of them
+            are familiar everyday words, and those are what the Common Words
+            view shows. Here is what those common {wordLength}-letter words
+            have in common:
+          </p>
+
+          <ul className="mt-5 space-y-3 leading-8 text-[#755d52]">
+            <li>
+              <strong className="text-[#4a2e25]">Most common first letters:</strong>{" "}
+              {formatShares(stats.firstLetters)}
+            </li>
+            <li>
+              <strong className="text-[#4a2e25]">Most common last letters:</strong>{" "}
+              {formatShares(stats.lastLetters)}
+            </li>
+            <li>
+              <strong className="text-[#4a2e25]">Most common final letter pairs:</strong>{" "}
+              {formatShares(stats.twoLetterEndings)}
+            </li>
+            <li>
+              <strong className="text-[#4a2e25]">Most common final three letters:</strong>{" "}
+              {formatShares(stats.threeLetterEndings)}
+            </li>
+            <li>
+              <strong className="text-[#4a2e25]">Letters found in the most words:</strong>{" "}
+              {formatShares(stats.topLetters)}
+            </li>
+            <li>
+              <strong className="text-[#4a2e25]">Repeated letters:</strong>{" "}
+              {stats.repeatedLetterPercent}% use at least one letter more than
+              once, so don&apos;t rule out doubles.
+            </li>
+            <li>
+              <strong className="text-[#4a2e25]">Vowels:</strong> about{" "}
+              {stats.averageVowels} vowels (A, E, I, O, U) per word on average.
+            </li>
+          </ul>
+
+          <h3 className="mt-8 text-xl font-black text-[#4a2e25]">
+            The most common {wordLength}-letter words
+          </h3>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            {stats.mostCommonWords.map((word) => (
+              <span
+                key={word}
+                className="rounded-full border border-[#efc89f] bg-[#fffaf4] px-4 py-2 font-bold text-[#6b4938]"
+              >
+                {word}
+              </span>
+            ))}
+          </div>
+
+          <h2 className="mt-12 text-2xl font-black text-[#4a2e25]">
+            Finding {wordLength}-Letter Words With These Letters
+          </h2>
+
+          <p className="mt-4 leading-8 text-[#755d52]">
+            If you have a set of letters, like tiles from a word game, and want
+            every {wordLength}-letter word they can make, use{" "}
+            <Link
+              href="/words-from-letters"
+              className="font-bold text-[#d8617f] underline decoration-[#ef9ab2] underline-offset-4"
+            >
+              Words From Letters
+            </Link>{" "}
+            or the{" "}
+            <Link
+              href="/word-unscrambler"
+              className="font-bold text-[#d8617f] underline decoration-[#ef9ab2] underline-offset-4"
+            >
+              Word Unscrambler
+            </Link>{" "}
+            then open More filters and set Word Length to {wordLength} letters.
+            If you only know a few letters the word must contain, enter them in
+            Contains above.
+          </p>
+
+          <p className="mt-4 leading-8 text-[#755d52]">
+            Working it out by hand?{" "}
+            {(stats.suffixTips[0]?.percent ?? 0) >= 5 ? (
+              <>
+                Check whether your letters can form a common ending first.
+                Among common {wordLength}-letter words, the most frequent
+                suffixes are {formatShares(stats.suffixTips, "-")}. Setting
+                those letters aside leaves a much smaller puzzle.
+              </>
+            ) : (
+              <>
+                Words this short rarely have suffixes, so look for letter pairs
+                that often end a word instead, such as{" "}
+                {formatShares(stats.twoLetterEndings)}.
+              </>
+            )}{" "}
+            Our{" "}
+            <Link
+              href="/guides/how-to-unscramble-letters"
+              className="font-bold text-[#d8617f] underline decoration-[#ef9ab2] underline-offset-4"
+            >
+              guide to unscrambling letters
+            </Link>{" "}
+            walks through this step by step.
+          </p>
+
+          <h2 className="mt-12 whimsy-title text-3xl font-black text-[#4a2e25]">
             {content.sectionTitle}
           </h2>
 
