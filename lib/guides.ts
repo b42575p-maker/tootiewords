@@ -36,6 +36,13 @@ export const guides: Guide[] = [
       "How English gets by without A, E, I, O, or U, the handful of words that skip Y too, and how to use them in word games.",
     badge: "Y?",
   },
+  {
+    slug: "two-letter-words",
+    title: "Two-Letter Words Every Player Should Know",
+    description:
+      "All the two-letter words in our list, grouped by letter, plus the high-scoring ones with J, Q, X, and Z and the all-vowel words that rescue a bad rack.",
+    badge: "2",
+  },
 ];
 
 export function guideMetadata(slug: string): Metadata {

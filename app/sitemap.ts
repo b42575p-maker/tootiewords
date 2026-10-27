@@ -130,6 +130,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      path: "/guides/two-letter-words",
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
       path: "/about",
       changeFrequency: "monthly" as const,
       priority: 0.5,

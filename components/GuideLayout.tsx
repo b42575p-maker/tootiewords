@@ -97,7 +97,7 @@ export default function GuideLayout({
             More Guides From Tootie
           </h2>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
             {otherGuides.map((guide) => (
               <GuideCard key={guide.slug} {...guide} />
             ))}
