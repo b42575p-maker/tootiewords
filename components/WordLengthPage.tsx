@@ -484,35 +484,35 @@ export default function WordLengthPage({
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link
                   href="/5-letter-words-starting-with-a"
-                  className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
                 >
                   5 Letter Words Starting With A
                 </Link>
 
                 <Link
                   href="/5-letter-words-starting-with-s"
-                  className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
                 >
                   5 Letter Words Starting With S
                 </Link>
 
                 <Link
                   href="/5-letter-words-ending-in-e"
-                  className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
                 >
                   5 Letter Words Ending In E
                 </Link>
 
                 <Link
                   href="/5-letter-words-ending-in-y"
-                  className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
                 >
                   5 Letter Words Ending In Y
                 </Link>
 
                 <Link
                   href="/5-letter-words-with-a"
-                  className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
                 >
                   5 Letter Words With A
                 </Link>
@@ -535,21 +535,21 @@ export default function WordLengthPage({
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link
                   href="/5-letter-words-with-a-in-second-position"
-                  className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
                 >
                   A in Second Position
                 </Link>
 
                 <Link
                   href="/5-letter-words-with-r-in-third-position"
-                  className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
                 >
                   R in Third Position
                 </Link>
 
                 <Link
                   href="/5-letter-words-with-o-in-second-position"
-                  className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
                 >
                   O in Second Position
                 </Link>
@@ -574,8 +574,8 @@ export default function WordLengthPage({
                 href={`/${length}-letter-words`}
                 className={`font-hand rounded-full border-2 px-5 py-3 font-bold ${
                   length === wordLength
-                    ? "border-[#ef9b4a] bg-[#fde3c4] text-[#51372c]"
-                    : "border-[#ead6c5] bg-[#fffaf4] text-[#51372c] hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+                    ? "border-[#d8741e] bg-[#ffd9ae] text-[#7a3f14]"
+                    : "border-[#efc9a8] bg-[#fff0df] text-[#9a5221] hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
                 }`}
               >
                 {length} Letter Words
@@ -599,21 +599,21 @@ export default function WordLengthPage({
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/word-unscrambler"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               Word Unscrambler
             </Link>
 
             <Link
               href="/anagram-solver"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               Anagram Solver
             </Link>
 
             <Link
               href="/words-from-letters"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               Words From Letters
             </Link>

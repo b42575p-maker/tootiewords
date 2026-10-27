@@ -594,35 +594,35 @@ export default function FiveLetterPatternPage({
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/5-letter-words"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               All 5 Letter Words
             </Link>
 
             <Link
               href="/5-letter-words-starting-with-a"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               Starting With A
             </Link>
 
             <Link
               href="/5-letter-words-ending-in-e"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               Ending In E
             </Link>
 
             <Link
               href="/5-letter-words-with-a"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               Words With A
             </Link>
 
             <Link
               href="/5-letter-words-with-r-in-third-position"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               R in Third Position
             </Link>
@@ -642,21 +642,21 @@ export default function FiveLetterPatternPage({
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/word-unscrambler"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               Word Unscrambler
             </Link>
 
             <Link
               href="/anagram-solver"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               Anagram Solver
             </Link>
 
             <Link
               href="/words-from-letters"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               Words From Letters
             </Link>

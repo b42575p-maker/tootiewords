@@ -77,19 +77,19 @@ export default function GuidesPage() {
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <Link
               href="/5-letter-words"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               5 Letter Word Finder
             </Link>
             <Link
               href="/word-unscrambler"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               Word Unscrambler
             </Link>
             <Link
               href="/words-with-q-without-u"
-              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
+              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
             >
               Q Without U Finder
             </Link>
