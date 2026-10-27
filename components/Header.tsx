@@ -53,7 +53,7 @@ export default function Header() {
         </div>
       </div>
 
-      <nav className="flex gap-2 overflow-x-auto border-t border-[#f4e6db] bg-white/70 px-4 py-2 text-sm font-bold text-[#69483d] lg:hidden">
+      <nav className="font-hand flex gap-2 overflow-x-auto border-t border-[#f4e6db] bg-white/70 px-4 py-2 text-sm font-bold text-[#69483d] lg:hidden">
         <MobileLink href="/">Home</MobileLink>
         <MobileLink href="/word-unscrambler">
           Unscrambler
@@ -82,7 +82,7 @@ function NavLink({
   return (
     <Link
       href={href}
-      className={`rounded-2xl px-5 py-3 text-sm font-bold transition duration-200 ${
+      className={`font-hand rounded-2xl px-5 py-3 text-[0.95rem] font-bold transition duration-200 ${
         active
           ? "bg-gradient-to-r from-[#ef799a] to-[#f0527e] text-white shadow-[0_6px_16px_rgba(240,82,126,0.25)]"
           : "bg-[#f9ecdf] text-[#573a31] hover:-translate-y-0.5 hover:bg-[#ffe2c8]"
