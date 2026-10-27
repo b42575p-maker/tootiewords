@@ -131,6 +131,24 @@ export default function WordsWithQWithoutUPage() {
 
       <section className="border-t border-[#ecd8c7] bg-white">
         <div className="mx-auto max-w-4xl px-6 py-14">
+          <div className="mb-12 rounded-[1.5rem] border-2 border-[#efb6c6] bg-[#fff1f5] p-6">
+            <h2 className="text-xl font-black text-[#4a2e25]">
+              Q Without U by the Numbers
+            </h2>
+            <ul className="mt-3 list-disc space-y-1 pl-6 leading-7 text-[#6f5549] marker:text-[#ef799a]">
+            <li>Our word list has 91 words where Q is not followed by U, counting plurals.</li>
+            <li>Only <strong>QI</strong> is common enough to appear in everyday English.</li>
+            <li>Most of these words came into English from Arabic, Chinese, Hebrew, and Inuit languages.</li>
+            <li>Short ones like <strong>QI</strong>, <strong>QAT</strong>, and <strong>QAID</strong> are the most useful in word games.</li>
+            </ul>
+            <Link
+              href="/guides/q-without-u-words"
+              className="mt-4 inline-flex rounded-full bg-gradient-to-r from-[#ef799a] to-[#f0527e] px-5 py-3 font-black text-white shadow-[0_6px_16px_rgba(240,82,126,0.25)] transition hover:-translate-y-0.5"
+            >
+              Read the Q Without U guide &rarr;
+            </Link>
+          </div>
+
           <h2 className="whimsy-title text-3xl font-black text-[#4a2e25]">
             Can Q Appear Without U?
           </h2>

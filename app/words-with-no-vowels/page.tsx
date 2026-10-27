@@ -132,6 +132,24 @@ export default function WordsWithNoVowelsPage() {
 
       <section className="border-t border-[#ecd8c7] bg-white">
         <div className="mx-auto max-w-4xl px-6 py-14">
+          <div className="mb-12 rounded-[1.5rem] border-2 border-[#efb6c6] bg-[#fff1f5] p-6">
+            <h2 className="text-xl font-black text-[#4a2e25]">
+              Words Without Vowels by the Numbers
+            </h2>
+            <ul className="mt-3 list-disc space-y-1 pl-6 leading-7 text-[#6f5549] marker:text-[#ef799a]">
+            <li>Our word list has 181 words of two or more letters with no A, E, I, O, or U.</li>
+            <li>149 of them use <strong>Y</strong> as a vowel, as in <strong>RHYTHM</strong> and <strong>GYM</strong>.</li>
+            <li>Only 32 skip Y too, mostly sounds like <strong>HMM</strong> and <strong>SHH</strong> or Welsh words like <strong>CWM</strong>.</li>
+            <li>The longest are seven letters: <strong>RHYTHMS</strong> and <strong>TSKTSKS</strong>.</li>
+            </ul>
+            <Link
+              href="/guides/words-without-vowels"
+              className="mt-4 inline-flex rounded-full bg-gradient-to-r from-[#ef799a] to-[#f0527e] px-5 py-3 font-black text-white shadow-[0_6px_16px_rgba(240,82,126,0.25)] transition hover:-translate-y-0.5"
+            >
+              Read the Words Without Vowels guide &rarr;
+            </Link>
+          </div>
+
           <h2 className="whimsy-title text-3xl font-black text-[#4a2e25]">
             What Does &quot;No Vowels&quot; Mean Here?
           </h2>

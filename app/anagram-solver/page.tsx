@@ -88,6 +88,173 @@ export default function AnagramSolverPage() {
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+            How Common Are Anagrams?
+          </h2>
+
+          <p className="mt-4 leading-8 text-[#755d52]">
+            We checked every common word of three or more letters in the
+            TootieWords word list, 19,941 words in all. Only 2,380 of them
+            (about 12%) can be rearranged into another common word. Short
+            words are far more likely to have a partner:
+          </p>
+
+          <div className="mt-6 overflow-x-auto rounded-2xl border-2 border-[#efd3ba]">
+            <table className="w-full min-w-[420px] border-collapse text-left">
+              <caption className="sr-only">
+                Share of common words that have at least one common-word anagram, by word length
+              </caption>
+              <thead className="bg-[#fff0df] text-sm font-black uppercase tracking-wide text-[#9a5830]">
+                <tr>
+                  <th scope="col" className="px-4 py-3">Word length</th>
+                  <th scope="col" className="px-4 py-3">Common words</th>
+                  <th scope="col" className="px-4 py-3">Have an anagram</th>
+                </tr>
+              </thead>
+              <tbody className="text-[#5f4a40]">
+                {[
+                  ["3 letters", "683", "44.5%"],
+                  ["4 letters", "1,679", "34.6%"],
+                  ["5 letters", "2,421", "24.2%"],
+                  ["6 letters", "2,993", "14.2%"],
+                  ["7 letters", "3,179", "9.1%"],
+                  ["8 letters", "2,879", "3.9%"],
+                ].map(([length, count, share]) => (
+                  <tr
+                    key={length}
+                    className="border-t border-[#f0ded0] odd:bg-white even:bg-[#fffaf4]"
+                  >
+                    <td className="px-4 py-3 font-black text-[#4a2e25]">{length}</td>
+                    <td className="px-4 py-3">{count}</td>
+                    <td className="px-4 py-3">{share}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="mt-4 leading-8 text-[#755d52]">
+            That is why the solver shows shorter words too. If you enter seven
+            or eight letters, there is a good chance no common word uses all
+            of them, but plenty of shorter words will.
+          </p>
+
+          <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+            The Biggest Anagram Families
+          </h2>
+
+          <p className="mt-4 leading-8 text-[#755d52]">
+            Some letter sets are surprisingly flexible. These groups of common
+            words all use exactly the same letters:
+          </p>
+
+          <div className="mt-5 space-y-3">
+            {[
+              ["least", "steal", "tales", "slate", "stale"],
+              ["risen", "resin", "siren", "rinse", "reins"],
+              ["stop", "post", "spot", "tops", "pots"],
+              ["relating", "integral", "triangle", "altering"],
+              ["plates", "staple", "petals", "pastel"],
+              ["trace", "react", "cater", "crate"],
+              ["races", "cares", "acres", "scare"],
+              ["large", "glare", "regal", "lager"],
+              ["team", "meat", "mate", "tame"],
+              ["garden", "danger", "ranged"],
+            ].map((family) => (
+              <div key={family[0]} className="flex flex-wrap gap-2">
+                {family.map((word) => (
+                  <span
+                    key={word}
+                    className="rounded-xl border-2 border-[#ead6c5] bg-[#fffaf4] px-3 py-1 font-black uppercase tracking-wide text-[#684b3f]"
+                  >
+                    {word}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-4 leading-8 text-[#755d52]">
+            Notice the letters they share. E, A, R, S, and T show up again and
+            again, because they are among the most common letters in English
+            and combine in many orders.
+          </p>
+
+          <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+            The Longest Anagram Pairs
+          </h2>
+
+          <p className="mt-4 leading-8 text-[#755d52]">
+            Long anagrams are rare, which makes them fun to find. The longest
+            pair among our common words is twelve letters long:
+          </p>
+
+          <ul className="mt-4 space-y-2 leading-8 text-[#755d52]">
+            <li>
+              <strong className="text-[#4a2e25]">CONSERVATION</strong> and{" "}
+              <strong className="text-[#4a2e25]">CONVERSATION</strong> (12
+              letters)
+            </li>
+            <li>
+              <strong className="text-[#4a2e25]">COORDINATES</strong> and{" "}
+              <strong className="text-[#4a2e25]">DECORATIONS</strong> (11)
+            </li>
+            <li>
+              <strong className="text-[#4a2e25]">DESCRIPTION</strong> and{" "}
+              <strong className="text-[#4a2e25]">PREDICTIONS</strong> (11)
+            </li>
+            <li>
+              <strong className="text-[#4a2e25]">IMPRESSIONS</strong> and{" "}
+              <strong className="text-[#4a2e25]">PERMISSIONS</strong> (11)
+            </li>
+            <li>
+              <strong className="text-[#4a2e25]">ANTAGONIST</strong> and{" "}
+              <strong className="text-[#4a2e25]">STAGNATION</strong> (10)
+            </li>
+            <li>
+              <strong className="text-[#4a2e25]">DEALERSHIP</strong> and{" "}
+              <strong className="text-[#4a2e25]">LEADERSHIP</strong> (10)
+            </li>
+          </ul>
+
+          <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+            Tips for Solving Anagram Puzzles
+          </h2>
+
+          <ul className="mt-4 list-disc space-y-2 pl-6 leading-8 text-[#755d52] marker:text-[#ef9b4a]">
+            <li>
+              <strong>Look for a common ending first.</strong> Pull out -ING,
+              -ED, or -ER if your letters allow it, then rearrange what is
+              left.
+            </li>
+            <li>
+              <strong>Swap the first letter.</strong> Many anagram families,
+              like STOP, POST, SPOT, and TOPS, differ mainly in which letter
+              leads.
+            </li>
+            <li>
+              <strong>Count your vowels.</strong> Common words average roughly
+              one vowel for every three letters, so a set with no vowels or
+              almost all vowels will have few answers.
+            </li>
+            <li>
+              <strong>Try the solver for confirmation.</strong> Enter your
+              letters above and check the Exact Anagrams section at the top
+              of the results.
+            </li>
+          </ul>
+
+          <p className="mt-4 leading-8 text-[#755d52]">
+            For a step-by-step method, read our{" "}
+            <Link
+              href="/guides/how-to-unscramble-letters"
+              className="font-bold text-[#d8617f] underline decoration-[#ef9ab2] underline-offset-4"
+            >
+              guide to unscrambling letters
+            </Link>
+            .
+          </p>
+
+          <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
             Repeated Letters Must Match
           </h2>
 
