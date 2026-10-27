@@ -4,6 +4,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WordFinder from "@/components/WordFinder";
+import CopyWordChip from "@/components/CopyWordChip";
 
 export const metadata: Metadata = {
   title:
@@ -144,7 +145,7 @@ export default function AnagramSolverPage() {
 
           <p className="mt-4 leading-8 text-[#755d52]">
             Some letter sets are surprisingly flexible. These groups of common
-            words all use exactly the same letters:
+            words all use exactly the same letters. Click any word to copy it.
           </p>
 
           <div className="mt-5 space-y-3">
@@ -162,12 +163,7 @@ export default function AnagramSolverPage() {
             ].map((family) => (
               <div key={family[0]} className="flex flex-wrap gap-2">
                 {family.map((word) => (
-                  <span
-                    key={word}
-                    className="rounded-xl border-2 border-[#ead6c5] bg-[#fffaf4] px-3 py-1 font-black uppercase tracking-wide text-[#684b3f]"
-                  >
-                    {word}
-                  </span>
+                  <CopyWordChip key={word} word={word} />
                 ))}
               </div>
             ))}

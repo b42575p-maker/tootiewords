@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { guides } from "@/lib/guides";
+import CopyWordChip from "@/components/CopyWordChip";
 
 type GuideLayoutProps = {
   slug: string;
@@ -173,12 +174,7 @@ export function Words({ words }: { words: string[] }) {
   return (
     <div className="mt-4 flex flex-wrap gap-2">
       {words.map((word) => (
-        <span
-          key={word}
-          className="rounded-xl border-2 border-[#ead6c5] bg-[#fffaf4] px-3 py-1 font-black uppercase tracking-wide text-[#684b3f]"
-        >
-          {word}
-        </span>
+        <CopyWordChip key={word} word={word} />
       ))}
     </div>
   );
