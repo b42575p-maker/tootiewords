@@ -63,9 +63,9 @@ function getCommonWordsWithNoVowels() {
 }
 
 export const metadata: Metadata = {
-  title: "Words With No Vowels - Word Finder",
+  title: "Words Without Vowels – Full List of 181 Words",
   description:
-    "Find words with no A, E, I, O, or U using TootieWords. Explore words that use Y or consonant-heavy patterns and filter the results by length and letters.",
+    "Words with no A, E, I, O, or U, like RHYTHM, GYM, and CRYPT, plus the rare ones that skip Y too. Filter all 181 by length and letters. Free, no sign-up.",
   alternates: {
     canonical:
       "https://tootiewords.com/words-with-no-vowels",
@@ -75,9 +75,9 @@ export const metadata: Metadata = {
     url:
       "https://tootiewords.com/words-with-no-vowels",
     siteName: "TootieWords",
-    title: "Words With No Vowels - Word Finder",
+    title: "Words Without Vowels – Full List of 181 Words",
     description:
-      "Browse words without A, E, I, O, or U and narrow the list with TootieWords filters.",
+      "Words with no A, E, I, O, or U, like RHYTHM, GYM, and CRYPT, plus the rare ones that skip Y too. Filter all 181 by length and letters. Free, no sign-up.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -89,9 +89,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Words With No Vowels - Word Finder",
+    title: "Words Without Vowels – Full List of 181 Words",
     description:
-      "Browse words without A, E, I, O, or U using TootieWords.",
+      "Words with no A, E, I, O, or U, like RHYTHM, GYM, and CRYPT, plus the rare ones that skip Y too. Filter all 181 by length and letters. Free, no sign-up.",
     images: ["/opengraph-image.png"],
   },
 };

@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 import WordLengthPage from "@/components/WordLengthPage";
 
 export const metadata: Metadata = {
-  title: "5 Letter Words - Five Letter Word Finder",
+  title: "5 Letter Words – Finder With Position Filters",
 
   description:
-    "Find 5 letter words with TootieWords. Filter five-letter words by starting letters, ending letters, exact letter positions, letters they contain, or letters you want to exclude.",
+    "Browse 2,421 common 5-letter words or search all 12,653. Lock letters in exact positions, include or exclude letters, and narrow your answer fast. Free.",
 
   alternates: {
     canonical:
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
     url: "https://tootiewords.com/5-letter-words",
     siteName: "TootieWords",
     title:
-      "5 Letter Words - Five Letter Word Finder",
+      "5 Letter Words – Finder With Position Filters",
     description:
-      "Find five-letter words and narrow the results by starting letters, ending letters, exact positions, included letters, and excluded letters.",
+      "Browse 2,421 common 5-letter words or search all 12,653. Lock letters in exact positions, include or exclude letters, and narrow your answer fast. Free.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "5 Letter Words - Five Letter Word Finder",
+      "5 Letter Words – Finder With Position Filters",
     description:
-      "Find five-letter words and narrow the results with TootieWords.",
+      "Browse 2,421 common 5-letter words or search all 12,653. Lock letters in exact positions, include or exclude letters, and narrow your answer fast. Free.",
     images: ["/opengraph-image.png"],
   },
 };

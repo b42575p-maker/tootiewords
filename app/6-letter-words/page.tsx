@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 import WordLengthPage from "@/components/WordLengthPage";
 
 export const metadata: Metadata = {
-  title: "6 Letter Words - Six Letter Word Finder",
+  title: "6 Letter Words – Free Six Letter Word Finder",
 
   description:
-    "Find 6 letter words with TootieWords. Filter six-letter words by starting letters, ending letters, exact letter positions, included letters, or excluded letters.",
+    "Browse 2,993 common 6-letter words or search all 22,418. Find six-letter words with the letters you have, a known start or ending, or exact positions.",
 
   alternates: {
     canonical:
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
     url: "https://tootiewords.com/6-letter-words",
     siteName: "TootieWords",
     title:
-      "6 Letter Words - Six Letter Word Finder",
+      "6 Letter Words – Free Six Letter Word Finder",
     description:
-      "Find six-letter words and narrow the results by starting letters, ending letters, exact positions, included letters, and excluded letters.",
+      "Browse 2,993 common 6-letter words or search all 22,418. Find six-letter words with the letters you have, a known start or ending, or exact positions.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "6 Letter Words - Six Letter Word Finder",
+      "6 Letter Words – Free Six Letter Word Finder",
     description:
-      "Find six-letter words and narrow the results with TootieWords.",
+      "Browse 2,993 common 6-letter words or search all 22,418. Find six-letter words with the letters you have, a known start or ending, or exact positions.",
     images: ["/opengraph-image.png"],
   },
 };

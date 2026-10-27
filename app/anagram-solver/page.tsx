@@ -8,10 +8,10 @@ import CopyWordChip from "@/components/CopyWordChip";
 
 export const metadata: Metadata = {
   title:
-    "Anagram Solver - Find Anagrams From Letters",
+    "Anagram Solver – Find Anagrams of Any Word",
 
   description:
-    "Use TootieWords' free anagram solver to find exact anagrams and other words from your letters. Enter a word or letter set and discover possible matches.",
+    "Free anagram solver: enter a word or letters to see exact anagrams first, then shorter words. Plus big anagram families like LEAST, STEAL, and SLATE.",
 
   alternates: {
     canonical:
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     url: "https://tootiewords.com/anagram-solver",
     siteName: "TootieWords",
     title:
-      "Anagram Solver - Find Anagrams From Letters",
+      "Anagram Solver – Find Anagrams of Any Word",
     description:
-      "Find exact anagrams and other words from your letters with the free TootieWords anagram solver.",
+      "Free anagram solver: enter a word or letters to see exact anagrams first, then shorter words. Plus big anagram families like LEAST, STEAL, and SLATE.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Anagram Solver - Find Anagrams From Letters",
+      "Anagram Solver – Find Anagrams of Any Word",
     description:
-      "Find exact anagrams and other words from your letters with the free TootieWords anagram solver.",
+      "Free anagram solver: enter a word or letters to see exact anagrams first, then shorter words. Plus big anagram families like LEAST, STEAL, and SLATE.",
     images: ["/opengraph-image.png"],
   },
 };

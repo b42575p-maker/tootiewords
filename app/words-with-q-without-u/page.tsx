@@ -60,9 +60,9 @@ function getCommonQWordsWithoutU() {
 }
 
 export const metadata: Metadata = {
-  title: "Words With Q Without U - Q Word Finder",
+  title: "Q Without U Words – Full List of 91 Words",
   description:
-    "Find words containing Q without U. Browse common and uncommon Q-without-U words and narrow the list by length, starting letters, endings, and other letter clues.",
+    "Every word where Q isn't followed by U, from QI and QAT to QWERTY. Browse common and unusual Q words without U and filter them by length or letters.",
   alternates: {
     canonical:
       "https://tootiewords.com/words-with-q-without-u",
@@ -73,9 +73,9 @@ export const metadata: Metadata = {
       "https://tootiewords.com/words-with-q-without-u",
     siteName: "TootieWords",
     title:
-      "Words With Q Without U - Q Word Finder",
+      "Q Without U Words – Full List of 91 Words",
     description:
-      "Explore words where Q appears without the U that usually follows it.",
+      "Every word where Q isn't followed by U, from QI and QAT to QWERTY. Browse common and unusual Q words without U and filter them by length or letters.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -88,9 +88,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Words With Q Without U - Q Word Finder",
+      "Q Without U Words – Full List of 91 Words",
     description:
-      "Explore words containing Q without the letter U.",
+      "Every word where Q isn't followed by U, from QI and QAT to QWERTY. Browse common and unusual Q words without U and filter them by length or letters.",
     images: ["/opengraph-image.png"],
   },
 };
