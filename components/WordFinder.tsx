@@ -452,7 +452,7 @@ export default function WordFinder({
                 <button
                   type="button"
                   onClick={copyAllWords}
-                  className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 text-sm font-black text-[#a85d25]"
+                  className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 text-sm font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
                 >
                   {copiedAll
                     ? "✓ Copied!"

@@ -161,7 +161,7 @@ export default function WordsWithQPage() {
           <div className="mt-5">
             <Link
               href="/words-with-q-without-u"
-              className="inline-flex rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+              className="inline-flex rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
             >
               Explore Words With Q Without U
             </Link>
@@ -203,28 +203,28 @@ export default function WordsWithQPage() {
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/words-with-q-without-u"
-              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+              className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
             >
               Q Without U
             </Link>
 
             <Link
               href="/words-with-no-vowels"
-              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+              className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
             >
               Words With No Vowels
             </Link>
 
             <Link
               href="/word-unscrambler"
-              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+              className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
             >
               Word Unscrambler
             </Link>
 
             <Link
               href="/words-from-letters"
-              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+              className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
             >
               Words From Letters
             </Link>

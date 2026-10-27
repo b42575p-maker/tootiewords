@@ -77,19 +77,19 @@ export default function GuidesPage() {
           <div className="mt-5 flex flex-wrap justify-center gap-3">
             <Link
               href="/5-letter-words"
-              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+              className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
             >
               5 Letter Word Finder
             </Link>
             <Link
               href="/word-unscrambler"
-              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+              className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
             >
               Word Unscrambler
             </Link>
             <Link
               href="/words-with-q-without-u"
-              className="rounded-full border-2 border-[#efc89f] bg-[#fff4e6] px-5 py-3 font-black text-[#9a5830] hover:bg-[#ffe9d0]"
+              className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
             >
               Q Without U Finder
             </Link>
