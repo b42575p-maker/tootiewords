@@ -140,7 +140,7 @@ export default function WordsFromLettersPage() {
               <Link
                 key={length}
                 href={`/${length}-letter-words`}
-                className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
+                className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
               >
                 {length} Letter Words
               </Link>
@@ -154,28 +154,28 @@ export default function WordsFromLettersPage() {
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/words-with-q"
-              className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
+              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
             >
               Words With Q
             </Link>
 
             <Link
               href="/words-with-q-without-u"
-              className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
+              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
             >
               Words With Q Without U
             </Link>
 
             <Link
               href="/words-with-no-vowels"
-              className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
+              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
             >
               Words With No Vowels
             </Link>
 
             <Link
               href="/word-unscrambler"
-              className="rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-5 py-3 font-black text-[#4f3a86] transition hover:border-[#a693db] hover:bg-[#e3dbf7]"
+              className="font-hand rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-5 py-3 font-bold text-[#51372c] transition hover:border-[#ef9b4a] hover:bg-[#fff0df]"
             >
               Word Unscrambler
             </Link>

@@ -84,8 +84,8 @@ function NavLink({
       href={href}
       className={`font-hand rounded-full border-2 px-5 py-3 text-[0.95rem] font-bold transition duration-200 ${
         active
-          ? "border-[#5a419e] bg-[#6a4fb0] text-white"
-          : "border-[#bfaee6] bg-[#efeafb] text-[#4f3a86] hover:-translate-y-0.5 hover:border-[#a693db] hover:bg-[#e3dbf7]"
+          ? "border-[#ef9b4a] bg-[#fde3c4] text-[#51372c]"
+          : "border-[#ead6c5] bg-[#fffaf4] text-[#51372c] hover:-translate-y-0.5 hover:border-[#ef9b4a] hover:bg-[#fff0df]"
       }`}
     >
       {children}
@@ -103,7 +103,7 @@ function MobileLink({
   return (
     <Link
       href={href}
-      className="shrink-0 rounded-full border-2 border-[#bfaee6] bg-[#efeafb] px-4 py-2 text-[#4f3a86] hover:border-[#a693db] hover:bg-[#e3dbf7]"
+      className="shrink-0 rounded-full border-2 border-[#ead6c5] bg-[#fffaf4] px-4 py-2 text-[#51372c] hover:border-[#ef9b4a] hover:bg-[#fff0df]"
     >
       {children}
     </Link>
