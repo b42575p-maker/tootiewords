@@ -21,7 +21,7 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-2 lg:flex">
-          <NavLink href="/" active>
+          <NavLink href="/">
             Home
           </NavLink>
 
