@@ -236,11 +236,11 @@ export function TryTool({
   text: string;
 }) {
   return (
-    <div className="mt-8 rounded-[1.5rem] border-2 border-[#efb6c6] bg-[#fff1f5] p-6">
+    <div className="mt-8 rounded-[1.5rem] border-2 border-[#efd3ba] bg-[#fffaf4] p-6">
       <p className="leading-7 text-[#6f5549]">{text}</p>
       <Link
         href={href}
-        className="mt-4 inline-flex rounded-full bg-gradient-to-r from-[#ef799a] to-[#f0527e] px-5 py-3 font-black text-white shadow-[0_6px_16px_rgba(240,82,126,0.25)] transition hover:-translate-y-0.5"
+        className="mt-4 font-hand inline-flex rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
       >
         {label} &rarr;
       </Link>
