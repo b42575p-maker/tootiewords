@@ -10,6 +10,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      path: "/word-pounce",
+      changeFrequency: "daily" as const,
+      priority: 0.9,
+    },
+    {
       path: "/word-unscrambler",
       changeFrequency: "weekly" as const,
       priority: 0.9,
