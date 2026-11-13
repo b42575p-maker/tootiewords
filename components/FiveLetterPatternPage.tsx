@@ -19,6 +19,7 @@ type FiveLetterPatternPageProps = {
   patternType: PatternType;
   letters: string;
   position?: number;
+  tip?: string;
 };
 
 type PatternContent = {
@@ -351,6 +352,7 @@ export default function FiveLetterPatternPage({
   patternType,
   letters,
   position,
+  tip,
 }: FiveLetterPatternPageProps) {
   const cleanLetters = letters
     .replace(/[^a-zA-Z]/g, "")
@@ -423,6 +425,15 @@ export default function FiveLetterPatternPage({
         <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-[#755d52]">
           {intro}
         </p>
+
+        {tip && (
+          <div className="mx-auto mt-6 max-w-3xl rounded-2xl border-2 border-[#efd3ba] bg-white px-5 py-4 text-left">
+            <p className="font-hand text-base font-bold text-[#9a5221]">
+              🐾 Tootie&apos;s Tip
+            </p>
+            <p className="mt-1 leading-7 text-[#5f4a40]">{tip}</p>
+          </div>
+        )}
 
         {patternType === "position" &&
           cleanLetters === "o" &&

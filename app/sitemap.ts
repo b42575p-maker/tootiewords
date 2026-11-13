@@ -60,6 +60,46 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      path: "/5-letter-words-starting-with-b",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-starting-with-c",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-starting-with-f",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-starting-with-p",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-starting-with-t",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-ending-in-er",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-ending-in-h",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
+      path: "/5-letter-words-ending-in-t",
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    {
       path: "/5-letter-words-with-a-in-second-position",
       changeFrequency: "weekly" as const,
       priority: 0.7,

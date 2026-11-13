@@ -516,6 +516,62 @@ export default function WordLengthPage({
                 >
                   5 Letter Words With A
                 </Link>
+
+                <Link
+                  href="/5-letter-words-starting-with-b"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
+                >
+                  5 Letter Words Starting With B
+                </Link>
+
+                <Link
+                  href="/5-letter-words-starting-with-c"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
+                >
+                  5 Letter Words Starting With C
+                </Link>
+
+                <Link
+                  href="/5-letter-words-starting-with-f"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
+                >
+                  5 Letter Words Starting With F
+                </Link>
+
+                <Link
+                  href="/5-letter-words-starting-with-p"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
+                >
+                  5 Letter Words Starting With P
+                </Link>
+
+                <Link
+                  href="/5-letter-words-starting-with-t"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
+                >
+                  5 Letter Words Starting With T
+                </Link>
+
+                <Link
+                  href="/5-letter-words-ending-in-er"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
+                >
+                  5 Letter Words Ending In ER
+                </Link>
+
+                <Link
+                  href="/5-letter-words-ending-in-h"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
+                >
+                  5 Letter Words Ending In H
+                </Link>
+
+                <Link
+                  href="/5-letter-words-ending-in-t"
+                  className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
+                >
+                  5 Letter Words Ending In T
+                </Link>
               </div>
 
               <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
