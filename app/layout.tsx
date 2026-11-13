@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
+import { Comic_Neue } from "next/font/google";
 import "./globals.css";
 
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import AdSense from "@/components/AdSense";
+
+// Comic Sans look-alike for phones and Macs that do not have Comic Sans MS.
+const comicNeue = Comic_Neue({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-comic-neue",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tootiewords.com"),
@@ -121,7 +130,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={comicNeue.variable}>
       <body>
         <script
           type="application/ld+json"

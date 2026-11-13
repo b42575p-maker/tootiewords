@@ -70,6 +70,7 @@ img {
 .font-hand {
   font-family:
     "Comic Sans MS",
+    var(--font-comic-neue),
     "Segoe Print",
     "Bradley Hand",
     cursive;
@@ -91,6 +92,7 @@ img {
 
   font-family:
     "Comic Sans MS",
+    var(--font-comic-neue),
     "Arial Rounded MT Bold",
     "Trebuchet MS",
     sans-serif;
@@ -204,6 +206,7 @@ img {
 
   font-family:
     "Comic Sans MS",
+    var(--font-comic-neue),
     "Segoe Print",
     cursive;
 
@@ -359,6 +362,7 @@ img {
 
   font-family:
     "Comic Sans MS",
+    var(--font-comic-neue),
     "Segoe Print",
     "Bradley Hand",
     cursive;
@@ -512,6 +516,7 @@ img {
 
   font-family:
     "Comic Sans MS",
+    var(--font-comic-neue),
     "Arial Rounded MT Bold",
     "Trebuchet MS",
     sans-serif;
@@ -726,6 +731,7 @@ img {
 
   font-family:
     "Comic Sans MS",
+    var(--font-comic-neue),
     "Segoe Print",
     "Bradley Hand",
     cursive;
@@ -750,6 +756,7 @@ img {
 
   font-family:
     "Comic Sans MS",
+    var(--font-comic-neue),
     "Segoe Print",
     cursive;
 
@@ -1019,6 +1026,7 @@ img {
 
   font-family:
     "Comic Sans MS",
+    var(--font-comic-neue),
     "Segoe Print",
     cursive;
 
@@ -1075,6 +1083,7 @@ img {
 
   font-family:
     "Comic Sans MS",
+    var(--font-comic-neue),
     "Segoe Print",
     cursive;
 
