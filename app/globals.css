@@ -1662,3 +1662,11 @@ img {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Word Pounce: the global `button { font: inherit }` rule above overrides
+   Tailwind size/weight classes on buttons. Let the game's buttons use them. */
+.word-pounce-game button {
+  font-size: revert-layer;
+  font-weight: revert-layer;
+  line-height: revert-layer;
+}

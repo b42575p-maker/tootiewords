@@ -53,7 +53,7 @@ export default function Header() {
         </div>
       </div>
 
-      <nav className="font-hand flex gap-2 overflow-x-auto border-t border-[#f4e6db] bg-white/70 px-4 py-2 text-sm font-bold text-[#69483d] lg:hidden">
+      <nav className="font-hand flex gap-2 overflow-x-auto border-t border-[#f4e6db] bg-white/70 px-4 py-2 text-base font-bold text-[#69483d] lg:hidden">
         <MobileLink href="/">Home</MobileLink>
         <MobileLink href="/word-unscrambler">
           Unscrambler

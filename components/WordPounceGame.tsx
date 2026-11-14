@@ -30,7 +30,7 @@ type SavedStats = {
 };
 
 const button =
-  "font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4] disabled:cursor-not-allowed disabled:opacity-50";
+  "font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 text-lg font-bold sm:text-base text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4] disabled:cursor-not-allowed disabled:opacity-50";
 
 function readStorage<T>(key: string): T | null {
   try {
@@ -60,6 +60,11 @@ async function loadPuzzle(dateKey: string): Promise<DailyPuzzle | null> {
   }
 }
 
+function todayKey() {
+  const key = toDateKey(new Date());
+  return key < FIRST_PUZZLE_DATE ? FIRST_PUZZLE_DATE : key;
+}
+
 function shuffle(letters: string[]) {
   const copy = [...letters];
   for (let i = copy.length - 1; i > 0; i -= 1) {
@@ -82,27 +87,69 @@ export default function WordPounceGame() {
   const [copied, setCopied] = useState(false);
   const [yesterday, setYesterday] = useState<DailyPuzzle | null | "hidden">("hidden");
 
-  // Load today's puzzle using the player's local date.
+  // Pick today's puzzle from the player's local date, then switch to the
+  // new puzzle automatically at local midnight.
   useEffect(() => {
-    let key = toDateKey(new Date());
-    if (key < FIRST_PUZZLE_DATE) key = FIRST_PUZZLE_DATE;
-    setDateKey(key);
+    const checkDate = () => setDateKey(todayKey());
+    let timer = 0;
 
-    loadPuzzle(key).then((daily) => {
+    function scheduleMidnight() {
+      const now = new Date();
+      const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 1);
+      timer = window.setTimeout(() => {
+        checkDate();
+        scheduleMidnight();
+      }, nextMidnight.getTime() - now.getTime());
+    }
+
+    function onVisible() {
+      if (document.visibilityState === "visible") checkDate();
+    }
+
+    checkDate();
+    scheduleMidnight();
+    // Phones pause timers while the screen is off, so also check the date
+    // whenever the player comes back to the page.
+    document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("focus", checkDate);
+
+    return () => {
+      window.clearTimeout(timer);
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("focus", checkDate);
+    };
+  }, []);
+
+  // Load the puzzle (and any saved progress) whenever the date changes.
+  useEffect(() => {
+    if (!dateKey) return;
+    let cancelled = false;
+
+    setStatus("loading");
+    loadPuzzle(dateKey).then((daily) => {
+      if (cancelled) return;
       if (!daily) {
+        setPuzzle(null);
         setStatus("missing");
         return;
       }
 
-      const saved = readStorage<SavedProgress>(`word-pounce-${key}`);
+      const saved = readStorage<SavedProgress>(`word-pounce-${dateKey}`);
       setPuzzle(daily);
       setTiles(daily.letters.split(""));
+      setSelected([]);
       setFound(saved?.found ?? []);
       setHints(saved?.hints ?? []);
+      setMessage(null);
+      setYesterday("hidden");
       setStats(readStorage<SavedStats>("word-pounce-stats"));
       setStatus("ready");
     });
-  }, []);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [dateKey]);
 
   const guess = selected.map((index) => tiles[index]).join("");
 
@@ -283,7 +330,7 @@ export default function WordPounceGame() {
   }, {});
 
   return (
-    <div className="rounded-[2rem] border-2 border-[#efd3ba] bg-white p-5 shadow-[0_18px_40px_rgba(86,51,36,0.08)] sm:p-8">
+    <div className="word-pounce-game rounded-[2rem] border-2 border-[#efd3ba] bg-white p-5 shadow-[0_18px_40px_rgba(86,51,36,0.08)] sm:p-8">
       {/* Score bar */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
@@ -358,7 +405,7 @@ export default function WordPounceGame() {
           type="button"
           onClick={submit}
           disabled={!guess}
-          className="font-hand rounded-full border-2 border-[#d8741e] bg-gradient-to-r from-[#f4b56b] to-[#ef9b4a] px-6 py-3 font-bold text-[#4a2618] shadow-md transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50"
+          className="font-hand rounded-full border-2 border-[#d8741e] bg-gradient-to-r from-[#f4b56b] to-[#ef9b4a] px-6 py-3 text-lg font-bold sm:text-base text-[#4a2618] shadow-md transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50"
         >
           🐾 Pounce!
         </button>

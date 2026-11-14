@@ -90,6 +90,9 @@ export default function WordPouncePage() {
             puzzle hides at least one word that uses all of them. Find it to
             pounce!
           </p>
+          <p className="font-hand mx-auto mt-4 inline-flex items-center gap-2 rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-4 py-2 text-sm font-bold text-[#9a5221]">
+            🕛 The puzzle resets at midnight your local time. Come back tomorrow for new letters!
+          </p>
         </div>
 
         <div className="mt-8">
