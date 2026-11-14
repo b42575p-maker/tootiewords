@@ -26,7 +26,7 @@ export default function Header({
         </Link>
       )}
 
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-7xl items-center justify-center gap-6 px-5 py-3 sm:px-6 lg:justify-between">
         <Link
           href="/"
           aria-label="TootieWords home"
@@ -75,10 +75,10 @@ export default function Header({
         </div>
       </div>
 
-      <nav className="font-hand flex gap-2 overflow-x-auto border-t border-[#f4e6db] bg-white/70 px-4 py-2 text-base font-bold text-[#69483d] lg:hidden">
+      <nav className="font-hand grid grid-cols-3 gap-2 border-t border-[#f4e6db] bg-white/70 px-3 py-2 text-base font-bold leading-tight text-[#69483d] sm:flex sm:flex-wrap sm:justify-center sm:px-4 lg:hidden">
         <Link
           href="/word-pounce"
-          className="shrink-0 rounded-full border-2 border-[#d8741e] bg-gradient-to-r from-[#f4b56b] to-[#ef9b4a] px-4 py-2 text-[#4a2618]"
+          className="flex min-h-11 items-center justify-center rounded-2xl border-2 border-[#d8741e] bg-gradient-to-r from-[#f4b56b] to-[#ef9b4a] px-1.5 py-1.5 text-center text-[#4a2618] sm:rounded-full sm:px-4"
         >
           🐾 Word Pounce
         </Link>
@@ -131,7 +131,7 @@ function MobileLink({
   return (
     <Link
       href={href}
-      className="shrink-0 rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-4 py-2 text-[#9a5221] hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
+      className="flex min-h-11 items-center justify-center rounded-2xl border-2 border-[#efc9a8] bg-[#fff0df] px-1.5 py-1.5 text-center text-[#9a5221] hover:border-[#ef9b4a] hover:bg-[#ffe4c4] sm:rounded-full sm:px-4"
     >
       {children}
     </Link>
