@@ -1670,3 +1670,14 @@ img {
   font-weight: revert-layer;
   line-height: revert-layer;
 }
+
+/* Comic Neue (used on phones) has a lighter bold than Comic Sans,
+   so thicken button and menu text a little on smaller screens. */
+@media (max-width: 1023px) {
+  header a,
+  a.font-hand,
+  a .font-hand,
+  button.font-hand {
+    -webkit-text-stroke: 0.4px currentColor;
+  }
+}
