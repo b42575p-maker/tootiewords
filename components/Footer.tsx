@@ -37,8 +37,16 @@ export default function Footer() {
           </nav>
 
           <nav className="footer-tool-links">
+            <Link href="/games">
+              Games
+            </Link>
+
             <Link href="/word-pounce">
               Word Pounce
+            </Link>
+
+            <Link href="/word-search">
+              Word Search
             </Link>
 
             <Link href="/word-unscrambler">

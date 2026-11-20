@@ -59,12 +59,12 @@ export default function Header({
             Words From Letters
           </NavLink>
 
-          <NavLink href="/guides">
-            Guides
+          <NavLink href="/games">
+            Games
           </NavLink>
 
-          <NavLink href="/about">
-            About
+          <NavLink href="/guides">
+            Guides
           </NavLink>
         </nav>
 
@@ -82,7 +82,7 @@ export default function Header({
         >
           🐾 Word Pounce
         </Link>
-        <MobileLink href="/">Home</MobileLink>
+        <MobileLink href="/games">🎲 Games</MobileLink>
         <MobileLink href="/word-unscrambler">
           Unscrambler
         </MobileLink>

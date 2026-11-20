@@ -10,7 +10,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      path: "/games",
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    },
+    {
       path: "/word-pounce",
+      changeFrequency: "daily" as const,
+      priority: 0.9,
+    },
+    {
+      path: "/word-search",
       changeFrequency: "daily" as const,
       priority: 0.9,
     },
