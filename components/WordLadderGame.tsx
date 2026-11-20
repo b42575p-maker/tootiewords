@@ -5,7 +5,6 @@ import type { ChangeEvent, FormEvent } from "react";
 
 import { toDateKey } from "@/lib/word-pounce";
 import {
-  differsByOneLetter,
   gameCard,
   loadLadders,
   pillButton,
@@ -115,14 +114,26 @@ export default function WordLadderGame() {
     setInput("");
     inputRef.current?.focus();
 
+    const shown = word.toUpperCase();
+    const current = last.toUpperCase();
+    const changed = [...word].filter((letter, index) => letter !== last[index]).length;
+
     if (word.length !== puzzle.start.length) {
-      setMessage({ text: `Use a ${puzzle.start.length}-letter word.`, tone: "bad" });
-    } else if (!differsByOneLetter(last, word)) {
-      setMessage({ text: `Change exactly one letter of ${last.toUpperCase()}.`, tone: "bad" });
-    } else if (!dictionary.has(word)) {
-      setMessage({ text: `${word.toUpperCase()} isn't in Tootie's word list.`, tone: "bad" });
+      setMessage({ text: `Almost! Every word in this ladder has ${puzzle.start.length} letters.`, tone: "bad" });
+    } else if (word === last) {
+      setMessage({ text: `That's the same word! Change one letter of ${current} to make a new word.`, tone: "bad" });
+    } else if (changed > 1) {
+      setMessage({
+        text: `Oops, ${shown} changes ${changed} letters. Only one letter of ${current} can change at a time.`,
+        tone: "bad",
+      });
     } else if (rungs.includes(word)) {
-      setMessage({ text: `You already used ${word.toUpperCase()}.`, tone: "bad" });
+      setMessage({ text: `You already climbed through ${shown}. Try a different letter.`, tone: "bad" });
+    } else if (!dictionary.has(word)) {
+      setMessage({
+        text: `Hmm, Tootie doesn't think ${shown} is a real word. Try changing a different letter of ${current}.`,
+        tone: "bad",
+      });
     } else {
       setMessage(word === puzzle.end ? null : { text: `${word.toUpperCase()} works! 🐾`, tone: "good" });
       addRung(word);
