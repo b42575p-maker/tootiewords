@@ -70,7 +70,7 @@ function P({ children }: { children: React.ReactNode }) {
 export default function WordPouncePage() {
   return (
     <main className="min-h-screen bg-[#fffaf4] text-[#3d2923]">
-      <Header showGameBanner={false} />
+      <Header />
 
       <script
         type="application/ld+json"

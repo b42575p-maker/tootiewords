@@ -1,31 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Header({
-  showGameBanner = true,
-}: {
-  showGameBanner?: boolean;
-}) {
+export default function Header() {
   return (
     <header className="relative z-50 border-b border-[#efd9c7] bg-[#fffaf4]/95 shadow-[0_4px_18px_rgba(74,46,37,0.06)] backdrop-blur">
-      {showGameBanner && (
-        <Link
-          href="/word-pounce"
-          className="font-hand flex items-center justify-center gap-2 bg-gradient-to-r from-[#f4b56b] to-[#ef9b4a] px-4 py-2.5 text-center font-bold text-[#4a2618] transition hover:brightness-105"
-        >
-          <span className="hidden rounded-full bg-white px-2.5 py-0.5 text-xs text-[#c4621a] sm:inline">
-            NEW
-          </span>
-          <span className="sm:hidden">
-            🐾 New daily game: <span className="underline">Play Word Pounce &rarr;</span>
-          </span>
-          <span className="hidden sm:inline">
-            🐾 Tootie&apos;s Word Pounce is here! A free word puzzle every day.{" "}
-            <span className="underline">Play now &rarr;</span>
-          </span>
-        </Link>
-      )}
-
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-6 px-5 py-3 sm:px-6 lg:justify-between">
         <Link
           href="/"
