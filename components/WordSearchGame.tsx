@@ -209,6 +209,11 @@ export default function WordSearchGame() {
     if (done) setFinishedSeconds(seconds);
     save({ found: nextFound, startedAt: start0, seconds });
     setMessage({ text: done ? "🎉 You found them all!" : `Found ${word}! 🐾`, tone: "good" });
+    try {
+      navigator.vibrate?.(done ? [30, 60, 30] : 25);
+    } catch {
+      // Vibration isn't supported everywhere.
+    }
   }
 
   function onPointerDown(event: ReactPointerEvent<HTMLDivElement>) {
@@ -303,31 +308,30 @@ export default function WordSearchGame() {
     );
   }
 
-  const fontSize = `calc(min(100vw - 4.5rem, 560px) / ${puzzle.size} * 0.52)`;
+  const fontSize = `calc(min(100vw - 3.25rem, 560px) / ${puzzle.size} * 0.55)`;
+  const selectionText = anchor ? (lineCells(anchor, hover ?? anchor) ?? [anchor]).map(([r, c]) => puzzle.grid[r][c]).join("") : "";
 
   return (
-    <div className="word-search-game rounded-[2rem] border-2 border-[#efd3ba] bg-white p-4 shadow-[0_18px_40px_rgba(86,51,36,0.08)] sm:p-8">
+    <div className="word-search-game game-card rounded-[2rem] border-2 border-[#efd3ba] bg-white p-3 shadow-[0_18px_40px_rgba(86,51,36,0.08)] sm:p-8">
       {/* Puzzle info */}
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <p className="font-hand text-sm font-bold text-[#9a5221]">
-            {mode.kind === "daily" ? `Daily puzzle · ${dateLabel(dateKey)}` : "Bonus puzzle"}
-          </p>
-          <p className="text-2xl font-black text-[#4a2e25]">
-            {puzzle.theme.emoji} {puzzle.theme.name}
-          </p>
-          <p className="text-sm text-[#755d52]">{DIFFICULTIES[difficulty].blurb}</p>
-        </div>
-        <div className="text-right text-sm text-[#755d52]">
-          <p>
-            <strong className="text-[#4a2e25]">{found.length}</strong> of {puzzle.placements.length} found
-          </p>
-          <p>⏱ {formatTime(elapsed)}</p>
+      <div className="px-1 sm:px-0">
+        <p className="font-hand text-sm font-bold text-[#9a5221]">
+          {mode.kind === "daily" ? `Daily puzzle · ${dateLabel(dateKey)}` : "Bonus puzzle"}
+        </p>
+        <p className="text-2xl font-black text-[#4a2e25]">
+          {puzzle.theme.emoji} {puzzle.theme.name}
+        </p>
+        <p className="text-sm text-[#755d52]">{DIFFICULTIES[difficulty].blurb}</p>
+        <div className="mt-3 flex flex-wrap gap-2 text-sm font-bold">
+          <span className="rounded-full bg-[#fff0df] px-3 py-1 text-[#9a5221]">
+            🔎 {found.length} of {puzzle.placements.length} found
+          </span>
+          <span className="rounded-full bg-[#fff0df] px-3 py-1 tabular-nums text-[#9a5221]">⏱ {formatTime(elapsed)}</span>
         </div>
       </div>
 
       {/* Difficulty */}
-      <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Difficulty">
+      <div className="mt-4 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap" role="group" aria-label="Difficulty">
         {DIFFICULTY_ORDER.map((level) => (
           <button
             key={level}
@@ -341,9 +345,17 @@ export default function WordSearchGame() {
         ))}
       </div>
 
+      {/* Letters currently selected */}
+      <p
+        className="mt-4 h-8 text-center text-xl font-black uppercase tracking-[0.25em] text-[#d8741e]"
+        aria-live="polite"
+      >
+        {selectionText.length > 1 ? selectionText : ""}
+      </p>
+
       {/* Grid */}
       <div
-        className="mx-auto mt-5 grid w-full max-w-[560px] touch-none select-none overflow-hidden rounded-2xl border-2 border-[#ead6c5] bg-[#fffaf4]"
+        className="mx-auto mt-1 grid w-full max-w-[560px] touch-none select-none overflow-hidden rounded-2xl border-2 border-[#ead6c5] bg-[#fffaf4]"
         style={{ gridTemplateColumns: `repeat(${puzzle.size}, minmax(0, 1fr))` }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}

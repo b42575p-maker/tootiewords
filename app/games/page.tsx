@@ -3,10 +3,11 @@ import Link from "next/link";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { GAMES } from "@/components/GamePage";
 
-const title = "Free Word Games – Daily Puzzles From Tootie";
+const title = "Free Word Games – Daily Puzzles & Brain Games";
 const description =
-  "Play free word games from TootieWords: Tootie's Word Pounce, a daily 7-letter word puzzle, and themed word searches you can play online or print.";
+  "Play six free word games from TootieWords: Word Pounce, Word Search, Word Ladder, Unscramble Sprint, Letter Guess, and Missing Letter. No signup needed.";
 
 export const metadata: Metadata = {
   title,
@@ -30,43 +31,26 @@ export const metadata: Metadata = {
   },
 };
 
-const games = [
-  {
-    href: "/word-pounce",
-    emoji: "🐾",
-    name: "Tootie's Word Pounce",
-    tag: "Daily",
-    description:
-      "Make as many words as you can from 7 letters. Find the word that uses them all and climb the cat ranks to Top Cat.",
-  },
-  {
-    href: "/word-search",
-    emoji: "🔎",
-    name: "Tootie's Word Search",
-    tag: "Daily + unlimited",
-    description:
-      "A new themed word search every day in Easy, Medium, and Hard. Play bonus puzzles anytime or print one to solve on paper.",
-  },
-];
+
 
 export default function GamesPage() {
   return (
     <main className="min-h-screen bg-[#fffaf4] text-[#3d2923]">
       <Header />
 
-      <section className="mx-auto max-w-4xl px-6 pb-10 pt-10 text-center sm:pt-12">
+      <section className="mx-auto max-w-6xl px-6 pb-10 pt-10 text-center sm:pt-12">
         <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#efc9a8] bg-[#fff0df] px-4 py-2 text-sm font-black text-[#a75b24]">
           🐾 Free to play, no signup
         </div>
         <h1 className="whimsy-title text-4xl font-black text-[#4a2e25] sm:text-5xl">Tootie&apos;s Word Games</h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-[#755d52]">
-          Daily puzzles for word lovers. Every game works on your phone or
-          computer, saves your progress in your browser, and gets a fresh puzzle
-          at midnight.
+          Six free games for word lovers, from daily puzzles to quick
+          unlimited rounds. Every game works on your phone or computer and saves
+          your progress in your browser.
         </p>
 
-        <div className="mt-10 grid gap-6 text-left md:grid-cols-2">
-          {games.map((game) => (
+        <div className="mt-10 grid gap-6 text-left sm:grid-cols-2 lg:grid-cols-3">
+          {GAMES.map((game) => (
             <Link
               key={game.href}
               href={game.href}
@@ -84,7 +68,7 @@ export default function GamesPage() {
                 </span>
               </div>
               <h2 className="mt-4 text-2xl font-black text-[#4a2e25]">{game.name}</h2>
-              <p className="mt-2 leading-7 text-[#755d52]">{game.description}</p>
+              <p className="mt-2 leading-7 text-[#755d52]">{game.blurb}</p>
               <div className="mt-auto pt-5">
                 <span className="font-hand inline-flex rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition group-hover:border-[#ef9b4a] group-hover:bg-[#ffe4c4]">
                   Play now &rarr;

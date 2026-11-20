@@ -1681,3 +1681,11 @@ img {
     -webkit-text-stroke: 0.4px currentColor;
   }
 }
+
+/* Games: the global `button { font: inherit }` rule above overrides
+   Tailwind size/weight classes on buttons. Let game buttons use them. */
+.game-card button {
+  font-size: revert-layer;
+  font-weight: revert-layer;
+  line-height: revert-layer;
+}

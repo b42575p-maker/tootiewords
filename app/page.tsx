@@ -134,6 +134,12 @@ export default function Home() {
             </Link>
           </div>
 
+          <p className="-mt-4 mb-10 text-center">
+            <Link href="/games" className="font-hand font-bold text-[#d8741e] hover:underline">
+              🎲 See all 6 free games: Word Ladder, Unscramble Sprint, Letter Guess and more &rarr;
+            </Link>
+          </p>
+
           <div className="grid gap-7 md:grid-cols-3">
             <ToolCard
               letters={["W", "O", "R", "D"]}

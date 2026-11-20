@@ -25,6 +25,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      path: "/word-ladder",
+      changeFrequency: "daily" as const,
+      priority: 0.8,
+    },
+    {
+      path: "/unscramble-sprint",
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    {
+      path: "/letter-guess",
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    {
+      path: "/missing-letter",
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    {
       path: "/word-unscrambler",
       changeFrequency: "weekly" as const,
       priority: 0.9,
