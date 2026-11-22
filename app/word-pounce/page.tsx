@@ -151,7 +151,8 @@ export default function WordPouncePage() {
           <P>
             Stuck? Ask Tootie for up to 3 hints a day. Each hint tells you the
             length and first two letters of a word you haven&apos;t found yet,
-            starting with the longest ones.
+            starting with the longest ones. Done for the day? Tap{" "}
+            <strong>Give up &amp; show answers</strong> to see every word you missed.
           </P>
 
           <H2>Tips for a Better Score</H2>

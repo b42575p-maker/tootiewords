@@ -9,7 +9,7 @@ export const GAMES = [
   { href: "/word-ladder", emoji: "🪜", name: "Word Ladder", tag: "Daily", blurb: "Change one word into another, one letter at a time." },
   { href: "/unscramble-sprint", emoji: "⏱️", name: "Unscramble Sprint", tag: "Unlimited", blurb: "Unscramble as many words as you can in 60 seconds." },
   { href: "/letter-guess", emoji: "🧶", name: "Letter Guess", tag: "Unlimited", blurb: "Guess the hidden word before Tootie knocks the yarn off the table." },
-  { href: "/missing-letter", emoji: "🔤", name: "Missing Letter", tag: "Unlimited", blurb: "Fill in the blank to spell a word. How long can your streak last?" },
+  { href: "/missing-letter", emoji: "🔤", name: "Missing Letter", tag: "Unlimited", blurb: "Fill in the blanks across four rounds that get harder as you go." },
 ];
 
 export function gameStructuredData(name: string, path: string, description: string) {

@@ -308,11 +308,14 @@ export default function WordSearchGame() {
     );
   }
 
-  const fontSize = `calc(min(100vw - 3.25rem, 560px) / ${puzzle.size} * 0.55)`;
+  // --ws-size is the grid's width. On phones it fills the card; on laptop-size
+  // screens it also shrinks to the window height, and the word list sits beside
+  // it, so the whole puzzle fits on screen without scrolling.
+  const fontSize = `calc(var(--ws-size) / ${puzzle.size} * 0.55)`;
   const selectionText = anchor ? (lineCells(anchor, hover ?? anchor) ?? [anchor]).map(([r, c]) => puzzle.grid[r][c]).join("") : "";
 
   return (
-    <div className="word-search-game game-card rounded-[2rem] border-2 border-[#efd3ba] bg-white p-3 shadow-[0_18px_40px_rgba(86,51,36,0.08)] sm:p-8">
+    <div className="word-search-game game-card [--ws-size:min(100vw_-_3.25rem,560px)] lg:[--ws-size:min(430px,100svh_-_9rem)] rounded-[2rem] border-2 border-[#efd3ba] bg-white p-3 shadow-[0_18px_40px_rgba(86,51,36,0.08)] sm:p-8">
       {/* Puzzle info */}
       <div className="px-1 sm:px-0">
         <p className="font-hand text-sm font-bold text-[#9a5221]">
@@ -353,10 +356,12 @@ export default function WordSearchGame() {
         {selectionText.length > 1 ? selectionText : ""}
       </p>
 
+      <div className="lg:flex lg:items-start lg:gap-6">
+      <div className="lg:shrink-0">
       {/* Grid */}
       <div
-        className="mx-auto mt-1 grid w-full max-w-[560px] touch-none select-none overflow-hidden rounded-2xl border-2 border-[#ead6c5] bg-[#fffaf4]"
-        style={{ gridTemplateColumns: `repeat(${puzzle.size}, minmax(0, 1fr))` }}
+        className="mx-auto mt-1 grid max-w-full touch-none select-none overflow-hidden rounded-2xl border-2 border-[#ead6c5] bg-[#fffaf4]"
+        style={{ width: "var(--ws-size)", gridTemplateColumns: `repeat(${puzzle.size}, minmax(0, 1fr))` }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
@@ -402,16 +407,17 @@ export default function WordSearchGame() {
           {message.text}
         </p>
       )}
+      </div>
 
       {/* Word list */}
-      <div className="mt-5 flex flex-wrap justify-center gap-2">
+      <div className="mt-5 flex flex-wrap justify-center gap-2 lg:mt-1 lg:min-w-0 lg:flex-1 lg:flex-col lg:flex-nowrap lg:items-stretch lg:justify-start lg:gap-1.5">
         {puzzle.placements.map((placement) => {
           const index = found.indexOf(placement.word);
           const isFound = index !== -1;
           return (
             <span
               key={placement.word}
-              className={`rounded-full border-2 px-3 py-1 text-sm font-bold tracking-wide sm:text-base ${
+              className={`rounded-full border-2 px-3 py-1 text-sm font-bold tracking-wide sm:text-base lg:py-0.5 lg:text-sm ${
                 isFound ? "border-transparent text-[#9a8175] line-through" : "border-[#ead6c5] bg-[#fffaf4] text-[#4a2e25]"
               }`}
               style={isFound ? { backgroundColor: FOUND_COLORS[index % FOUND_COLORS.length] } : undefined}
@@ -420,6 +426,7 @@ export default function WordSearchGame() {
             </span>
           );
         })}
+      </div>
       </div>
 
       {/* Finished */}

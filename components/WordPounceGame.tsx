@@ -21,6 +21,7 @@ import {
 type SavedProgress = {
   found: string[];
   hints: string[];
+  gaveUp?: boolean;
 };
 
 type SavedStats = {
@@ -86,6 +87,8 @@ export default function WordPounceGame() {
   const [stats, setStats] = useState<SavedStats | null>(null);
   const [copied, setCopied] = useState(false);
   const [yesterday, setYesterday] = useState<DailyPuzzle | null | "hidden">("hidden");
+  const [gaveUp, setGaveUp] = useState(false);
+  const [confirmGiveUp, setConfirmGiveUp] = useState(false);
 
   // Pick today's puzzle from the player's local date, then switch to the
   // new puzzle automatically at local midnight.
@@ -140,6 +143,8 @@ export default function WordPounceGame() {
       setSelected([]);
       setFound(saved?.found ?? []);
       setHints(saved?.hints ?? []);
+      setGaveUp(saved?.gaveUp ?? false);
+      setConfirmGiveUp(false);
       setMessage(null);
       setYesterday("hidden");
       setStats(readStorage<SavedStats>("word-pounce-stats"));
@@ -163,9 +168,9 @@ export default function WordPounceGame() {
   const pounced = puzzle ? found.some((word) => word.length === puzzle.letters.length) : false;
 
   const saveProgress = useCallback(
-    (nextFound: string[], nextHints: string[]) => {
+    (nextFound: string[], nextHints: string[], nextGaveUp = false) => {
       if (!dateKey) return;
-      writeStorage(`word-pounce-${dateKey}`, { found: nextFound, hints: nextHints });
+      writeStorage(`word-pounce-${dateKey}`, { found: nextFound, hints: nextHints, gaveUp: nextGaveUp });
     },
     [dateKey]
   );
@@ -189,11 +194,11 @@ export default function WordPounceGame() {
 
   const addLetter = useCallback(
     (index: number) => {
-      if (selected.includes(index)) return;
+      if (gaveUp || selected.includes(index)) return;
       setSelected((current) => [...current, index]);
       setMessage(null);
     },
-    [selected]
+    [gaveUp, selected]
   );
 
   const removeLetter = useCallback(() => {
@@ -203,7 +208,7 @@ export default function WordPounceGame() {
   const clearGuess = useCallback(() => setSelected([]), []);
 
   const submit = useCallback(() => {
-    if (!puzzle || !guess) return;
+    if (!puzzle || !guess || gaveUp) return;
     const result = checkGuess(guess, puzzle, found);
 
     if (result.kind === "answer" || result.kind === "bonus") {
@@ -236,12 +241,12 @@ export default function WordPounceGame() {
     }
 
     setSelected([]);
-  }, [found, guess, hints, puzzle, recordPlay, saveProgress]);
+  }, [found, gaveUp, guess, hints, puzzle, recordPlay, saveProgress]);
 
   // Physical keyboard support.
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      if (status !== "ready" || event.metaKey || event.ctrlKey || event.altKey) return;
+      if (status !== "ready" || gaveUp || event.metaKey || event.ctrlKey || event.altKey) return;
 
       if (event.key === "Enter") {
         event.preventDefault();
@@ -260,7 +265,7 @@ export default function WordPounceGame() {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [addLetter, clearGuess, removeLetter, selected, status, submit, tiles]);
+  }, [addLetter, clearGuess, gaveUp, removeLetter, selected, status, submit, tiles]);
 
   function giveHint() {
     if (!puzzle || hints.length >= MAX_HINTS) return;
@@ -272,6 +277,15 @@ export default function WordPounceGame() {
     const nextHints = [...hints, word];
     setHints(nextHints);
     saveProgress(found, nextHints);
+  }
+
+  function giveUp() {
+    setGaveUp(true);
+    setConfirmGiveUp(false);
+    setSelected([]);
+    saveProgress(found, hints, true);
+    recordPlay();
+    setMessage({ text: "Here are all of today's words. Come back tomorrow for a new puzzle!", tone: "info" });
   }
 
   async function share() {
@@ -324,6 +338,11 @@ export default function WordPounceGame() {
 
   const foundAnswers = found.filter((word) => puzzle.answers.includes(word));
   const foundBonus = found.filter((word) => puzzle.bonus.includes(word));
+  const missedAnswers = gaveUp ? puzzle.answers.filter((word) => !found.includes(word)) : [];
+  const missedByLength = missedAnswers.reduce<Record<number, string[]>>((groups, word) => {
+    (groups[word.length] ??= []).push(word);
+    return groups;
+  }, {});
   const byLength = foundAnswers.reduce<Record<number, string[]>>((groups, word) => {
     (groups[word.length] ??= []).push(word);
     return groups;
@@ -379,10 +398,10 @@ export default function WordPounceGame() {
               key={index}
               type="button"
               onClick={() => addLetter(index)}
-              disabled={used}
+              disabled={used || gaveUp}
               aria-label={`Letter ${letter.toUpperCase()}`}
               className={`flex h-14 w-14 items-center justify-center rounded-xl text-2xl font-black uppercase shadow-md transition sm:h-16 sm:w-16 ${
-                used
+                used || gaveUp
                   ? "bg-[#f3e4d6] text-[#c9b3a4] shadow-none"
                   : "bg-[#f5b05d] text-[#4e332a] hover:-translate-y-0.5 hover:bg-[#f7a64a]"
               }`}
@@ -398,13 +417,13 @@ export default function WordPounceGame() {
         <button type="button" onClick={removeLetter} disabled={!guess} className={button}>
           ⌫ Delete
         </button>
-        <button type="button" onClick={() => { setTiles(shuffle(tiles)); setSelected([]); }} className={button}>
+        <button type="button" onClick={() => { setTiles(shuffle(tiles)); setSelected([]); }} disabled={gaveUp} className={button}>
           🔀 Shuffle
         </button>
         <button
           type="button"
           onClick={submit}
-          disabled={!guess}
+          disabled={!guess || gaveUp}
           className="font-hand rounded-full border-2 border-[#d8741e] bg-gradient-to-r from-[#f4b56b] to-[#ef9b4a] px-6 py-3 text-lg font-bold sm:text-base text-[#4a2618] shadow-md transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50"
         >
           🐾 Pounce!
@@ -426,7 +445,7 @@ export default function WordPounceGame() {
       <div className="mt-8 rounded-2xl border-2 border-[#efd3ba] bg-[#fffaf4] p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="font-hand font-bold text-[#9a5221]">🐱 Tootie&apos;s hints ({MAX_HINTS - hints.length} left today)</p>
-          <button type="button" onClick={giveHint} disabled={hints.length >= MAX_HINTS} className={button}>
+          <button type="button" onClick={giveHint} disabled={hints.length >= MAX_HINTS || gaveUp} className={button}>
             Ask Tootie
           </button>
         </div>
@@ -473,6 +492,59 @@ export default function WordPounceGame() {
           </p>
         )}
       </div>
+
+      {/* Give up / missed words */}
+      {gaveUp ? (
+        <div className="mt-8 rounded-2xl border-2 border-[#efd3ba] bg-[#fffaf4] p-5">
+          <h2 className="text-xl font-black text-[#4a2e25]">Words you missed</h2>
+          {missedAnswers.length === 0 ? (
+            <p className="mt-2 text-[#755d52]">None! You found every word. 🎉</p>
+          ) : (
+            <div className="mt-3 space-y-3">
+              {Object.keys(missedByLength)
+                .map(Number)
+                .sort((a, b) => b - a)
+                .map((length) => (
+                  <div key={length}>
+                    <p className="text-sm font-bold text-[#9a8175]">
+                      {length} letters{length === puzzle.letters.length ? " · the Pounce word!" : ""}
+                    </p>
+                    <div className="mt-1 flex flex-wrap gap-2">
+                      {missedByLength[length].sort().map((word) => (
+                        <span key={word} className="word-chip border-dashed border-[#ead6c5] bg-white uppercase text-[#9a8175]">
+                          {word}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+            </div>
+          )}
+          <p className="mt-4 text-sm text-[#755d52]">A new puzzle arrives at midnight. 🐾</p>
+        </div>
+      ) : (
+        score.answersFound < puzzle.answers.length && (
+          <div className="mt-8 text-center">
+            {confirmGiveUp ? (
+              <div className="rounded-2xl border-2 border-[#efd3ba] bg-[#fffaf4] p-4">
+                <p className="font-bold text-[#4a2e25]">Show all the answers? You won&apos;t be able to keep playing today&apos;s puzzle.</p>
+                <div className="mt-3 flex flex-wrap justify-center gap-3">
+                  <button type="button" onClick={giveUp} className={button}>
+                    Yes, show answers
+                  </button>
+                  <button type="button" onClick={() => setConfirmGiveUp(false)} className={button}>
+                    Keep playing
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button type="button" onClick={() => setConfirmGiveUp(true)} className={button}>
+                🏳️ Give up &amp; show answers
+              </button>
+            )}
+          </div>
+        )
+      )}
 
       {/* Share and yesterday */}
       <div className="mt-8 flex flex-wrap justify-center gap-3 border-t border-[#f0ded0] pt-6">

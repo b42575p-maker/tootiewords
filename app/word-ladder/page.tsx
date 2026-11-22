@@ -23,7 +23,9 @@ export default function WordLadderPage() {
         <li>Keep going, one letter at a time, until you reach the target word at the bottom.</li>
         <li>Letters stay in the same spots. You can&apos;t add, remove, or rearrange letters.</li>
         <li>Every step must be a real English word. Changed letters are highlighted so you can follow your path.</li>
+        <li>Below the ladder, Tootie shows the fewest steps left from your current word, so you always know how close you are.</li>
         <li>Stuck? Use up to 3 hints, undo a step, or reveal the answer.</li>
+        <li>Want more? Tap <strong>Practice ladder</strong> for unlimited extra ladders any time.</li>
       </List>
 
       <H2>What Is Par?</H2>

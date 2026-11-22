@@ -6,6 +6,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import { toDateKey } from "@/lib/word-pounce";
 import {
   gameCard,
+  ladderNeighbors,
   loadLadders,
   pillButton,
   primaryButton,
@@ -15,12 +16,41 @@ import {
   vibrate,
   writeStorage,
   type LadderData,
+  type LadderDay,
 } from "@/lib/games";
 
 const FIRST_LADDER_DATE = "2026-11-19";
 const MAX_HINTS = 3;
 
 type Saved = { rungs: string[]; hints: number; gaveUp: boolean };
+
+// A random practice ladder between two common words, 3 to 5 steps apart.
+function makePracticeLadder(data: LadderData, dictionary: Set<string>, common: Set<string>): LadderDay | null {
+  const pool = data.common;
+  for (let attempt = 0; attempt < 40; attempt += 1) {
+    const start = pool[Math.floor(Math.random() * pool.length)];
+    const distance = new Map<string, number>([[start, 0]]);
+    const queue = [start];
+    for (let i = 0; i < queue.length; i += 1) {
+      const word = queue[i];
+      const d = distance.get(word) ?? 0;
+      if (d >= 5) continue;
+      for (const next of ladderNeighbors(word, common)) {
+        if (!distance.has(next)) {
+          distance.set(next, d + 1);
+          queue.push(next);
+        }
+      }
+    }
+    const targets = [...distance].filter(([, d]) => d >= 3 && d <= 5).map(([word]) => word);
+    if (!targets.length) continue;
+    const end = targets[Math.floor(Math.random() * targets.length)];
+    const solution = shortestLadder(start, end, dictionary, common);
+    if (!solution) continue;
+    return { number: 0, start, end, par: solution.length - 1, solution };
+  }
+  return null;
+}
 
 function Rung({ word, previous, tone }: { word: string; previous?: string; tone: "start" | "step" | "end" | "ghost" }) {
   return (
@@ -60,6 +90,7 @@ export default function WordLadderGame() {
   const [input, setInput] = useState("");
   const [message, setMessage] = useState<{ text: string; tone: "good" | "bad" | "info" } | null>(null);
   const [copied, setCopied] = useState(false);
+  const [practice, setPractice] = useState<LadderDay | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -71,15 +102,19 @@ export default function WordLadderGame() {
       .catch(() => setFailed(true));
   }, []);
 
-  const puzzle = data && dateKey ? data.days[dateKey] : null;
+  const daily = data && dateKey ? data.days[dateKey] : null;
+  const puzzle = practice ?? daily;
   const dictionary = useMemo(() => (data ? new Set(data.dictionary) : new Set<string>()), [data]);
   const common = useMemo(() => (data ? new Set(data.common) : new Set<string>()), [data]);
-  const storageKey = dateKey ? `word-ladder-${dateKey}` : null;
+  // Practice ladders aren't saved.
+  const storageKey = dateKey && !practice ? `word-ladder-${dateKey}` : null;
 
-  // Restore today's progress.
+  // Restore today's progress (or start a fresh practice ladder).
   useEffect(() => {
-    if (!puzzle || !storageKey) return;
-    const saved = readStorage<Saved>(storageKey);
+    if (!puzzle) return;
+    const saved = storageKey ? readStorage<Saved>(storageKey) : null;
+    setMessage(null);
+    setInput("");
     setRungs(saved?.rungs?.length ? saved.rungs : [puzzle.start]);
     setHints(saved?.hints ?? 0);
     setGaveUp(saved?.gaveUp ?? false);
@@ -89,6 +124,25 @@ export default function WordLadderGame() {
   const solved = !!puzzle && last === puzzle.end;
   const finished = solved || gaveUp;
   const steps = rungs.length - 1;
+
+  // Fewest steps left from the current word (live, so players know what they're aiming for).
+  const stepsLeft = useMemo(() => {
+    if (!puzzle || finished || !last) return null;
+    // Same everyday-word path that par and hints use, so the numbers agree.
+    const path = shortestLadder(last, puzzle.end, dictionary, common);
+    return path ? path.length - 1 : null;
+  }, [puzzle, finished, last, dictionary, common]);
+
+  function startPractice() {
+    if (!data) return;
+    const next = makePracticeLadder(data, dictionary, common);
+    if (!next) {
+      setMessage({ text: "Tootie couldn't build a practice ladder. Try again?", tone: "info" });
+      return;
+    }
+    setCopied(false);
+    setPractice(next);
+  }
 
   function save(next: Partial<Saved>) {
     if (!storageKey) return;
@@ -200,13 +254,17 @@ export default function WordLadderGame() {
     <div className={gameCard}>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <p className="font-hand text-sm font-bold text-[#9a5221]">Ladder #{puzzle.number}</p>
+          <p className="font-hand text-sm font-bold text-[#9a5221]">
+            {practice ? "Practice ladder" : `Ladder #${puzzle.number}`}
+          </p>
           <p className="text-xl font-black text-[#4a2e25]">
             {puzzle.start.toUpperCase()} → {puzzle.end.toUpperCase()}
           </p>
         </div>
         <div className="flex flex-wrap gap-2 text-sm">
-          <span className="rounded-full bg-[#fff0df] px-3 py-1 font-bold text-[#9a5221]">Par {puzzle.par}</span>
+          <span className="rounded-full bg-[#fff0df] px-3 py-1 font-bold text-[#9a5221]" title="The fewest steps Tootie found">
+            Par {puzzle.par}
+          </span>
           <span className="rounded-full bg-[#fff0df] px-3 py-1 font-bold text-[#9a5221]">Steps {steps}</span>
           <span className="rounded-full bg-[#fff0df] px-3 py-1 font-bold text-[#9a5221]">💡 {MAX_HINTS - hints} left</span>
         </div>
@@ -269,8 +327,22 @@ export default function WordLadderGame() {
         </p>
       )}
 
+      {!finished && stepsLeft !== null && (
+        <p className="mt-4 text-center text-sm font-bold text-[#755d52]">
+          🐾 Shortest way from {last.toUpperCase()}: {stepsLeft} more step{stepsLeft === 1 ? "" : "s"}
+          <span className="block font-normal text-[#9a8175]">
+            Par {puzzle.par} = the whole ladder in {puzzle.par} steps
+          </span>
+        </p>
+      )}
+      {!finished && stepsLeft === null && rungs.length > 1 && (
+        <p className="mt-4 text-center text-sm font-bold text-[#b23b4f]">
+          There&apos;s no way to {puzzle.end.toUpperCase()} from {last.toUpperCase()}. Try undoing a step.
+        </p>
+      )}
+
       {!finished && (
-        <div className="mt-5 flex flex-wrap justify-center gap-2">
+        <div className="mt-4 flex flex-wrap justify-center gap-2">
           <button type="button" onClick={undo} disabled={rungs.length <= 1} className={pillButton}>
             ↩ Undo
           </button>
@@ -297,16 +369,49 @@ export default function WordLadderGame() {
                     ? "Right on par. Purr-fect! ⭐"
                     : `Par was ${puzzle.par}. Tootie's way: ${puzzle.solution.map((w) => w.toUpperCase()).join(" → ")}`}
               </p>
-              <button type="button" onClick={share} className={`${pillButton} mt-4`}>
-                {copied ? "✓ Result copied!" : "📤 Share my ladder"}
-              </button>
+              {!practice && (
+                <button type="button" onClick={share} className={`${pillButton} mt-4`}>
+                  {copied ? "✓ Result copied!" : "📤 Share my ladder"}
+                </button>
+              )}
             </>
           ) : (
             <p className="font-bold text-[#4a2e25]">
               Here&apos;s one way to finish. Tootie&apos;s full ladder: {puzzle.solution.map((w) => w.toUpperCase()).join(" → ")}
             </p>
           )}
-          <p className="mt-3 text-sm text-[#9a8175]">A new ladder arrives at midnight your local time.</p>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <button type="button" onClick={startPractice} className={pillButton}>
+              🪜 {practice ? "Another practice ladder" : "Try a practice ladder"}
+            </button>
+            {practice && (
+              <button type="button" onClick={() => setPractice(null)} className={pillButton}>
+                📅 Back to today&apos;s ladder
+              </button>
+            )}
+          </div>
+          <p className="mt-3 text-sm text-[#9a8175]">
+            {practice ? "Practice ladders are unlimited. " : ""}A new daily ladder arrives at midnight your local time.
+          </p>
+        </div>
+      )}
+
+      {!finished && (
+        <div className="mt-6 flex flex-wrap justify-center gap-2 border-t border-[#f0ded0] pt-4 text-sm">
+          {practice ? (
+            <>
+              <button type="button" onClick={startPractice} className={pillButton}>
+                🔀 New practice ladder
+              </button>
+              <button type="button" onClick={() => setPractice(null)} className={pillButton}>
+                📅 Today&apos;s ladder
+              </button>
+            </>
+          ) : (
+            <button type="button" onClick={startPractice} className={pillButton}>
+              🪜 Practice ladder
+            </button>
+          )}
         </div>
       )}
     </div>
