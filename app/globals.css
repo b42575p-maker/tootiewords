@@ -1689,3 +1689,137 @@ img {
   font-weight: revert-layer;
   line-height: revert-layer;
 }
+
+/* ---------- Tootie the in-game character (Word Pounce) ---------- */
+.tootie-buddy {
+  transform-origin: 50% 100%;
+}
+
+.tootie-idle {
+  animation: tootie-breathe 4s ease-in-out infinite;
+}
+
+.tootie-happy {
+  animation: tootie-hop 0.5s ease-out;
+}
+
+.tootie-excited {
+  animation: tootie-big-hop 0.75s ease-out;
+}
+
+.tootie-celebrate {
+  animation: tootie-celebrate 1s ease-in-out;
+}
+
+.tootie-surprised {
+  animation: tootie-pop 0.45s ease-out;
+}
+
+.tootie-confused {
+  animation: tootie-shake 0.55s ease-in-out;
+}
+
+.tootie-smug,
+.tootie-thinking {
+  animation: tootie-tilt 0.9s ease-in-out;
+}
+
+.tootie-swat {
+  animation: tootie-swat 0.45s ease-in-out;
+}
+
+.tootie-sleepy {
+  animation: tootie-breathe 3.5s ease-in-out infinite;
+  filter: saturate(0.85) brightness(0.97);
+}
+
+.tootie-zzz {
+  animation: tootie-float 2.4s ease-in-out infinite;
+}
+
+.tootie-accessory {
+  animation: tootie-pop 0.5s ease-out;
+}
+
+/* Speech-bubble tail pointing at Tootie */
+.tootie-bubble::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  bottom: 14px;
+  border-width: 8px 10px 8px 0;
+  border-style: solid;
+  border-color: transparent #efd3ba transparent transparent;
+}
+
+.tootie-bubble::after {
+  content: "";
+  position: absolute;
+  left: -7px;
+  bottom: 16px;
+  border-width: 6px 8px 6px 0;
+  border-style: solid;
+  border-color: transparent #fffaf4 transparent transparent;
+}
+
+@keyframes tootie-breathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.97); }
+}
+
+@keyframes tootie-hop {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+}
+
+@keyframes tootie-big-hop {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  30% { transform: translateY(-16px) rotate(-4deg); }
+  60% { transform: translateY(-6px) rotate(3deg); }
+}
+
+@keyframes tootie-celebrate {
+  0% { transform: translateY(0) rotate(0) scale(1); }
+  25% { transform: translateY(-18px) rotate(-12deg) scale(1.08); }
+  50% { transform: translateY(-22px) rotate(12deg) scale(1.1); }
+  75% { transform: translateY(-8px) rotate(-6deg) scale(1.04); }
+  100% { transform: translateY(0) rotate(0) scale(1); }
+}
+
+@keyframes tootie-pop {
+  0% { transform: scale(0.8); }
+  60% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes tootie-shake {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(-8deg); }
+  40% { transform: rotate(7deg); }
+  60% { transform: rotate(-5deg); }
+  80% { transform: rotate(3deg); }
+}
+
+@keyframes tootie-tilt {
+  0%, 100% { transform: rotate(0); }
+  50% { transform: rotate(-10deg); }
+}
+
+@keyframes tootie-swat {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  35% { transform: translateX(8px) rotate(6deg); }
+  65% { transform: translateX(-4px) rotate(-3deg); }
+}
+
+@keyframes tootie-float {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(-6px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tootie-buddy,
+  .tootie-zzz,
+  .tootie-accessory {
+    animation: none !important;
+  }
+}

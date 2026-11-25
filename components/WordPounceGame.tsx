@@ -19,6 +19,8 @@ import {
 } from "@/lib/word-pounce";
 import { shareOrCopy } from "@/lib/games";
 import NextPuzzleCountdown from "@/components/NextPuzzleCountdown";
+import TootieBuddy from "@/components/TootieBuddy";
+import { RANK_ACCESSORIES, tootieLine, type TootieMood } from "@/lib/tootie";
 
 type SavedProgress = {
   found: string[];
@@ -85,12 +87,21 @@ export default function WordPounceGame() {
   const [selected, setSelected] = useState<number[]>([]);
   const [found, setFound] = useState<string[]>([]);
   const [hints, setHints] = useState<string[]>([]);
-  const [message, setMessage] = useState<{ text: string; tone: "good" | "bad" | "info" } | null>(null);
+  const [message, setMessage] = useState<{ text: string; tone: "good" | "bad" | "info"; mood: TootieMood } | null>(null);
+  const [beat, setBeat] = useState(0);
+  const [lastActive, setLastActive] = useState(0);
   const [stats, setStats] = useState<SavedStats | null>(null);
   const [copied, setCopied] = useState(false);
   const [yesterday, setYesterday] = useState<DailyPuzzle | null | "hidden">("hidden");
   const [gaveUp, setGaveUp] = useState(false);
   const [confirmGiveUp, setConfirmGiveUp] = useState(false);
+
+  // Tootie says something and reacts with a mood animation.
+  const say = useCallback((mood: TootieMood, text: string, tone: "good" | "bad" | "info" = "info") => {
+    setMessage({ text, tone, mood });
+    setBeat((current) => current + 1);
+    setLastActive(Date.now());
+  }, []);
 
   // Pick today's puzzle from the player's local date, then switch to the
   // new puzzle automatically at local midnight.
@@ -147,7 +158,15 @@ export default function WordPounceGame() {
       setHints(saved?.hints ?? []);
       setGaveUp(saved?.gaveUp ?? false);
       setConfirmGiveUp(false);
-      setMessage(null);
+      const savedFound = saved?.found ?? [];
+      if (saved?.gaveUp) {
+        say("sleepy", tootieLine("gaveUp"));
+      } else if (savedFound.length > 0) {
+        const savedRank = rankFor(scoreFor(savedFound, daily).points, maxPoints(daily)).name;
+        say("happy", tootieLine("welcomeBack", { rank: savedRank }));
+      } else {
+        say("idle", tootieLine("greet"));
+      }
       setYesterday("hidden");
       setStats(readStorage<SavedStats>("word-pounce-stats"));
       setStatus("ready");
@@ -156,7 +175,7 @@ export default function WordPounceGame() {
     return () => {
       cancelled = true;
     };
-  }, [dateKey]);
+  }, [dateKey, say]);
 
   const guess = selected.map((index) => tiles[index]).join("");
 
@@ -198,9 +217,10 @@ export default function WordPounceGame() {
     (index: number) => {
       if (gaveUp || selected.includes(index)) return;
       setSelected((current) => [...current, index]);
-      setMessage(null);
+      setLastActive(Date.now());
+      if (message?.mood === "sleepy") say("surprised", "I'm up! I'm up! 🐾");
     },
-    [gaveUp, selected]
+    [gaveUp, selected, message, say]
   );
 
   const removeLetter = useCallback(() => {
@@ -220,30 +240,57 @@ export default function WordPounceGame() {
       recordPlay();
     }
 
+    const W = guess.toUpperCase();
+
     switch (result.kind) {
       case "too-short":
-        setMessage({ text: "Words need at least 3 letters.", tone: "bad" });
+        say("confused", tootieLine("tooShort"), "bad");
         break;
       case "already-found":
-        setMessage({ text: `You already found ${guess.toUpperCase()}.`, tone: "info" });
+        say("smug", tootieLine("already", { W }));
         break;
-      case "answer":
-        setMessage({
-          text: result.pounce
-            ? `POUNCE! ${guess.toUpperCase()} uses every letter! +${result.points}`
-            : `Nice! ${guess.toUpperCase()} +${result.points}`,
-          tone: "good",
+      case "answer": {
+        const nextFound = [...found, guess];
+        const nextScore = scoreFor(nextFound, puzzle);
+        const nextRankName = rankFor(nextScore.points, max).name;
+        const wordLine = tootieLine(result.pounce ? "pounce" : guess.length >= 5 ? "long" : "short", {
+          W,
+          p: result.points,
         });
+
+        if (nextScore.answersFound === puzzle.answers.length) {
+          say("celebrate", `${wordLine} ${tootieLine("allFound")}`, "good");
+        } else if (nextRankName !== rank.name) {
+          const accessory = RANK_ACCESSORIES[nextRankName];
+          const rankLine =
+            nextRankName === "Top Cat"
+              ? tootieLine("topCat")
+              : tootieLine("rankUp", { rank: nextRankName, acc: accessory?.name ?? "", emoji: accessory?.emoji ?? "" });
+          say("celebrate", `${wordLine} ${rankLine}`, "good");
+        } else if (result.pounce) {
+          say("celebrate", wordLine, "good");
+        } else {
+          say(guess.length >= 5 ? "excited" : "happy", wordLine, "good");
+        }
         break;
+      }
       case "bonus":
-        setMessage({ text: `${guess.toUpperCase()} is a rare bonus word! It counts toward your bonus total.`, tone: "good" });
+        say("surprised", tootieLine("bonus", { W }), "good");
         break;
       default:
-        setMessage({ text: `${guess.toUpperCase()} isn't in Tootie's word list.`, tone: "bad" });
+        say("confused", tootieLine("notWord", { W }), "bad");
     }
 
     setSelected([]);
-  }, [found, gaveUp, guess, hints, puzzle, recordPlay, saveProgress]);
+  }, [found, gaveUp, guess, hints, max, puzzle, rank.name, recordPlay, saveProgress, say]);
+
+  // Tootie dozes off if nothing happens for a while.
+  useEffect(() => {
+    if (status !== "ready" || gaveUp || !lastActive || message?.mood === "sleepy") return;
+    if (puzzle && score.answersFound === puzzle.answers.length) return;
+    const timer = window.setTimeout(() => say("sleepy", tootieLine("sleepy")), 45000);
+    return () => window.clearTimeout(timer);
+  }, [lastActive, status, gaveUp, message, puzzle, score.answersFound, say]);
 
   // Physical keyboard support.
   useEffect(() => {
@@ -273,12 +320,13 @@ export default function WordPounceGame() {
     if (!puzzle || hints.length >= MAX_HINTS) return;
     const word = pickHint(puzzle, found, hints);
     if (!word) {
-      setMessage({ text: "You've found every word. Tootie has no hints left to give!", tone: "info" });
+      say("smug", tootieLine("noHints"));
       return;
     }
     const nextHints = [...hints, word];
     setHints(nextHints);
     saveProgress(found, nextHints);
+    say("thinking", tootieLine("hint", { hint: describeHint(word) }));
   }
 
   function giveUp() {
@@ -287,7 +335,7 @@ export default function WordPounceGame() {
     setSelected([]);
     saveProgress(found, hints, true);
     recordPlay();
-    setMessage({ text: "Here are all of today's words. Come back tomorrow for a new puzzle!", tone: "info" });
+    say("sleepy", tootieLine("gaveUp"));
   }
 
   async function share() {
@@ -299,7 +347,7 @@ export default function WordPounceGame() {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1500);
     } else if (result === "failed") {
-      setMessage({ text: "Couldn't copy your result. Try again?", tone: "bad" });
+      say("confused", tootieLine("shareFailed"), "bad");
     }
   }
 
@@ -410,7 +458,7 @@ export default function WordPounceGame() {
         <button type="button" onClick={removeLetter} disabled={!guess} className={button}>
           ⌫ Delete
         </button>
-        <button type="button" onClick={() => { setTiles(shuffle(tiles)); setSelected([]); }} disabled={gaveUp} className={button}>
+        <button type="button" onClick={() => { setTiles(shuffle(tiles)); setSelected([]); say("swat", tootieLine("shuffle")); }} disabled={gaveUp} className={button}>
           🔀 Shuffle
         </button>
         <button
@@ -423,16 +471,13 @@ export default function WordPounceGame() {
         </button>
       </div>
 
-      {message && (
-        <p
-          role="status"
-          className={`mt-4 text-center font-bold ${
-            message.tone === "good" ? "text-[#2f7a3e]" : message.tone === "bad" ? "text-[#b23b4f]" : "text-[#755d52]"
-          }`}
-        >
-          {message.text}
-        </p>
-      )}
+      <TootieBuddy
+        mood={message?.mood ?? "idle"}
+        text={message?.text ?? "Tap a letter to start!"}
+        tone={message?.tone}
+        beat={beat}
+        accessory={RANK_ACCESSORIES[rank.name]}
+      />
 
       {/* Hints */}
       <div className="mt-8 rounded-2xl border-2 border-[#efd3ba] bg-[#fffaf4] p-5">
