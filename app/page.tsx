@@ -5,11 +5,12 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WordFinder from "@/components/WordFinder";
+import TodaysPuzzles from "@/components/TodaysPuzzles";
 
 export const metadata: Metadata = {
   title: "Free Word Finder & Letter Unscrambler",
   description:
-    "Find words from scrambled letters, discover hidden words, and solve anagrams with TootieWords' free online word finder.",
+    "Find words from scrambled letters and solve anagrams with TootieWords' free word finder, then play today's free daily puzzles: Word Pounce, Word Search, and Word Ladder.",
   alternates: {
     canonical: "https://tootiewords.com",
   },
@@ -113,32 +114,7 @@ export default function Home() {
         <PawPrint className="right-[4%] bottom-[12%] -rotate-12 opacity-[0.08]" />
 
         <div className="mx-auto max-w-6xl">
-          <div className="mx-auto mb-10 grid max-w-4xl gap-6 md:grid-cols-2">
-            <Link
-              href="/word-pounce"
-              className="group flex flex-col items-center gap-3 rounded-[2rem] border-2 border-[#efd3ba] bg-white p-6 text-center shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition hover:-translate-y-1 hover:border-[#ef9b4a]"
-            >
-              <span className="text-5xl" aria-hidden="true">🐾</span>
-              <span className="block text-2xl font-black text-[#4a2e25]">Tootie&apos;s Word Pounce</span>
-              <span className="block leading-7 text-[#755d52]">A free daily word game. Make as many words as you can from 7 letters and climb to Top Cat.</span>
-              <span className="font-hand mt-auto rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition group-hover:border-[#ef9b4a] group-hover:bg-[#ffe4c4]">Play today&apos;s puzzle &rarr;</span>
-            </Link>
-            <Link
-              href="/word-search"
-              className="group flex flex-col items-center gap-3 rounded-[2rem] border-2 border-[#efd3ba] bg-white p-6 text-center shadow-[0_12px_30px_rgba(91,59,43,0.08)] transition hover:-translate-y-1 hover:border-[#ef9b4a]"
-            >
-              <span className="text-5xl" aria-hidden="true">🔎</span>
-              <span className="block text-2xl font-black text-[#4a2e25]">Tootie&apos;s Word Search</span>
-              <span className="block leading-7 text-[#755d52]">A new themed word search every day in Easy, Medium, and Hard. Play online or print it.</span>
-              <span className="font-hand mt-auto rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition group-hover:border-[#ef9b4a] group-hover:bg-[#ffe4c4]">Find today&apos;s words &rarr;</span>
-            </Link>
-          </div>
-
-          <p className="-mt-4 mb-10 text-center">
-            <Link href="/games" className="font-hand font-bold text-[#d8741e] hover:underline">
-              🎲 See all 6 free games: Word Ladder, Unscramble Sprint, Letter Guess and more &rarr;
-            </Link>
-          </p>
+          <TodaysPuzzles />
 
           <div className="grid gap-7 md:grid-cols-3">
             <ToolCard
