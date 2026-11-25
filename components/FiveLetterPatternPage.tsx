@@ -6,8 +6,43 @@ import { commonWordFrequencies as wordFrequencyData } from "@/lib/word-frequenci
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WordListFinder from "@/components/WordListFinder";
+import { fiveLetterPatternContent } from "@/lib/five-letter-pattern-content";
 
 type FrequencyEntry = [string, number];
+
+const PATTERN_PAGES = [
+  { group: "Starting with", key: "starting-with-a", href: "/5-letter-words-starting-with-a", label: "Starting With A" },
+  { group: "Starting with", key: "starting-with-b", href: "/5-letter-words-starting-with-b", label: "Starting With B" },
+  { group: "Starting with", key: "starting-with-c", href: "/5-letter-words-starting-with-c", label: "Starting With C" },
+  { group: "Starting with", key: "starting-with-f", href: "/5-letter-words-starting-with-f", label: "Starting With F" },
+  { group: "Starting with", key: "starting-with-p", href: "/5-letter-words-starting-with-p", label: "Starting With P" },
+  { group: "Starting with", key: "starting-with-s", href: "/5-letter-words-starting-with-s", label: "Starting With S" },
+  { group: "Starting with", key: "starting-with-t", href: "/5-letter-words-starting-with-t", label: "Starting With T" },
+  { group: "Ending in", key: "ending-in-e", href: "/5-letter-words-ending-in-e", label: "Ending In E" },
+  { group: "Ending in", key: "ending-in-er", href: "/5-letter-words-ending-in-er", label: "Ending In ER" },
+  { group: "Ending in", key: "ending-in-h", href: "/5-letter-words-ending-in-h", label: "Ending In H" },
+  { group: "Ending in", key: "ending-in-t", href: "/5-letter-words-ending-in-t", label: "Ending In T" },
+  { group: "Ending in", key: "ending-in-y", href: "/5-letter-words-ending-in-y", label: "Ending In Y" },
+  { group: "Letter position", key: "with-a", href: "/5-letter-words-with-a", label: "Words With A" },
+  { group: "Letter position", key: "a-2nd", href: "/5-letter-words-with-a-in-second-position", label: "A in Second Position" },
+  { group: "Letter position", key: "o-2nd", href: "/5-letter-words-with-o-in-second-position", label: "O in Second Position" },
+  { group: "Letter position", key: "r-3rd", href: "/5-letter-words-with-r-in-third-position", label: "R in Third Position" },
+];
+
+function getContentKey(
+  patternType: PatternType,
+  letters: string,
+  position?: number
+) {
+  if (patternType === "starts-with") return `starting-with-${letters}`;
+  if (patternType === "ends-with") return `ending-in-${letters}`;
+  if (patternType === "contains") return `with-${letters}`;
+  const suffix = position === 2 ? "2nd" : position === 3 ? "3rd" : `${position}th`;
+  return `${letters}-${suffix}`;
+}
+
+const pillLink =
+  "font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]";
 
 type PatternType =
   | "starts-with"
@@ -364,10 +399,33 @@ export default function FiveLetterPatternPage({
     position
   );
 
-  const intro = getIntro(
+  const contentKey = getContentKey(
     patternType,
     cleanLetters,
     position
+  );
+
+  const pageContent =
+    fiveLetterPatternContent[contentKey];
+
+  const intro =
+    pageContent?.intro ??
+    getIntro(patternType, cleanLetters, position);
+
+  const faqStructuredData = pageContent
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: pageContent.faq.map(({ q, a }) => ({
+          "@type": "Question",
+          name: q,
+          acceptedAnswer: { "@type": "Answer", text: a },
+        })),
+      }
+    : null;
+
+  const relatedPages = PATTERN_PAGES.filter(
+    (page) => page.key !== contentKey
   );
 
   const commonFiveLetterWords =
@@ -490,13 +548,36 @@ export default function FiveLetterPatternPage({
 
       <section className="border-t border-[#ecd8c7] bg-white">
         <div className="mx-auto max-w-4xl px-6 py-14">
-          <h2 className="whimsy-title text-3xl font-black text-[#4a2e25]">
-            {content.explanationTitle}
-          </h2>
+          {pageContent ? (
+            pageContent.sections.map((section, index) => (
+              <div key={section.title}>
+                <h2
+                  className={
+                    index === 0
+                      ? "whimsy-title text-3xl font-black text-[#4a2e25]"
+                      : "mt-10 text-2xl font-black text-[#4a2e25]"
+                  }
+                >
+                  {section.title}
+                </h2>
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph.slice(0, 40)} className="mt-4 leading-8 text-[#755d52]">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            ))
+          ) : (
+            <>
+              <h2 className="whimsy-title text-3xl font-black text-[#4a2e25]">
+                {content.explanationTitle}
+              </h2>
 
-          <p className="mt-5 leading-8 text-[#755d52]">
-            {content.explanation}
-          </p>
+              <p className="mt-5 leading-8 text-[#755d52]">
+                {content.explanation}
+              </p>
+            </>
+          )}
 
           <div className="mt-8 rounded-3xl border-2 border-[#f1d5bb] bg-[#fffaf4] p-6">
             <h2 className="text-xl font-black text-[#4a2e25]">
@@ -575,27 +656,96 @@ export default function FiveLetterPatternPage({
             </>
           )}
 
-          <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
-            {content.strategyTitle}
-          </h2>
+          {pageContent ? (
+            <>
+              <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+                Watch Out for These Word Traps
+              </h2>
 
-          <p className="mt-4 leading-8 text-[#755d52]">
-            {content.strategy}
-          </p>
+              <p className="mt-4 leading-8 text-[#755d52]">
+                These groups of common words share four letters, so guessing
+                them one at a time can use up your turns.
+              </p>
 
-          <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
-            Common Words and All Words
-          </h2>
+              <div className="mt-5 space-y-4">
+                {pageContent.traps.map((trap) => (
+                  <div
+                    key={trap.pattern}
+                    className="rounded-2xl border-2 border-[#f1d5bb] bg-[#fffaf4] p-5"
+                  >
+                    <p className="font-mono text-lg font-black tracking-widest text-[#9a5221]">
+                      {trap.pattern}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {trap.words.map((word) => (
+                        <span
+                          key={word}
+                          className="rounded-full border border-[#efc89f] bg-white px-3 py-1 font-bold text-[#6b4938]"
+                        >
+                          {word}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="mt-3 leading-7 text-[#755d52]">{trap.note}</p>
+                  </div>
+                ))}
+              </div>
 
-          <p className="mt-4 leading-8 text-[#755d52]">
-            Common Words focuses on entries found
-            in the frequency list used by
-            TootieWords. Switch to All Words in the
-            finder when you want to search the
-            broader dictionary, which may include
-            less familiar vocabulary. A particular
-            word game may use its own accepted-word
-            list.
+              <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+                Good Guesses for This Pattern
+              </h2>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {pageContent.guesses.words.map((word) => (
+                  <span
+                    key={word}
+                    className="rounded-xl border-2 border-[#d78935] bg-[#f4b56b] px-4 py-2 font-black tracking-wider text-[#663a18]"
+                  >
+                    {word}
+                  </span>
+                ))}
+              </div>
+
+              <p className="mt-4 leading-8 text-[#755d52]">
+                {pageContent.guesses.why}
+              </p>
+
+              <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+                Questions About This Pattern
+              </h2>
+
+              <dl className="mt-4 space-y-5">
+                {pageContent.faq.map(({ q, a }) => (
+                  <div key={q}>
+                    <dt className="font-black text-[#4a2e25]">{q}</dt>
+                    <dd className="mt-1 leading-8 text-[#755d52]">{a}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify(faqStructuredData),
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
+                {content.strategyTitle}
+              </h2>
+
+              <p className="mt-4 leading-8 text-[#755d52]">
+                {content.strategy}
+              </p>
+            </>
+          )}
+
+          <p className="mt-10 rounded-2xl bg-[#fffaf4] px-5 py-4 text-sm leading-7 text-[#8a7166]">
+            Counts use Tootie&apos;s Common Words list. Switch the finder to All
+            Words to search the full dictionary. Your word game may accept a
+            slightly different list.
           </p>
 
           <h2 className="mt-10 text-2xl font-black text-[#4a2e25]">
@@ -603,40 +753,15 @@ export default function FiveLetterPatternPage({
           </h2>
 
           <div className="mt-5 flex flex-wrap gap-3">
-            <Link
-              href="/5-letter-words"
-              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
-            >
+            <Link href="/5-letter-words" className={pillLink}>
               All 5 Letter Words
             </Link>
 
-            <Link
-              href="/5-letter-words-starting-with-a"
-              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
-            >
-              Starting With A
-            </Link>
-
-            <Link
-              href="/5-letter-words-ending-in-e"
-              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
-            >
-              Ending In E
-            </Link>
-
-            <Link
-              href="/5-letter-words-with-a"
-              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
-            >
-              Words With A
-            </Link>
-
-            <Link
-              href="/5-letter-words-with-r-in-third-position"
-              className="font-hand rounded-full border-2 border-[#efc9a8] bg-[#fff0df] px-5 py-3 font-bold text-[#9a5221] transition hover:border-[#ef9b4a] hover:bg-[#ffe4c4]"
-            >
-              R in Third Position
-            </Link>
+            {relatedPages.map((page) => (
+              <Link key={page.href} href={page.href} className={pillLink}>
+                {page.label}
+              </Link>
+            ))}
 
             <Link
               href="/guides/best-wordle-starting-words"

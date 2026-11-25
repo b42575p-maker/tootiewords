@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "5 Letter Words With A In The Second Position",
 
   description:
-    "Find 5 letter words with A in the second position. Use TootieWords to filter by starting letters, ending letters, included letters, excluded letters, and exact letter positions.",
+    "Browse 386 common 5-letter words with A as the second letter, like WATER, PARTY, and MAKES. See traps like _ATCH and filter your clues. Free.",
 
   alternates: {
     canonical:
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title:
       "5 Letter Words With A In The Second Position",
     description:
-      "Find five-letter words with A in the second position and narrow the list with TootieWords filters.",
+    "Browse 386 common 5-letter words with A as the second letter, like WATER, PARTY, and MAKES. See traps like _ATCH and filter your clues. Free.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title:
       "5 Letter Words With A In The Second Position",
     description:
-      "Find five-letter words with A in the second position using TootieWords.",
+    "Browse 386 common 5-letter words with A as the second letter, like WATER, PARTY, and MAKES. See traps like _ATCH and filter your clues. Free.",
     images: ["/opengraph-image.png"],
   },
 };
@@ -50,6 +50,7 @@ export default function FiveLetterWordsWithAInSecondPositionPage() {
       patternType="position"
       letters="a"
       position={2}
+      tip="R, N, and T are the most common letters right after the A, as in PARTY, HANDS, and WATCH."
     />
   );
 }

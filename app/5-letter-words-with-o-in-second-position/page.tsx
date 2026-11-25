@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "5 Letter Words With O In The Second Position",
 
   description:
-    "Find 5 letter words with O in the second position. Use TootieWords to filter by starting letters, ending letters, included letters, excluded letters, and exact letter positions.",
+    "Browse 373 common 5-letter words with O as the second letter, like WORLD, HOUSE, and MONEY. See traps like _OUND and filter your clues. Free.",
 
   alternates: {
     canonical:
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title:
       "5 Letter Words With O In The Second Position",
     description:
-      "Find five-letter words with O in the second position and narrow the list with TootieWords filters.",
+    "Browse 373 common 5-letter words with O as the second letter, like WORLD, HOUSE, and MONEY. See traps like _OUND and filter your clues. Free.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     title:
       "5 Letter Words With O In The Second Position",
     description:
-      "Find five-letter words with O in the second position using TootieWords.",
+    "Browse 373 common 5-letter words with O as the second letter, like WORLD, HOUSE, and MONEY. See traps like _OUND and filter your clues. Free.",
     images: ["/opengraph-image.png"],
   },
 };
@@ -50,6 +50,7 @@ export default function FiveLetterWordsWithOInSecondPositionPage() {
       patternType="position"
       letters="o"
       position={2}
+      tip="U and R are the most common letters right after the O (12% each), as in FOUND, HOUSE, WORLD, and NORTH."
     />
   );
 }

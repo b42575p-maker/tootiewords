@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import FiveLetterPatternPage from "@/components/FiveLetterPatternPage";
 
 export const metadata: Metadata = {
-  title: "5 Letter Words Ending In Y - Word Finder",
+  title: "5 Letter Words Ending In Y – Word Finder",
   description:
-    "Find 5 letter words ending in Y. Browse common and all five-letter words that end with Y and narrow the list with helpful filters.",
+    "Browse 227 common 5-letter words ending in Y, like EVERY, MONEY, and HAPPY. Half use a double letter. See traps like _ERRY and filter your clues. Free.",
 
   alternates: {
     canonical:
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://tootiewords.com/5-letter-words-ending-in-y",
     siteName: "TootieWords",
-    title: "5 Letter Words Ending In Y - Word Finder",
+    title: "5 Letter Words Ending In Y – Word Finder",
     description:
-      "Find five-letter words that end in Y and narrow the results with TootieWords filters.",
+    "Browse 227 common 5-letter words ending in Y, like EVERY, MONEY, and HAPPY. Half use a double letter. See traps like _ERRY and filter your clues. Free.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "5 Letter Words Ending In Y - Word Finder",
+    title: "5 Letter Words Ending In Y – Word Finder",
     description:
-      "Find five-letter words that end in Y using TootieWords.",
+    "Browse 227 common 5-letter words ending in Y, like EVERY, MONEY, and HAPPY. Half use a double letter. See traps like _ERRY and filter your clues. Free.",
     images: ["/opengraph-image.png"],
   },
 };
@@ -43,6 +43,7 @@ export default function FiveLetterWordsEndingInYPage() {
     <FiveLetterPatternPage
       patternType="ends-with"
       letters="y"
+      tip="Half of these words repeat a letter, usually right before the Y: HAPPY, SORRY, FUNNY, CARRY. If you're stuck, try doubling the fourth letter."
     />
   );
 }
