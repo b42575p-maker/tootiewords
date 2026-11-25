@@ -109,9 +109,9 @@ export default function LetterGuessGame() {
       "Tootie's Letter Guess 🧶",
       won ? `Solved a ${answer.length}-letter word with ${misses} miss${misses === 1 ? "" : "es"}!` : "Tootie knocked the yarn off the table this time!",
       `🔥 Streak: ${stats.streak} · Best: ${stats.best}`,
-      "tootiewords.com/letter-guess",
+      "https://tootiewords.com/letter-guess?ref=share",
     ].join("\n");
-    if ((await shareOrCopy(text)) === "copied") {
+    if ((await shareOrCopy(text, "letter-guess")) === "copied") {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1500);
     }

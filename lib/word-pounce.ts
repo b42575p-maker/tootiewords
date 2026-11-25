@@ -146,19 +146,51 @@ export function shiftDateKey(dateKey: string, days: number) {
   return toDateKey(new Date(year, month - 1, day + days));
 }
 
+const KEYCAPS: Record<number, string> = {
+  3: "3️⃣",
+  4: "4️⃣",
+  5: "5️⃣",
+  6: "6️⃣",
+  7: "7️⃣",
+  8: "8️⃣",
+  9: "9️⃣",
+};
+
+function shareRow(filled: number, total: number, max = 8) {
+  let f = filled;
+  let t = total;
+  if (total > max) {
+    f = Math.round((filled / total) * max);
+    if (filled > 0 && f === 0) f = 1;
+    if (filled < total && f === max) f = max - 1;
+    t = max;
+  }
+  return "🟧".repeat(f) + "⬜".repeat(t - f);
+}
+
+// Wordle-style result: one row of squares per word length, so friends can
+// compare without seeing any answers.
 export function shareText(
   puzzle: DailyPuzzle,
   rank: string,
   answersFound: number,
   pounced: boolean,
-  hintsUsed: number
+  hintsUsed: number,
+  found: string[] = []
 ) {
-  const paws = "🐾".repeat(Math.max(1, Math.round((answersFound / puzzle.answers.length) * 5)));
+  const lengths = [...new Set(puzzle.answers.map((word) => word.length))].sort((a, b) => b - a);
+  const rows = found.length
+    ? lengths.map((length) => {
+        const total = puzzle.answers.filter((word) => word.length === length).length;
+        const got = found.filter((word) => word.length === length && puzzle.answers.includes(word)).length;
+        return `${KEYCAPS[length] ?? `${length}`} ${shareRow(got, total)}`;
+      })
+    : [];
 
   return [
-    `Tootie's Word Pounce #${puzzle.number}`,
-    `${rank} ${paws}`,
-    `${answersFound}/${puzzle.answers.length} words${pounced ? " · Pounce! ✓" : ""}${hintsUsed ? ` · ${hintsUsed} hint${hintsUsed === 1 ? "" : "s"}` : ""}`,
-    "tootiewords.com/word-pounce",
+    `Tootie's Word Pounce #${puzzle.number} 🐾`,
+    `${rank} · ${answersFound}/${puzzle.answers.length} words${pounced ? " · Pounce! ✓" : ""}${hintsUsed ? ` · 💡${hintsUsed}` : ""}`,
+    ...rows,
+    "https://tootiewords.com/word-pounce?ref=share",
   ].join("\n");
 }

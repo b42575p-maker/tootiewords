@@ -231,10 +231,12 @@ export function formatTime(totalSeconds: number) {
 }
 
 export function shareText(puzzle: Puzzle, dateLabel: string | null, seconds: number) {
+  const words = puzzle.placements.length;
   return [
     `Tootie's Word Search ${puzzle.theme.emoji}`,
     `${dateLabel ? `${dateLabel} · ` : ""}${puzzle.theme.name} (${DIFFICULTIES[puzzle.difficulty].label})`,
-    `Found all ${puzzle.placements.length} words in ${formatTime(seconds)} 🐾`,
-    "tootiewords.com/word-search",
+    `${"🟩".repeat(Math.min(words, 12))}`,
+    `Found all ${words} words in ⏱️ ${formatTime(seconds)}`,
+    "https://tootiewords.com/word-search?ref=share",
   ].join("\n");
 }

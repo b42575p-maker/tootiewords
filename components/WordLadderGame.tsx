@@ -18,6 +18,7 @@ import {
   type LadderData,
   type LadderDay,
 } from "@/lib/games";
+import NextPuzzleCountdown from "@/components/NextPuzzleCountdown";
 
 const FIRST_LADDER_DATE = "2026-11-19";
 const MAX_HINTS = 3;
@@ -227,14 +228,16 @@ export default function WordLadderGame() {
 
   async function share() {
     if (!puzzle) return;
-    const rating = steps <= puzzle.par ? "⭐ Par or better!" : `(par ${puzzle.par})`;
+    const rating = steps < puzzle.par ? "🏆 Beat par!" : steps === puzzle.par ? "⭐ On par!" : `(par ${puzzle.par})`;
+    // One square per step: green up to par, orange for extra steps.
+    const squares = "🟩".repeat(Math.min(steps, puzzle.par)) + "🟧".repeat(Math.max(0, steps - puzzle.par));
     const text = [
       `Tootie's Word Ladder #${puzzle.number} 🪜`,
-      `${puzzle.start.toUpperCase()} → ${puzzle.end.toUpperCase()} in ${steps} steps ${rating}`,
-      hints ? `💡 ${hints} hint${hints === 1 ? "" : "s"}` : "No hints 🐾",
-      "tootiewords.com/word-ladder",
+      `${puzzle.start.toUpperCase()} ${squares} ${puzzle.end.toUpperCase()}`,
+      `${steps} step${steps === 1 ? "" : "s"} ${rating}${hints ? ` · 💡${hints}` : ""}`,
+      "https://tootiewords.com/word-ladder?ref=share",
     ].join("\n");
-    if ((await shareOrCopy(text)) === "copied") {
+    if ((await shareOrCopy(text, "word-ladder")) === "copied") {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1500);
     }
@@ -390,9 +393,13 @@ export default function WordLadderGame() {
               </button>
             )}
           </div>
-          <p className="mt-3 text-sm text-[#9a8175]">
-            {practice ? "Practice ladders are unlimited. " : ""}A new daily ladder arrives at midnight your local time.
-          </p>
+          {practice ? (
+            <p className="mt-3 text-sm text-[#9a8175]">
+              Practice ladders are unlimited. A new daily ladder arrives at midnight your local time.
+            </p>
+          ) : (
+            <NextPuzzleCountdown label="Next ladder in" />
+          )}
         </div>
       )}
 

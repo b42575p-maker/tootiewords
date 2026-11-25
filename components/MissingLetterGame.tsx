@@ -259,9 +259,9 @@ export default function MissingLetterGame() {
       finished
         ? `I cleared all ${ROUNDS.length} rounds with ${score} of ${ROUNDS.length * WORDS_PER_ROUND} words! 🏆`
         : `I made it to Round ${roundIndex + 1} (${round.name}) with ${score} word${score === 1 ? "" : "s"}!`,
-      "tootiewords.com/missing-letter",
+      "https://tootiewords.com/missing-letter?ref=share",
     ].join("\n");
-    if ((await shareOrCopy(text)) === "copied") {
+    if ((await shareOrCopy(text, "missing-letter")) === "copied") {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1500);
     }

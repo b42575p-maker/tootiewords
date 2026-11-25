@@ -19,6 +19,8 @@ import {
   type Difficulty,
   type Puzzle,
 } from "@/lib/word-search";
+import NextPuzzleCountdown from "@/components/NextPuzzleCountdown";
+import { shareOrCopy } from "@/lib/games";
 
 type Mode = { kind: "daily" } | { kind: "random"; seed: string; themeSlug: string };
 
@@ -276,19 +278,11 @@ export default function WordSearchGame() {
   async function share() {
     if (!puzzle || finishedSeconds === null) return;
     const text = shareText(puzzle, mode.kind === "daily" && dateKey ? `Daily ${dateLabel(dateKey)}` : null, finishedSeconds);
-    try {
-      if (navigator.share) {
-        await navigator.share({ text });
-        return;
-      }
-    } catch {
-      // Fall back to copying.
-    }
-    try {
-      await navigator.clipboard.writeText(text);
+    const result = await shareOrCopy(text, "word-search");
+    if (result === "copied") {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1500);
-    } catch {
+    } else if (result === "failed") {
       setMessage({ text: "Couldn't copy your result. Try again?", tone: "info" });
     }
   }
@@ -454,6 +448,7 @@ export default function WordSearchGame() {
               </button>
             )}
           </div>
+          {mode.kind === "daily" && <NextPuzzleCountdown label="Next daily puzzle in" />}
         </div>
       )}
 

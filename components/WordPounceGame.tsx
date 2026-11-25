@@ -17,6 +17,8 @@ import {
   toDateKey,
   type DailyPuzzle,
 } from "@/lib/word-pounce";
+import { shareOrCopy } from "@/lib/games";
+import NextPuzzleCountdown from "@/components/NextPuzzleCountdown";
 
 type SavedProgress = {
   found: string[];
@@ -290,22 +292,13 @@ export default function WordPounceGame() {
 
   async function share() {
     if (!puzzle) return;
-    const text = shareText(puzzle, rank.name, score.answersFound, pounced, hints.length);
+    const text = shareText(puzzle, rank.name, score.answersFound, pounced, hints.length, found);
+    const result = await shareOrCopy(text, "word-pounce");
 
-    try {
-      if (navigator.share) {
-        await navigator.share({ text });
-        return;
-      }
-    } catch {
-      // Fall back to copying if sharing is cancelled or unavailable.
-    }
-
-    try {
-      await navigator.clipboard.writeText(text);
+    if (result === "copied") {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1500);
-    } catch {
+    } else if (result === "failed") {
       setMessage({ text: "Couldn't copy your result. Try again?", tone: "bad" });
     }
   }
@@ -554,6 +547,9 @@ export default function WordPounceGame() {
         <button type="button" onClick={toggleYesterday} className={button}>
           {yesterday === "hidden" ? "Yesterday's answers" : "Hide yesterday's answers"}
         </button>
+      </div>
+      <div className="text-center">
+        <NextPuzzleCountdown />
       </div>
 
       {yesterday !== "hidden" && (

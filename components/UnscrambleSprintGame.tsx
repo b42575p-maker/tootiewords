@@ -204,9 +204,10 @@ export default function UnscrambleSprintGame() {
     const text = [
       "Tootie's Unscramble Sprint ⏱️",
       `${solved.length} word${solved.length === 1 ? "" : "s"} in 60 seconds · ${points} points`,
-      "tootiewords.com/unscramble-sprint",
+      solved.length ? "🟩".repeat(Math.min(solved.length, 15)) : "🐾",
+      "https://tootiewords.com/unscramble-sprint?ref=share",
     ].join("\n");
-    if ((await shareOrCopy(text)) === "copied") {
+    if ((await shareOrCopy(text, "unscramble-sprint")) === "copied") {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1500);
     }

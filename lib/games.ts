@@ -93,10 +93,27 @@ export function writeStorage(key: string, value: unknown) {
   }
 }
 
-export async function shareOrCopy(text: string) {
+// Full, clickable link for share messages. ?ref=share lets Google Analytics
+// show how many visitors arrive from shared results.
+export function shareUrl(path: string) {
+  return `https://tootiewords.com${path}?ref=share`;
+}
+
+// Records a "share" event in Google Analytics (if it has loaded).
+export function trackShare(game: string, method: "shared" | "copied") {
+  try {
+    const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+    gtag?.("event", "share", { method, content_type: "game", item_id: game });
+  } catch {
+    // Analytics is optional.
+  }
+}
+
+export async function shareOrCopy(text: string, game?: string) {
   try {
     if (navigator.share) {
       await navigator.share({ text });
+      if (game) trackShare(game, "shared");
       return "shared" as const;
     }
   } catch {
@@ -104,10 +121,17 @@ export async function shareOrCopy(text: string) {
   }
   try {
     await navigator.clipboard.writeText(text);
+    if (game) trackShare(game, "copied");
     return "copied" as const;
   } catch {
     return "failed" as const;
   }
+}
+
+// Milliseconds until the next local midnight, when daily puzzles reset.
+export function msUntilMidnight(now = new Date()) {
+  const next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  return next.getTime() - now.getTime();
 }
 
 export function vibrate(ms = 25) {
