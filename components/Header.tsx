@@ -25,6 +25,10 @@ export default function Header() {
             Home
           </NavLink>
 
+          <NavLink href="/games">
+            Games
+          </NavLink>
+
           <NavLink href="/word-unscrambler">
             Word Unscrambler
           </NavLink>
@@ -35,10 +39,6 @@ export default function Header() {
 
           <NavLink href="/words-from-letters">
             Words From Letters
-          </NavLink>
-
-          <NavLink href="/games">
-            Games
           </NavLink>
 
           <NavLink href="/guides">
